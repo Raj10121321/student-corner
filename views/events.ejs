@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events | TechNexus</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    body {
+      background-color: #0b1326;
+      color: #dae2fd;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0b1326; }
+    ::-webkit-scrollbar-thumb { background: #2d3449; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #464554; }
+  </style>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#c0c1ff",
+            "on-primary": "#1000a9",
+            "primary-container": "#8083ff",
+            "on-primary-container": "#0d0096",
+            "secondary": "#adc6ff",
+            "on-secondary": "#002e6a",
+            "secondary-container": "#0566d9",
+            "on-secondary-container": "#e6ecff",
+            "tertiary": "#4edea3",
+            "on-tertiary": "#003824",
+            "tertiary-container": "#00885d",
+            "on-tertiary-container": "#000703",
+            "error": "#ffb4ab",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "on-error-container": "#ffdad6",
+            "background": "#0b1326",
+            "on-background": "#dae2fd",
+            "surface": "#0b1326",
+            "on-surface": "#dae2fd",
+            "surface-variant": "#2d3449",
+            "on-surface-variant": "#c7c4d7",
+            "outline": "#908fa0",
+            "outline-variant": "#464554",
+            "surface-container": "#171f33",
+            "surface-container-low": "#131b2e",
+            "surface-container-high": "#222a3d",
+            "surface-container-highest": "#2d3449",
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "gutter": "24px",
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "stack-lg": "32px",
+            "margin-desktop": "48px",
+            "container-max": "1280px"
+          },
+          fontFamily: {
+            "body-md": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-mono": ["JetBrains Mono"],
+            "button-text": ["Inter"]
+          },
+          fontSize: {
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "button-text": ["15px", { "lineHeight": "16px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-background text-on-background min-h-screen font-body-md flex flex-col">
+  <!-- TopNavBar -->
+  <header class="bg-surface-container-low border-b border-outline-variant sticky top-0 z-50">
+    <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+      <div class="flex items-center gap-8">
+        <a class="text-headline-md font-headline-md font-bold text-primary" href="/dashboard">TechNexus</a>
+        <nav class="hidden md:flex items-center gap-6">
+          <a class="text-primary font-bold border-b-2 border-primary pb-1 transition-colors" href="/events">Events</a>
+          <a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="/hackathons">Hackathons</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <div class="hidden lg:flex items-center relative">
+          <input class="bg-surface-container-high border-none rounded-full px-4 py-1.5 text-body-sm w-64 focus:ring-2 focus:ring-primary-container text-on-surface" placeholder="Search events..." type="text"/>
+          <span class="material-symbols-outlined absolute right-3 text-on-surface-variant text-sm">search</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="/edit-profile" class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-container text-on-primary-container text-sm font-medium">
+            <%= (typeof user !== 'undefined' && user.name) ? user.name.charAt(0).toUpperCase() : 'U' %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="relative py-16 overflow-hidden">
+      <div class="relative z-10 max-w-container-max mx-auto px-margin-desktop">
+        <h1 class="font-headline-xl text-headline-xl mb-4">Discover the Next <span class="text-primary">Big Event</span></h1>
+        <p class="text-body-lg text-on-surface-variant max-w-2xl">Browse technical hackathons, coordination workshops, and industry conferences curated for high-performance teams.</p>
+      </div>
+    </section>
+
+    <!-- Search & Filter Bar -->
+    <section class="bg-surface-container sticky top-16 z-40 border-b border-outline-variant shadow-sm">
+      <div class="max-w-container-max mx-auto px-margin-desktop py-stack-md flex flex-col md:flex-row md:items-center justify-between gap-gutter">
+        <!-- Mobile Search -->
+        <div class="md:hidden w-full relative">
+          <input class="w-full bg-surface-container-high border-outline-variant border rounded-xl px-4 py-3 text-body-md focus:ring-2 focus:ring-primary text-on-surface" placeholder="Search events..." type="text"/>
+        </div>
+
+        <!-- Filters -->
+        <div class="flex items-center gap-4 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+          <button class="bg-primary text-on-primary px-5 py-2 rounded-full font-button-text whitespace-nowrap">All Events</button>
+          <button class="bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-5 py-2 rounded-full font-button-text whitespace-nowrap transition-colors">Hackathons</button>
+          <button class="bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-5 py-2 rounded-full font-button-text whitespace-nowrap transition-colors">Workshops</button>
+          <button class="bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-5 py-2 rounded-full font-button-text whitespace-nowrap transition-colors">Webinars</button>
+        </div>
+
+        <div class="flex items-center gap-stack-md">
+          <button class="flex items-center gap-2 border border-outline-variant rounded-xl px-4 py-2 hover:bg-surface-container-high transition-colors text-on-surface">
+            <span class="material-symbols-outlined text-md">tune</span>
+            <span class="font-button-text">Filters</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Grid -->
+    <section class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+        <% upcomingEvents.forEach(event => { %>
+          <div class="group bg-surface-container border border-outline-variant rounded-xl overflow-hidden hover:border-primary transition-all duration-300 flex flex-col">
+            <div class="h-48 relative overflow-hidden">
+              <% if (event.img) { %>
+                <img src="<%= event.img %>" alt="<%= event.eventName %>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <% } else { %>
+                <div class="w-full h-full bg-surface-container-highest flex items-center justify-center">
+                  <span class="material-symbols-outlined text-6xl text-on-surface-variant/30">event</span>
+                </div>
+              <% } %>
+
+              <div class="absolute top-4 left-4">
+                <span class="bg-background/80 backdrop-blur-md text-primary font-label-mono text-xs px-3 py-1 rounded-full border border-primary/20 uppercase tracking-widest">Event</span>
+              </div>
+
+              <% if (event.isEnrolled) { %>
+                <div class="absolute top-4 right-4">
+                  <span class="bg-tertiary/20 backdrop-blur-md text-tertiary font-label-mono text-xs px-3 py-1 rounded-full border border-tertiary/20 uppercase tracking-widest">Enrolled</span>
+                </div>
+              <% } %>
+            </div>
+
+            <div class="p-stack-lg flex-grow flex flex-col">
+              <div class="flex items-center gap-2 text-primary font-label-mono text-label-mono mb-2 uppercase">
+                <span class="material-symbols-outlined text-sm">schedule</span>
+                <span><%= new Date(event.deadlineDate).toLocaleDateString() %></span>
+              </div>
+
+              <h3 class="font-headline-md text-headline-md mb-3 group-hover:text-primary transition-colors">
+                <%= event.eventName %>
+              </h3>
+
+              <div class="space-y-2 mb-6">
+                <div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+                  <span class="material-symbols-outlined text-md">calendar_today</span>
+                  <span><%= event.day %>, <%= event.month %></span>
+                </div>
+                <div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+                  <span class="material-symbols-outlined text-md">location_on</span>
+                  <span><%= event.location %></span>
+                </div>
+              </div>
+
+              <div class="mt-auto flex items-center justify-between">
+                <a href="/event/<%= event.id %>" class="bg-secondary-container hover:bg-primary-container text-on-secondary-container hover:text-on-primary-container px-6 py-2 rounded-lg font-button-text transition-colors">
+                  View Details
+                </a>
+
+                <% if (event.isEnrolled) { %>
+                  <form class="enroll-form" data-event-id="<%= event.id %>" data-action="unenroll">
+                    <input type="hidden" name="eventId" value="<%= event.id %>">
+                    <input type="hidden" name="eventType" value="event">
+                    <button type="submit" class="text-error font-label-mono text-xs hover:underline">Unenroll</button>
+                  </form>
+                <% } else { %>
+                  <form class="enroll-form" data-event-id="<%= event.id %>" data-action="enroll">
+                    <input type="hidden" name="eventId" value="<%= event.id %>">
+                    <input type="hidden" name="eventType" value="event">
+                    <button type="submit" class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2 rounded-lg font-button-text transition-colors text-sm">Enroll</button>
+                  </form>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
+      <% if (upcomingEvents.length === 0) { %>
+        <div class="text-center py-12">
+          <span class="material-symbols-outlined text-6xl text-on-surface-variant/30 mb-4">event_busy</span>
+          <p class="text-on-surface-variant text-lg">No events available at the moment.</p>
+          <p class="text-on-surface-variant text-sm mt-2">Check back later for new opportunities!</p>
+        </div>
+      <% } %>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-lowest border-t border-outline-variant w-full">
+    <div class="w-full py-stack-lg px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+      <div class="flex flex-col gap-4">
+        <span class="font-headline-md text-headline-md text-primary">TechNexus</span>
+        <p class="text-body-sm text-on-surface-variant">Connecting the world's most talented engineers through curated high-stakes technical events.</p>
+      </div>
+
+      <div>
+        <h4 class="text-secondary font-label-mono text-label-mono mb-4 uppercase tracking-widest">Platform</h4>
+        <ul class="space-y-2">
+          <li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="/events">Events</a></li>
+          <li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="/hackathons">Hackathons</a></li>
+          <li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="/dashboard">Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-secondary font-label-mono text-label-mono mb-4 uppercase tracking-widest">Support</h4>
+        <ul class="space-y-2">
+          <li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="#">Documentation</a></li>
+          <li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-body-sm text-on-surface-variant">© 2024 TechNexus Hackathon Platform. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const enrollForms = document.querySelectorAll('.enroll-form');
+
+      enrollForms.forEach(form => {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const eventId = this.dataset.eventId;
+          const action = this.dataset.action;
+          const formData = new FormData(this);
+          const data = {
+            eventId: formData.get('eventId'),
+            eventType: formData.get('eventType')
+          };
+
+          fetch(`/${action}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.status === 'success') {
+                Swal.fire({
+                  title: 'Success!',
+                  text: data.message,
+                  icon: 'success',
+                  confirmButtonText: 'OK',
+                  background: '#171f33',
+                  color: '#dae2fd'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    location.reload();
+                  }
+                });
+              } else {
+                Swal.fire({
+                  title: 'Error!',
+                  text: data.message,
+                  icon: 'error',
+                  confirmButtonText: 'OK',
+                  background: '#171f33',
+                  color: '#dae2fd'
+                });
+              }
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              Swal.fire({
+                title: 'Error!',
+                text: 'An unexpected error occurred',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                background: '#171f33',
+                color: '#dae2fd'
+              });
+            });
+        });
+      });
+
+      // Micro-interactions for buttons
+      document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('mousedown', () => {
+          btn.style.transform = 'scale(0.97)';
+        });
+        btn.addEventListener('mouseup', () => {
+          btn.style.transform = '';
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

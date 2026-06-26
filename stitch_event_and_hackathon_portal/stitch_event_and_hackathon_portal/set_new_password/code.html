@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reset Password | TechNexus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#c0c1ff",
+                    "inverse-surface": "#dae2fd",
+                    "tertiary-container": "#00885d",
+                    "tertiary": "#4edea3",
+                    "primary-container": "#8083ff",
+                    "on-primary-fixed": "#07006c",
+                    "surface-container": "#171f33",
+                    "surface-tint": "#c0c1ff",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "background": "#0b1326",
+                    "surface-container-lowest": "#060e20",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-container-low": "#131b2e",
+                    "surface-bright": "#31394d",
+                    "outline-variant": "#464554",
+                    "surface-container-high": "#222a3d",
+                    "inverse-on-surface": "#283044",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#2d3449",
+                    "surface-dim": "#0b1326",
+                    "on-secondary-container": "#e6ecff",
+                    "on-secondary-fixed": "#001a42",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-secondary": "#002e6a",
+                    "outline": "#908fa0",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-tertiary": "#003824",
+                    "error": "#ffb4ab",
+                    "on-surface": "#dae2fd",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-error": "#690005",
+                    "on-primary-container": "#0d0096",
+                    "on-surface-variant": "#c7c4d7",
+                    "error-container": "#93000a",
+                    "on-background": "#dae2fd",
+                    "surface-variant": "#2d3449",
+                    "surface": "#0b1326",
+                    "primary": "#c0c1ff",
+                    "inverse-primary": "#494bd6",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-tertiary-container": "#000703",
+                    "primary-fixed": "#e1e0ff",
+                    "secondary-container": "#0566d9",
+                    "secondary": "#adc6ff",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-primary": "#1000a9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "48px",
+                    "stack-md": "16px",
+                    "base-unit": "4px",
+                    "container-max": "1280px",
+                    "stack-lg": "32px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "button-text": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-mono": ["JetBrains Mono"],
+                    "headline-xl": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "button-text": ["15px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0b1326; /* Level 0 Base */
+            color: #dae2fd;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .auth-card {
+            background-color: #1e293b; /* Level 1 Card */
+            border: 1px solid #334155; /* Slate-700 */
+        }
+
+        .input-field {
+            background-color: #0b1326;
+            border: 1px solid #334155;
+            transition: all 0.2s ease;
+        }
+
+        .input-field:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+            outline: none;
+        }
+
+        .password-strength-bar {
+            height: 4px;
+            background-color: #334155;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .strength-progress {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- TopNavBar (Suppressed for focused task per policy, but Brand Identity preserved) -->
+<header class="fixed top-0 left-0 w-full z-50 px-margin-desktop h-20 flex items-center">
+<div class="flex items-center gap-2">
+<span class="text-primary font-headline-md text-headline-md font-bold tracking-tight">TechNexus</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center relative overflow-hidden px-margin-mobile">
+<!-- Subtle Atmospheric Background -->
+<div class="absolute inset-0 z-0 pointer-events-none">
+<div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px]"></div>
+</div>
+<div class="w-full max-w-md z-10">
+<!-- Auth Layout Container -->
+<div class="auth-card p-stack-lg rounded-xl shadow-2xl">
+<div class="mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Create New Password</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Your new password must be different from previous used passwords.</p>
+</div>
+<form class="space-y-stack-md" id="reset-password-form">
+<!-- New Password Field -->
+<div class="space-y-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant block uppercase" for="new-password">New Password</label>
+<div class="relative">
+<input class="input-field w-full px-4 py-3 rounded-lg font-body-md text-on-surface placeholder:text-outline" id="new-password" name="new-password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" onclick="togglePassword('new-password')" type="button">
+<span class="material-symbols-outlined" id="new-password-icon">visibility</span>
+</button>
+</div>
+<!-- Strength Meter -->
+<div class="mt-2 space-y-1">
+<div class="password-strength-bar">
+<div class="strength-progress" id="strength-meter"></div>
+</div>
+<p class="font-label-mono text-[11px] text-on-surface-variant uppercase tracking-wider" id="strength-text">Strength: Enter password</p>
+</div>
+</div>
+<!-- Confirm Password Field -->
+<div class="space-y-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant block uppercase" for="confirm-password">Confirm New Password</label>
+<div class="relative">
+<input class="input-field w-full px-4 py-3 rounded-lg font-body-md text-on-surface placeholder:text-outline" id="confirm-password" name="confirm-password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors" onclick="togglePassword('confirm-password')" type="button">
+<span class="material-symbols-outlined" id="confirm-password-icon">visibility</span>
+</button>
+</div>
+<p class="hidden font-label-mono text-[11px] text-error uppercase tracking-wider" id="match-error">Passwords do not match</p>
+</div>
+<!-- Requirements List -->
+<div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant/30 mt-4">
+<p class="font-label-mono text-label-mono text-primary-fixed-dim mb-2 uppercase">Requirements</p>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant transition-colors" id="req-length">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                At least 12 characters long
+                            </li>
+<li class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant transition-colors" id="req-spec">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                Include special characters (!@#$%^&amp;*)
+                            </li>
+<li class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant transition-colors" id="req-num">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                At least one number (0-9)
+                            </li>
+</ul>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-secondary-container hover:bg-secondary-container/90 text-on-secondary-container font-button-text text-button-text py-4 rounded-lg transition-all active:scale-[0.98] mt-6 flex items-center justify-center gap-2" type="submit">
+                        Update Password
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<div class="pt-4 text-center">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors inline-flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-sm">west</span>
+                            Back to Sign In
+                        </a>
+</div>
+</form>
+</div>
+<!-- Side Branding / Visual Anchor for Auth Layout -->
+<div class="mt-stack-lg text-center opacity-40">
+<p class="font-label-mono text-label-mono uppercase tracking-[0.2em]">Secure Authentication Gateway v4.2</p>
+</div>
+</div>
+</main>
+<!-- Footer Content Alignment -->
+<footer class="w-full py-8 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4 text-on-surface-variant/50 border-t border-outline-variant/10">
+<p class="font-label-mono text-body-sm">© 2024 TechNexus Hackathon Platform</p>
+<div class="flex gap-gutter">
+<a class="font-label-mono text-body-sm hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-mono text-body-sm hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</footer>
+<script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        const newPass = document.getElementById('new-password');
+        const confPass = document.getElementById('confirm-password');
+        const strengthMeter = document.getElementById('strength-meter');
+        const strengthText = document.getElementById('strength-text');
+        const matchError = document.getElementById('match-error');
+
+        const reqLength = document.getElementById('req-length');
+        const reqSpec = document.getElementById('req-spec');
+        const reqNum = document.getElementById('req-num');
+
+        newPass.addEventListener('input', () => {
+            const val = newPass.value;
+            let strength = 0;
+
+            // Requirements checks
+            if (val.length >= 12) {
+                strength += 1;
+                reqLength.classList.remove('text-on-surface-variant');
+                reqLength.classList.add('text-tertiary');
+            } else {
+                reqLength.classList.add('text-on-surface-variant');
+                reqLength.classList.remove('text-tertiary');
+            }
+
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(val)) {
+                strength += 1;
+                reqSpec.classList.remove('text-on-surface-variant');
+                reqSpec.classList.add('text-tertiary');
+            } else {
+                reqSpec.classList.add('text-on-surface-variant');
+                reqSpec.classList.remove('text-tertiary');
+            }
+
+            if (/\d/.test(val)) {
+                strength += 1;
+                reqNum.classList.remove('text-on-surface-variant');
+                reqNum.classList.add('text-tertiary');
+            } else {
+                reqNum.classList.add('text-on-surface-variant');
+                reqNum.classList.remove('text-tertiary');
+            }
+
+            // Strength Visuals
+            const colors = ['#93000a', '#ffb4ab', '#adc6ff', '#4edea3'];
+            const levels = ['Weak', 'Fair', 'Good', 'Strong'];
+            
+            let levelIdx = Math.min(strength, 3);
+            if (val.length === 0) {
+                strengthMeter.style.width = '0%';
+                strengthText.textContent = 'Strength: Enter password';
+            } else {
+                strengthMeter.style.width = ((levelIdx + 1) * 25) + '%';
+                strengthMeter.style.backgroundColor = colors[levelIdx];
+                strengthText.textContent = 'Strength: ' + levels[levelIdx];
+                strengthText.style.color = colors[levelIdx];
+            }
+
+            checkMatch();
+        });
+
+        confPass.addEventListener('input', checkMatch);
+
+        function checkMatch() {
+            if (confPass.value && newPass.value !== confPass.value) {
+                matchError.classList.remove('hidden');
+                confPass.classList.add('border-error');
+            } else {
+                matchError.classList.add('hidden');
+                confPass.classList.remove('border-error');
+            }
+        }
+
+        document.getElementById('reset-password-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (newPass.value === confPass.value && newPass.value.length >= 1) {
+                // Success animation logic
+                const btn = e.target.querySelector('button[type="submit"]');
+                btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Updating...';
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    btn.innerHTML = '<span class="material-symbols-outlined">task_alt</span> Updated';
+                    btn.classList.remove('bg-secondary-container');
+                    btn.classList.add('bg-tertiary-container');
+                }, 1500);
+            }
+        });
+    </script>
+</body></html>

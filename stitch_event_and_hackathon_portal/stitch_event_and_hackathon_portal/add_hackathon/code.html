@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create New Hackathon | Admin Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#c0c1ff",
+                    "inverse-surface": "#dae2fd",
+                    "tertiary-container": "#00885d",
+                    "tertiary": "#4edea3",
+                    "primary-container": "#8083ff",
+                    "on-primary-fixed": "#07006c",
+                    "surface-container": "#171f33",
+                    "surface-tint": "#c0c1ff",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "background": "#0b1326",
+                    "surface-container-lowest": "#060e20",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-container-low": "#131b2e",
+                    "surface-bright": "#31394d",
+                    "outline-variant": "#464554",
+                    "surface-container-high": "#222a3d",
+                    "inverse-on-surface": "#283044",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#2d3449",
+                    "surface-dim": "#0b1326",
+                    "on-secondary-container": "#e6ecff",
+                    "on-secondary-fixed": "#001a42",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-secondary": "#002e6a",
+                    "outline": "#908fa0",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-tertiary": "#003824",
+                    "error": "#ffb4ab",
+                    "on-surface": "#dae2fd",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-error": "#690005",
+                    "on-primary-container": "#0d0096",
+                    "on-surface-variant": "#c7c4d7",
+                    "error-container": "#93000a",
+                    "on-background": "#dae2fd",
+                    "surface-variant": "#2d3449",
+                    "surface": "#0b1326",
+                    "primary": "#c0c1ff",
+                    "inverse-primary": "#494bd6",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-tertiary-container": "#000703",
+                    "primary-fixed": "#e1e0ff",
+                    "secondary-container": "#0566d9",
+                    "secondary": "#adc6ff",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-primary": "#1000a9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "48px",
+                    "stack-md": "16px",
+                    "base-unit": "4px",
+                    "container-max": "1280px",
+                    "stack-lg": "32px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "button-text": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-mono": ["JetBrains Mono"],
+                    "headline-xl": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "button-text": ["15px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .form-input-focus:focus {
+            border-color: #c0c1ff;
+            box-shadow: 0 0 0 2px rgba(192, 193, 255, 0.2);
+        }
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+<!-- Admin SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-surface-container border-r border-outline-variant w-60 z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md text-primary">Admin Panel</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant opacity-70">Management Suite</p>
+</div>
+<nav class="flex-1 px-3 space-y-2">
+<a class="flex items-center space-x-3 text-on-surface-variant hover:bg-surface-variant px-4 py-2 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-mono text-label-mono">Users</span>
+</a>
+<a class="flex items-center space-x-3 text-on-surface-variant hover:bg-surface-variant px-4 py-2 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-mono text-label-mono">Events</span>
+</a>
+<a class="flex items-center space-x-3 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">code</span>
+<span class="font-label-mono text-label-mono font-bold">Hackathons</span>
+</a>
+</nav>
+<div class="mt-auto px-3 space-y-2">
+<button class="w-full flex items-center justify-center space-x-2 bg-primary text-on-primary py-3 rounded-xl font-button-text hover:opacity-90 transition-all active:scale-95 mb-6">
+<span class="material-symbols-outlined">add</span>
+<span>Create New</span>
+</button>
+<a class="flex items-center space-x-3 text-on-surface-variant hover:bg-surface-variant px-4 py-2 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-mono text-label-mono">Settings</span>
+</a>
+<a class="flex items-center space-x-3 text-on-surface-variant hover:bg-surface-variant px-4 py-2 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-mono text-label-mono">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation -->
+<header class="flex justify-between items-center w-full px-6 h-14 bg-surface-container-highest shadow-sm fixed top-0 left-0 z-40 pl-64">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-dim border-none rounded-lg py-1.5 pl-10 text-body-sm focus:ring-1 focus:ring-primary" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-on-surface-variant hover:bg-surface-bright p-2 rounded-full transition-all active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-bright p-2 rounded-full transition-all active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio headshot of a technology platform administrator, wearing a minimalist dark turtleneck, looking confidently at the camera. The background is a clean, neutral slate gray with subtle soft lighting highlighting the contours of the face. The overall aesthetic is professional, modern, and high-contrast dark mode." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARbb_YkkRcWYHY43oHl7eI53ro5jYZ2cqxApgiAMvNF0VjSRnftp2zO8-euTkt1y9NwkIDQ3PFRgSFMtD84-hq9HDMPpYHS4BO1fXZYtfNU9OZPjcYLR6kRn8WD8m6LuzEbZRF3FQvkME-R4tb-p0iHehEP3D1QhOkMCl3Ve9FDz5Ri0c0MGf1Q4LKqVrOXl2L1PlU_Mtwl7-vdcYVs-9p9PO_nSUugG-fwHCziae74zbhlE55spQUuQ"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-60 pt-14 min-h-screen">
+<div class="max-w-4xl mx-auto px-margin-desktop py-stack-lg">
+<!-- Breadcrumbs -->
+<nav class="flex mb-6 space-x-2 font-label-mono text-label-mono text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Admin Console</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">Hackathons</a>
+<span>/</span>
+<span class="text-primary">Create New</span>
+</nav>
+<!-- Header Section -->
+<div class="mb-stack-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Configure New Hackathon</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Define the parameters for your upcoming technical challenge. High-quality cover images and clear prize structures increase developer engagement by 40%.</p>
+</div>
+<!-- Bento Form Layout -->
+<form class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Main Configuration Card -->
+<div class="md:col-span-8 bg-surface-container-low border border-outline-variant p-6 rounded-xl space-y-6">
+<div>
+<label class="block font-label-mono text-label-mono text-primary mb-2">HACKATHON TITLE</label>
+<input class="w-full bg-surface-dim border border-outline-variant rounded-lg p-3 text-on-surface font-body-md form-input-focus outline-none transition-all" placeholder="e.g. Global AI Innovation Challenge 2024" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-mono text-label-mono text-primary mb-2">START DATE</label>
+<input class="w-full bg-surface-dim border border-outline-variant rounded-lg p-3 text-on-surface font-body-md form-input-focus outline-none transition-all" type="datetime-local"/>
+</div>
+<div>
+<label class="block font-label-mono text-label-mono text-primary mb-2">END DATE</label>
+<input class="w-full bg-surface-dim border border-outline-variant rounded-lg p-3 text-on-surface font-body-md form-input-focus outline-none transition-all" type="datetime-local"/>
+</div>
+</div>
+<div>
+<label class="block font-label-mono text-label-mono text-primary mb-2">DETAILED DESCRIPTION</label>
+<textarea class="w-full bg-surface-dim border border-outline-variant rounded-lg p-3 text-on-surface font-body-md form-input-focus outline-none transition-all" placeholder="Describe the problem statement, rules, and technical requirements..." rows="6"></textarea>
+</div>
+</div>
+<!-- Right Sidebar / Secondary Info -->
+<div class="md:col-span-4 space-y-gutter">
+<!-- Prize Pool Card -->
+<div class="bg-surface-container-low border border-outline-variant p-6 rounded-xl">
+<label class="block font-label-mono text-label-mono text-primary mb-4">PRIZE POOL</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-headline-md">$</span>
+<input class="w-full bg-surface-dim border border-outline-variant rounded-lg p-3 pl-10 text-on-surface font-headline-md font-bold form-input-focus outline-none transition-all" placeholder="50,000" type="number"/>
+</div>
+<p class="mt-4 font-body-sm text-body-sm text-on-surface-variant">Currency: USD. Prizes are typically distributed to top 3 teams.</p>
+</div>
+<!-- Image Upload Area -->
+<div class="bg-surface-container-low border border-outline-variant p-6 rounded-xl">
+<label class="block font-label-mono text-label-mono text-primary mb-4">COVER IMAGE</label>
+<div class="relative group cursor-pointer border-2 border-dashed border-outline-variant rounded-xl overflow-hidden hover:border-primary transition-all aspect-video flex flex-col items-center justify-center bg-surface-dim">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 grayscale group-hover:opacity-50 transition-opacity" data-alt="A dark, cinematic preview placeholder image for a hackathon cover. The image features blurred code structures and abstract network nodes in shades of indigo and slate. The lighting is low and atmospheric, with a central bright focus point suggesting a technical horizon. High contrast, professional digital art aesthetic for a technical platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAstudsn1wHgAxhkE2RBEsNnDIuRa9svYmFYjYLcxNUKqzwm38au27-c_WwlJTowWEck0Z45aHTh8npgQ095eYP-Kp1XP0-TSc6TRDv6urDn026f8qSKG8MYLql2YP04Wo1rgPju4R1HTUf1y3G5a7uHbtf4cJ-f-bazxtzLzHjB3axHk9JZuw1Yf7pYuybC5IR5b7y8HoNV9tYIydL-iYw63N4B40PA3OKaWjzycL_Xsges4CqGJq7Og"/>
+</div>
+<div class="relative z-10 text-center p-4">
+<span class="material-symbols-outlined text-headline-xl text-primary mb-2">cloud_upload</span>
+<p class="font-label-mono text-label-mono text-on-surface">Click or drag to upload</p>
+<p class="text-[10px] text-on-surface-variant mt-1 uppercase">PNG, JPG up to 10MB (16:9 recommended)</p>
+</div>
+<input class="absolute inset-0 opacity-0 cursor-pointer" type="file"/>
+</div>
+</div>
+</div>
+<!-- Form Actions -->
+<div class="md:col-span-12 flex items-center justify-end space-x-4 pt-6 border-t border-outline-variant">
+<button class="px-6 py-2 rounded-lg font-button-text text-on-surface-variant hover:text-on-surface transition-colors" type="button">
+                        Discard Draft
+                    </button>
+<button class="px-8 py-3 bg-primary text-on-primary rounded-xl font-button-text font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all" type="submit">
+                        Launch Hackathon
+                    </button>
+</div>
+</form>
+</div>
+</main>
+<!-- Success Feedback Overlay (Hidden by default) -->
+<div class="fixed bottom-8 right-8 bg-surface-container-highest border border-tertiary rounded-xl p-4 shadow-2xl flex items-center space-x-4 translate-y-24 opacity-0 transition-all duration-500 z-[100]" id="successToast">
+<div class="bg-tertiary-container text-on-tertiary-container p-2 rounded-full">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<p class="font-label-mono text-label-mono text-on-surface">SUCCESS</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Hackathon configuration saved successfully.</p>
+</div>
+</div>
+<script>
+        // Micro-interaction for form submission preview
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const toast = document.getElementById('successToast');
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        });
+
+        // Interactive sidebar states
+        const navItems = document.querySelectorAll('aside nav a');
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                navItems.forEach(i => {
+                    i.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'translate-x-1');
+                    i.classList.add('text-on-surface-variant', 'hover:bg-surface-variant');
+                    i.querySelector('span.font-bold')?.classList.remove('font-bold');
+                });
+                item.classList.add('bg-secondary-container', 'text-on-secondary-container', 'translate-x-1');
+                item.classList.remove('text-on-surface-variant', 'hover:bg-surface-variant');
+                item.querySelector('.font-label-mono').classList.add('font-bold');
+            });
+        });
+    </script>
+</body></html>

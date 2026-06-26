@@ -1,0 +1,139 @@
+<%
+// Modal Component
+// Usage: <%- include('partials/components/modal', { id: 'modal-id', title: 'Modal Title', size: 'md' }) %>
+// Parameters:
+// - id: Required unique identifier for the modal
+// - title: Modal title (optional)
+// - size: 'sm', 'md', 'lg', 'xl' (default: 'md')
+// - closeOnBackdrop: Boolean (default: true)
+// - showCloseButton: Boolean (default: true)
+const modalId = locals.id || 'modal';
+const modalTitle = locals.title || '';
+const modalSize = locals.size || 'md';
+const closeOnBackdrop = locals.closeOnBackdrop !== undefined ? locals.closeOnBackdrop : true;
+const showCloseButton = locals.showCloseButton !== undefined ? locals.showCloseButton : true;
+
+const sizeClasses = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl'
+};
+const sizeClass = sizeClasses[modalSize] || sizeClasses.md;
+%>
+
+<!-- Modal -->
+<div id="<%= modalId %>" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
+  <!-- Backdrop -->
+  <div class="modal-backdrop" <%= closeOnBackdrop ? 'data-close-modal' : '' %>></div>
+
+  <!-- Modal Panel -->
+  <div class="flex min-h-full items-center justify-center p-4">
+    <div class="relative <%= sizeClass %> w-full transform transition-all">
+      <div class="modal-content animate-scale-in">
+        <!-- Header -->
+        <% if (modalTitle || showCloseButton) { %>
+          <div class="flex items-center justify-between border-b border-secondary-200 pb-4 mb-4 dark:border-secondary-800">
+            <% if (modalTitle) { %>
+              <h3 class="text-lg font-semibold text-secondary-900 dark:text-white">
+                <%= modalTitle %>
+              </h3>
+            <% } %>
+
+            <% if (showCloseButton) { %>
+              <button
+                data-close-modal
+                class="rounded-lg p-2 text-secondary-400 hover:bg-secondary-100 hover:text-secondary-600 dark:hover:bg-secondary-800 dark:hover:text-secondary-300"
+              >
+                <i data-feather="x" class="h-5 w-5"></i>
+              </button>
+            <% } %>
+          </div>
+        <% } %>
+
+        <!-- Content -->
+        <div class="<%= modalTitle ? '' : 'mb-4' %>">
+          <%- content %>
+        </div>
+
+        <!-- Footer (optional) -->
+        <% if (locals.showFooter) { %>
+          <div class="mt-6 flex justify-end gap-3 border-t border-secondary-200 pt-4 dark:border-secondary-800">
+            <% if (locals.cancelButton) { %>
+              <button data-close-modal class="btn-secondary">
+                <%= locals.cancelText || 'Cancel' %>
+              </button>
+            <% } %>
+
+            <% if (locals.confirmButton) { %>
+              <button id="<%= modalId %>-confirm" class="btn-primary">
+                <%= locals.confirmText || 'Confirm' %>
+              </button>
+            <% } %>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const modalId = '<%= modalId %>';
+    const modal = document.getElementById(modalId);
+    const closeButtons = modal.querySelectorAll('[data-close-modal]');
+
+    // Open modal function (can be called globally)
+    window['open' + modalId.charAt(0).toUpperCase() + modalId.slice(1)] = function() {
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    };
+
+    // Close modal function
+    window['close' + modalId.charAt(0).toUpperCase() + modalId.slice(1)] = function() {
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    };
+
+    // Close on backdrop click
+    if (<%= closeOnBackdrop %>) {
+      modal.addEventListener('click', function(e) {
+        if (e.target.hasAttribute('data-close-modal')) {
+          window['close' + modalId.charAt(0).toUpperCase() + modalId.slice(1)]();
+        }
+      });
+    }
+
+    // Close buttons
+    closeButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        window['close' + modalId.charAt(0).toUpperCase() + modalId.slice(1)]();
+      });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        window['close' + modalId.charAt(0).toUpperCase() + modalId.slice(1)]();
+      }
+    });
+
+    // Emit open/close events
+    const openEvent = new CustomEvent('modalOpen', { detail: { modalId } });
+    const closeEvent = new CustomEvent('modalClose', { detail: { modalId } });
+
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'class') {
+          if (modal.classList.contains('hidden')) {
+            window.dispatchEvent(closeEvent);
+          } else {
+            window.dispatchEvent(openEvent);
+          }
+        }
+      });
+    });
+
+    observer.observe(modal, { attributes: true });
+  })();
+</script>

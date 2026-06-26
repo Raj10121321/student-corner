@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | TechNexus</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    body { background-color: #0b1326; color: #dae2fd; }
+    .tonal-layer-1 { background-color: #1E293B; border: 1px solid #334155; }
+  </style>
+</head>
+
+<body class="min-h-screen flex">
+  <!-- Sidebar -->
+  <nav class="w-64 bg-surface-container border-r border-outline-variant p-6 hidden md:flex flex-col">
+    <div class="flex items-center gap-3 mb-8">
+      <span class="text-headline-md font-bold text-primary">TechNexus</span>
+    </div>
+    <ul class="space-y-2 flex-1">
+      <li>
+        <a href="/dashboard" class="flex items-center gap-3 bg-primary/10 text-primary px-4 py-3 rounded-lg">
+          <span class="material-symbols-outlined">dashboard</span> Dashboard
+        </a>
+      </li>
+      <li><a href="/events" class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-lg transition-colors"><span class="material-symbols-outlined">event</span> Events</a></li>
+      <li><a href="/hackathons" class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-lg transition-colors"><span class="material-symbols-outlined">code</span> Hackathons</a></li>
+      <li><a href="/my-events" class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-lg transition-colors"><span class="material-symbols-outlined">bookmark</span> My Events</a></li>
+      <li><a href="/my-hackathons" class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-lg transition-colors"><span class="material-symbols-outlined">emoji_events</span> My Hackathons</a></li>
+      <li><a href="/edit-profile" class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-lg transition-colors"><span class="material-symbols-outlined">person</span> Edit Profile</a></li>
+    </ul>
+    <div class="pt-6 border-t border-outline-variant">
+      <a href="/logout" class="flex items-center gap-3 text-error hover:text-error/80 px-4 py-3 rounded-lg transition-colors">
+        <span class="material-symbols-outlined">logout</span> Logout
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-8">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8">
+      <h1 class="font-headline-xl text-headline-xl">Welcome, <%= accounts.name %>!</h1>
+      <div class="flex items-center gap-4">
+        <button class="p-2 rounded-full hover:bg-surface-container transition-colors relative">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+        </button>
+        <a href="/edit-profile" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+            <span class="text-primary font-bold"><%= accounts.name.charAt(0).toUpperCase() %></span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="tonal-layer-1 rounded-xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <span class="material-symbols-outlined text-primary">bookmark</span>
+          <span class="text-on-surface-variant font-label-mono text-xs">Total</span>
+        </div>
+        <p class="font-headline-lg text-headline-lg text-primary"><%= EnrolledEvents.length + EnrolledHackthons.length %></p>
+        <p class="text-on-surface-variant text-sm">Enrolled</p>
+      </div>
+
+      <div class="tonal-layer-1 rounded-xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <span class="material-symbols-outlined text-tertiary">event_available</span>
+          <span class="text-on-surface-variant font-label-mono text-xs">Active</span>
+        </div>
+        <p class="font-headline-lg text-headline-lg text-tertiary"><%= upcomingEvents.length %></p>
+        <p class="text-on-surface-variant text-sm">Events Available</p>
+      </div>
+
+      <div class="tonal-layer-1 rounded-xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <span class="material-symbols-outlined text-secondary">code</span>
+          <span class="text-on-surface-variant font-label-mono text-xs">Active</span>
+        </div>
+        <p class="font-headline-lg text-headline-lg text-secondary"><%= upcomingHackthons.length %></p>
+        <p class="text-on-surface-variant text-sm">Hackathons Available</p>
+      </div>
+
+      <div class="tonal-layer-1 rounded-xl p-6">
+        <div class="flex items-center justify-between mb-4">
+          <span class="material-symbols-outlined text-primary">stars</span>
+          <span class="text-on-surface-variant font-label-mono text-xs">Points</span>
+        </div>
+        <p class="font-headline-lg text-headline-lg text-primary">1250</p>
+        <p class="text-on-surface-variant text-sm">Achievement Points</p>
+      </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Profile Card -->
+      <div class="tonal-layer-1 rounded-xl p-6">
+        <h2 class="font-headline-md text-headline-md mb-4">Profile Overview</h2>
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+            <span class="text-primary text-2xl font-bold"><%= accounts.name.charAt(0).toUpperCase() %></span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md"><%= accounts.name %></h3>
+            <p class="text-on-surface-variant text-sm"><%= accounts.gender %></p>
+          </div>
+        </div>
+        <div class="space-y-3 mb-6">
+          <div class="flex items-center gap-3 text-on-surface-variant">
+            <span class="material-symbols-outlined text-sm">email</span>
+            <span class="text-sm"><%= accounts.email %></span>
+          </div>
+          <div class="flex items-center gap-3 text-on-surface-variant">
+            <span class="material-symbols-outlined text-sm">phone</span>
+            <span class="text-sm"><%= accounts.phonenumber %></span>
+          </div>
+        </div>
+        <a href="/edit-profile" class="w-full bg-primary text-on-primary py-3 rounded-lg text-center font-button-text hover:opacity-90 transition-all">Edit Profile</a>
+      </div>
+
+      <!-- Enrolled Events -->
+      <div class="tonal-layer-1 rounded-xl p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="font-headline-md text-headline-md">Enrolled Events</h2>
+          <a href="/my-events" class="text-primary text-sm hover:underline">View All</a>
+        </div>
+        <div class="space-y-4">
+          <% EnrolledEvents.slice(0, 3).forEach(event => { %>
+            <div class="flex items-center gap-4 p-3 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary">event</span>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-on-surface"><%= event.name %></p>
+                <p class="text-on-surface-variant text-xs"><%= event.location %></p>
+              </div>
+              <a href="/event/<%= event.id %>" class="text-primary text-sm hover:underline">Details</a>
+            </div>
+          <% }) %>
+          <% if (EnrolledEvents.length === 0) { %>
+            <p class="text-on-surface-variant text-sm text-center py-4">No enrolled events yet</p>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Upcoming Events -->
+      <div class="tonal-layer-1 rounded-xl p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="font-headline-md text-headline-md">Upcoming Events</h2>
+          <a href="/events" class="text-primary text-sm hover:underline">View All</a>
+        </div>
+        <div class="space-y-4">
+          <% upcomingEvents.slice(0, 3).forEach(event => { %>
+            <div class="flex items-center gap-4 p-3 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+              <div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-tertiary">event_available</span>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-on-surface"><%= event.eventName %></p>
+                <p class="text-on-surface-variant text-xs"><%= event.location %></p>
+              </div>
+              <a href="/event/<%= event.id %>" class="text-tertiary text-sm hover:underline">Details</a>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <!-- Upcoming Hackathons -->
+      <div class="tonal-layer-1 rounded-xl p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="font-headline-md text-headline-md">Upcoming Hackathons</h2>
+          <a href="/hackathons" class="text-primary text-sm hover:underline">View All</a>
+        </div>
+        <div class="space-y-4">
+          <% upcomingHackthons.slice(0, 3).forEach(hackathon => { %>
+            <div class="flex items-center gap-4 p-3 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+              <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-secondary">code</span>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-on-surface"><%= hackathon.eventName %></p>
+                <p class="text-on-surface-variant text-xs"><%= hackathon.location %></p>
+              </div>
+              <a href="/hackathon/<%= hackathon.id %>" class="text-secondary text-sm hover:underline">Details</a>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <a href="/events" class="tonal-layer-1 rounded-xl p-4 flex items-center gap-3 hover:border-primary transition-all">
+        <span class="material-symbols-outlined text-primary">search</span>
+        <span class="text-on-surface font-medium">Find Events</span>
+      </a>
+      <a href="/hackathons" class="tonal-layer-1 rounded-xl p-4 flex items-center gap-3 hover:border-primary transition-all">
+        <span class="material-symbols-outlined text-tertiary">search</span>
+        <span class="text-on-surface font-medium">Find Hackathons</span>
+      </a>
+      <a href="/my-events" class="tonal-layer-1 rounded-xl p-4 flex items-center gap-3 hover:border-primary transition-all">
+        <span class="material-symbols-outlined text-secondary">bookmark</span>
+        <span class="text-on-surface font-medium">My Events</span>
+      </a>
+      <a href="/my-hackathons" class="tonal-layer-1 rounded-xl p-4 flex items-center gap-3 hover:border-primary transition-all">
+        <span class="material-symbols-outlined text-secondary">emoji_events</span>
+        <span class="text-on-surface font-medium">My Hackathons</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

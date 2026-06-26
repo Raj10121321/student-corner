@@ -1,0 +1,233 @@
+<%
+// Event Card Component
+// Usage: <%- include('partials/components/event-card', { event: eventData, type: 'event' }) %>
+// Parameters:
+// - event: Event object with id, eventName, location, month, day, deadlineDate, logo, description, etc.
+// - type: 'event' or 'hackathon' (default: 'event')
+// - isEnrolled: Boolean (optional)
+// - showEnrollButton: Boolean (default: true)
+const eventType = locals.type || 'event';
+const isEnrolled = locals.isEnrolled || false;
+const showEnrollButton = locals.showEnrollButton !== undefined ? locals.showEnrollButton : true;
+const eventDetailPath = eventType === 'hackathon' ? `/hackathon/${event.id}` : `/event/${event.id}`;
+const enrollAction = eventType === 'hackathon' ? '/enroll' : '/enroll';
+%>
+
+<div class="card card-hover overflow-hidden group">
+  <!-- Image -->
+  <div class="relative h-48 overflow-hidden">
+    <%
+      const imageUrl = event.img || event.logo || '/images/placeholder-event.jpg';
+      const eventName = event.eventname || event.eventName || 'Event';
+    %>
+    <img
+      src="<%= imageUrl %>"
+      alt="<%= eventName %>"
+      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+      loading="lazy"
+    >
+
+    <!-- Status Badge -->
+    <div class="absolute top-3 right-3">
+      <span class="badge <%= event.status === 'active' ? 'badge-success' : 'badge-warning' %>">
+        <%= event.status === 'active' ? 'Open' : 'Closed' %>
+      </span>
+    </div>
+
+    <!-- Type Badge -->
+    <div class="absolute top-3 left-3">
+      <span class="badge badge-primary">
+        <%= eventType === 'hackathon' ? 'Hackathon' : 'Event' %>
+      </span>
+    </div>
+
+    <!-- Date Overlay -->
+    <div class="absolute bottom-3 left-3 rounded-lg bg-white/90 px-3 py-1.5 text-center shadow-md dark:bg-secondary-900/90">
+      <p class="text-xs font-semibold text-primary-600 dark:text-primary-400 uppercase">
+        <%= event.month || 'TBD' %>
+      </p>
+      <p class="text-xl font-bold text-secondary-900 dark:text-white">
+        <%= event.day || '--' %>
+      </p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-5">
+    <!-- Title -->
+    <h3 class="mb-2 text-lg font-semibold text-secondary-900 dark:text-white line-clamp-1">
+      <%= eventName %>
+    </h3>
+
+    <!-- Location -->
+    <div class="mb-3 flex items-center gap-2 text-sm text-secondary-600 dark:text-secondary-400">
+      <i data-feather="map-pin" class="h-4 w-4 shrink-0"></i>
+      <span class="line-clamp-1"><%= event.location || 'Location TBD' %></span>
+    </div>
+
+    <!-- Description -->
+    <p class="mb-4 text-sm text-secondary-600 dark:text-secondary-400 line-clamp-2">
+      <%= event.description || 'No description available.' %>
+    </p>
+
+    <!-- Meta Info -->
+    <div class="mb-4 flex flex-wrap gap-3 text-xs text-secondary-500 dark:text-secondary-500">
+      <% if (event.age) { %>
+        <span class="flex items-center gap-1">
+          <i data-feather="users" class="h-3 w-3"></i>
+          <%= event.age %>
+        </span>
+      <% } %>
+      <% if (event.country) { %>
+        <span class="flex items-center gap-1">
+          <i data-feather="globe" class="h-3 w-3"></i>
+          <%= event.country %>
+        </span>
+      <% } %>
+      <% if (event.deadlineDate || event.deadlinedate) { %>
+        <span class="flex items-center gap-1">
+          <i data-feather="clock" class="h-3 w-3"></i>
+          Deadline: <%= new Date(event.deadlineDate || event.deadlinedate).toLocaleDateString() %>
+        </span>
+      <% } %>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-between gap-3">
+      <% if (showEnrollButton) { %>
+        <% if (isEnrolled) { %>
+          <button
+            onclick="unenroll('<%= event.id %>', '<%= eventType %>')"
+            class="btn-ghost flex-1 text-accent-error hover:bg-red-50 hover:text-accent-error dark:hover:bg-red-900/20"
+          >
+            <i data-feather="x-circle" class="h-4 w-4 mr-2"></i>
+            Unenroll
+          </button>
+        <% } else { %>
+          <button
+            onclick="enroll('<%= event.id %>', '<%= eventType %>')"
+            class="btn-primary flex-1"
+            <%= event.status !== 'active' ? 'disabled' : '' %>
+          >
+            <i data-feather="check-circle" class="h-4 w-4 mr-2"></i>
+            Enroll Now
+          </button>
+        <% } %>
+      <% } %>
+
+      <a href="<%= eventDetailPath %>" class="btn-secondary">
+        <i data-feather="arrow-right" class="h-4 w-4"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function enroll(eventId, eventType) {
+    Swal.fire({
+      title: 'Enroll in ' + (eventType === 'hackathon' ? 'Hackathon' : 'Event'),
+      text: 'Are you sure you want to enroll?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, enroll me!',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#4f46e5',
+      cancelButtonColor: '#64748b',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch('/enroll', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            eventId: eventId,
+            eventType: eventType
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Enrolled!',
+              text: data.message || 'You have been successfully enrolled.',
+              timer: 2000,
+              showConfirmButton: false
+            }).then(() => {
+              location.reload();
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: data.message || 'Failed to enroll. Please try again.',
+            });
+          }
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred. Please try again.',
+          });
+        });
+      }
+    });
+  }
+
+  function unenroll(eventId, eventType) {
+    Swal.fire({
+      title: 'Unenroll from ' + (eventType === 'hackathon' ? 'Hackathon' : 'Event'),
+      text: 'Are you sure you want to unenroll?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, unenroll me',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#ef4444',
+      cancelButtonColor: '#64748b',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const unenrollUrl = eventType === 'hackathon' ? `/unenroll/${eventId}` : '/unenroll';
+
+        fetch(unenrollUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            eventId: eventId,
+            eventType: eventType
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Unenrolled!',
+              text: data.message || 'You have been successfully unenrolled.',
+              timer: 2000,
+              showConfirmButton: false
+            }).then(() => {
+              location.reload();
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: data.message || 'Failed to unenroll. Please try again.',
+            });
+          }
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred. Please try again.',
+          });
+        });
+      }
+    });
+  }
+</script>

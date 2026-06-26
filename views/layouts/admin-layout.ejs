@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student Corner Admin Panel">
+  <title><%= title || 'Admin Panel' %> | Student Corner</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/images/react.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <link href="/stylesheets/main.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <% if (typeof additionalStyles !== 'undefined') { %>
+    <% additionalStyles.forEach(style => { %>
+      <link href="<%= style %>" rel="stylesheet">
+    <% }) %>
+  <% } %>
+</head>
+<body class="min-h-screen bg-secondary-50 dark:bg-secondary-950">
+  <div class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <aside class="hidden w-64 flex-col border-r border-secondary-200 bg-white dark:border-secondary-800 dark:bg-secondary-900 lg:flex">
+      <!-- Logo -->
+      <div class="flex h-16 items-center gap-3 border-b border-secondary-200 px-6 dark:border-secondary-800">
+        <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary-600 to-primary-500 shadow-glow">
+          <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-lg font-bold text-secondary-900 dark:text-white">Student Corner</span>
+          <p class="text-xs text-secondary-500 dark:text-secondary-400">Admin Panel</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex-1 space-y-1 overflow-y-auto p-4">
+        <a href="/admin/dashboard" class="nav-link <%= currentPath === '/admin/dashboard' ? 'nav-link-active' : '' %>">
+          <i data-feather="grid" class="h-5 w-5"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <div class="space-y-1 pt-4">
+          <p class="px-4 text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400">Management</p>
+          <a href="/admin/users" class="nav-link <%= currentPath === '/admin/users' ? 'nav-link-active' : '' %>">
+            <i data-feather="users" class="h-5 w-5"></i>
+            <span>Users</span>
+          </a>
+          <a href="/admin/events" class="nav-link <%= currentPath === '/admin/events' ? 'nav-link-active' : '' %>">
+            <i data-feather="calendar" class="h-5 w-5"></i>
+            <span>Events</span>
+          </a>
+          <a href="/admin/hackathons" class="nav-link <%= currentPath === '/admin/hackathons' ? 'nav-link-active' : '' %>">
+            <i data-feather="code" class="h-5 w-5"></i>
+            <span>Hackathons</span>
+          </a>
+        </div>
+
+        <div class="space-y-1 pt-4">
+          <p class="px-4 text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400">Quick Actions</p>
+          <a href="/admin/users/add" class="nav-link">
+            <i data-feather="user-plus" class="h-5 w-5"></i>
+            <span>Add User</span>
+          </a>
+          <a href="/admin/events/add" class="nav-link">
+            <i data-feather="plus-circle" class="h-5 w-5"></i>
+            <span>Add Event</span>
+          </a>
+          <a href="/admin/hackathons/add" class="nav-link">
+            <i data-feather="trophy" class="h-5 w-5"></i>
+            <span>Add Hackathon</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- User Info -->
+      <div class="border-t border-secondary-200 p-4 dark:border-secondary-800">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary-600 to-primary-500 text-white font-semibold">
+            <%= (admin && admin.username) ? admin.username.charAt(0).toUpperCase() : 'A' %>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-secondary-900 dark:text-white truncate">
+              <%= (admin && admin.username) ? admin.username : 'Admin' %>
+            </p>
+            <p class="text-xs text-secondary-500 dark:text-secondary-400 truncate">Administrator</p>
+          </div>
+          <a href="/admin/logout" class="flex h-8 w-8 items-center justify-center rounded-lg text-secondary-400 hover:bg-secondary-100 hover:text-secondary-600 dark:hover:bg-secondary-800 dark:hover:text-secondary-300" title="Logout">
+            <i data-feather="log-out" class="h-4 w-4"></i>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex flex-1 flex-col overflow-hidden">
+      <!-- Top Bar -->
+      <header class="flex h-16 items-center justify-between border-b border-secondary-200 bg-white px-4 sm:px-6 dark:border-secondary-800 dark:bg-secondary-900">
+        <div class="flex items-center gap-4">
+          <!-- Mobile Menu Button -->
+          <button id="admin-mobile-menu-button" class="lg:hidden rounded-lg p-2 text-secondary-600 hover:bg-secondary-100 dark:text-secondary-400 dark:hover:bg-secondary-800">
+            <i data-feather="menu" class="h-6 w-6"></i>
+          </button>
+
+          <!-- Breadcrumb -->
+          <nav class="hidden sm:flex items-center text-sm text-secondary-600 dark:text-secondary-400">
+            <a href="/admin/dashboard" class="hover:text-secondary-900 dark:hover:text-white">Admin</a>
+            <svg class="mx-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span class="font-medium text-secondary-900 dark:text-white"><%= pageTitle || 'Dashboard' %></span>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <!-- Dark Mode Toggle -->
+          <button id="admin-dark-mode-toggle" class="rounded-lg p-2 text-secondary-600 hover:bg-secondary-100 dark:text-secondary-400 dark:hover:bg-secondary-800">
+            <i data-feather="moon" class="h-5 w-5 dark:hidden"></i>
+            <i data-feather="sun" class="h-5 w-5 hidden dark:block"></i>
+          </button>
+
+          <!-- Notifications -->
+          <button class="relative rounded-lg p-2 text-secondary-600 hover:bg-secondary-100 dark:text-secondary-400 dark:hover:bg-secondary-800">
+            <i data-feather="bell" class="h-5 w-5"></i>
+            <span class="absolute right-1 top-1 flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-error opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-error"></span>
+            </span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        <%- content %>
+      </main>
+    </div>
+
+    <!-- Mobile Sidebar -->
+    <div id="admin-mobile-menu" class="fixed inset-0 z-50 hidden lg:hidden">
+      <div class="absolute inset-0 bg-secondary-900/50 backdrop-blur-sm" id="admin-mobile-backdrop"></div>
+      <aside class="absolute inset-y-0 left-0 w-64 flex-col border-r border-secondary-200 bg-white dark:border-secondary-800 dark:bg-secondary-900">
+        <!-- Mobile Logo -->
+        <div class="flex h-16 items-center justify-between border-b border-secondary-200 px-6 dark:border-secondary-800">
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary-600 to-primary-500 shadow-glow">
+              <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <span class="text-lg font-bold text-secondary-900 dark:text-white">Admin</span>
+          </div>
+          <button id="close-admin-mobile-menu" class="rounded-lg p-2 text-secondary-600 hover:bg-secondary-100 dark:text-secondary-400 dark:hover:bg-secondary-800">
+            <i data-feather="x" class="h-5 w-5"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Navigation (same as desktop) -->
+        <nav class="flex-1 space-y-1 overflow-y-auto p-4">
+          <a href="/admin/dashboard" class="nav-link <%= currentPath === '/admin/dashboard' ? 'nav-link-active' : '' %>">
+            <i data-feather="grid" class="h-5 w-5"></i>
+            <span>Dashboard</span>
+          </a>
+
+          <div class="space-y-1 pt-4">
+            <p class="px-4 text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400">Management</p>
+            <a href="/admin/users" class="nav-link <%= currentPath === '/admin/users' ? 'nav-link-active' : '' %>">
+              <i data-feather="users" class="h-5 w-5"></i>
+              <span>Users</span>
+            </a>
+            <a href="/admin/events" class="nav-link <%= currentPath === '/admin/events' ? 'nav-link-active' : '' %>">
+              <i data-feather="calendar" class="h-5 w-5"></i>
+              <span>Events</span>
+            </a>
+            <a href="/admin/hackathons" class="nav-link <%= currentPath === '/admin/hackathons' ? 'nav-link-active' : '' %>">
+              <i data-feather="code" class="h-5 w-5"></i>
+              <span>Hackathons</span>
+            </a>
+          </div>
+
+          <div class="space-y-1 pt-4">
+            <p class="px-4 text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400">Quick Actions</p>
+            <a href="/admin/users/add" class="nav-link">
+              <i data-feather="user-plus" class="h-5 w-5"></i>
+              <span>Add User</span>
+            </a>
+            <a href="/admin/events/add" class="nav-link">
+              <i data-feather="plus-circle" class="h-5 w-5"></i>
+              <span>Add Event</span>
+            </a>
+            <a href="/admin/hackathons/add" class="nav-link">
+              <i data-feather="trophy" class="h-5 w-5"></i>
+              <span>Add Hackathon</span>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Mobile User Info -->
+        <div class="border-t border-secondary-200 p-4 dark:border-secondary-800">
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary-600 to-primary-500 text-white font-semibold">
+              <%= (admin && admin.username) ? admin.username.charAt(0).toUpperCase() : 'A' %>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-secondary-900 dark:text-white truncate">
+                <%= (admin && admin.username) ? admin.username : 'Admin' %>
+              </p>
+              <p class="text-xs text-secondary-500 dark:text-secondary-400 truncate">Administrator</p>
+            </div>
+            <a href="/admin/logout" class="flex h-8 w-8 items-center justify-center rounded-lg text-secondary-400 hover:bg-secondary-100 hover:text-secondary-600 dark:hover:bg-secondary-800 dark:hover:text-secondary-300">
+              <i data-feather="log-out" class="h-4 w-4"></i>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Feather Icons
+    feather.replace();
+
+    // Mobile Menu Toggle
+    const adminMobileMenuButton = document.getElementById('admin-mobile-menu-button');
+    const adminMobileMenu = document.getElementById('admin-mobile-menu');
+    const closeAdminMobileMenu = document.getElementById('close-admin-mobile-menu');
+    const adminMobileBackdrop = document.getElementById('admin-mobile-backdrop');
+
+    function toggleAdminMobileMenu() {
+      adminMobileMenu.classList.toggle('hidden');
+      document.body.classList.toggle('overflow-hidden');
+    }
+
+    if (adminMobileMenuButton) {
+      adminMobileMenuButton.addEventListener('click', toggleAdminMobileMenu);
+    }
+    if (closeAdminMobileMenu) {
+      closeAdminMobileMenu.addEventListener('click', toggleAdminMobileMenu);
+    }
+    if (adminMobileBackdrop) {
+      adminMobileBackdrop.addEventListener('click', toggleAdminMobileMenu);
+    }
+
+    // Dark Mode Toggle
+    const adminDarkModeToggle = document.getElementById('admin-dark-mode-toggle');
+    const html = document.documentElement;
+
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.classList.add('dark');
+    }
+
+    if (adminDarkModeToggle) {
+      adminDarkModeToggle.addEventListener('click', () => {
+        html.classList.toggle('dark');
+        localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+      });
+    }
+  </script>
+
+  <% if (typeof additionalScripts !== 'undefined') { %>
+    <% additionalScripts.forEach(script => { %>
+      <script src="<%= script %>"></script>
+    <% }) %>
+  <% } %>
+
+  <% if (typeof pageScripts !== 'undefined') { %>
+    <% pageScripts.forEach(script => { %>
+      <%- script %>
+    <% }) %>
+  <% } %>
+</body>
+</html>

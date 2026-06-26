@@ -1,0 +1,31 @@
+{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "9e66bb6cefe64de89f0f1a22da820c2e.KFyOeWbBah8uXspj",
+    "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
+    "API_TIMEOUT_MS": "3000000",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-4.7",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-4.7",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-4.7"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(xargs sed:*)",
+      "Bash(make:*)",
+      "Bash(java:*)",
+      "Bash(python3.11:*)",
+      "Read(//c/Users/STTL/AppData/Local/Programs/Python/Python311/**)",
+      "Bash(mvn:*)",
+      "Bash(node --version)",
+      "Bash(yarn --version:*)",
+      "Bash(docker:*)",
+      "Bash(\"c:/Users/STTL/AppData/Local/Programs/Python/Python311/python.exe\" -m venv env)",
+      "Bash(source:*)",
+      "Bash(pip install:*)",
+      "Read(//d/SSTL/talktodb/DATA-connector/**)",
+      "Bash(curl:*)",
+      "Bash(\"d:\\\\SSTL\\\\AskDB\\\\askdb-frontend\\\\.env.local\":*)",
+      "Bash(timeout 10 python:*)",
+      "Bash(npm run dev)"
+    ]
+  }
+}

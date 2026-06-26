@@ -1,0 +1,191 @@
+<%-
+layout('auth-layout', {
+  title: 'Sign In - Student Corner',
+  heading: 'Welcome Back',
+  subheading: 'Sign in to access your dashboard, events, and hackathons.'
+})
+-%>
+
+<div class="animate-fade-in">
+  <!-- Form Header -->
+  <div class="mb-8 text-center">
+    <h2 class="text-2xl font-bold text-secondary-900 dark:text-white">Sign In</h2>
+    <p class="mt-2 text-sm text-secondary-600 dark:text-secondary-400">
+      Enter your email or phone number to access your account
+    </p>
+  </div>
+
+  <!-- Login Form -->
+  <form id="login-form" class="space-y-5">
+    <!-- Email/Phone Input -->
+    <div class="input-floating">
+      <input
+        type="text"
+        id="identifier"
+        name="identifier"
+        placeholder=" "
+        required
+        autocomplete="username"
+      >
+      <label for="identifier">Email or Phone Number</label>
+    </div>
+
+    <!-- Password Input -->
+    <div class="input-floating">
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder=" "
+        required
+        autocomplete="current-password"
+      >
+      <label for="identifier">Password</label>
+      <button
+        type="button"
+        id="toggle-password"
+        class="absolute right-4 top-4 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-300"
+      >
+        <i data-feather="eye" class="h-5 w-5"></i>
+      </button>
+    </div>
+
+    <!-- Remember Me & Forgot Password -->
+    <div class="flex items-center justify-between">
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input type="checkbox" class="rounded border-secondary-300 text-primary-600 focus:ring-primary-500 dark:border-secondary-600 dark:bg-secondary-800">
+        <span class="text-sm text-secondary-600 dark:text-secondary-400">Remember me</span>
+      </label>
+      <a href="/forgot-password" class="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400">
+        Forgot password?
+      </a>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="hidden alert alert-error">
+      <i data-feather="alert-circle" class="h-5 w-5"></i>
+      <span id="error-text"></span>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn-primary w-full" id="submit-btn">
+      <span class="btn-text">Sign In</span>
+      <span class="hidden">
+        <svg class="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Signing in...
+      </span>
+    </button>
+  </form>
+
+  <!-- Divider -->
+  <div class="my-6 flex items-center">
+    <div class="flex-1 border-t border-secondary-200 dark:border-secondary-800"></div>
+    <span class="px-4 text-sm text-secondary-500 dark:text-secondary-400">or continue with</span>
+    <div class="flex-1 border-t border-secondary-200 dark:border-secondary-800"></div>
+  </div>
+
+  <!-- Social Login (placeholder) -->
+  <div class="grid grid-cols-2 gap-4">
+    <button class="btn-secondary flex items-center justify-center gap-2">
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,10.249-7.85c0-0.635-0.072-1.258-0.201-1.873H12.545z"/>
+      </svg>
+      <span>Google</span>
+    </button>
+    <button class="btn-secondary flex items-center justify-center gap-2">
+      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+      </svg>
+      <span>GitHub</span>
+    </button>
+  </div>
+
+  <!-- Sign Up Link -->
+  <p class="mt-8 text-center text-sm text-secondary-600 dark:text-secondary-400">
+    Don't have an account?
+    <a href="/signup" class="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400">
+      Sign up for free
+    </a>
+  </p>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('login-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('span:last-child');
+    const errorMessage = document.getElementById('error-message');
+    const errorText = document.getElementById('error-text');
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    // Toggle password visibility
+    togglePassword.addEventListener('click', function() {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+
+      const icon = togglePassword.querySelector('i');
+      icon.setAttribute('data-feather', type === 'password' ? 'eye' : 'eye-off');
+      feather.replace();
+    });
+
+    // Form submission
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Show loading state
+      btnText.classList.add('hidden');
+      btnLoading.classList.remove('hidden');
+      submitBtn.disabled = true;
+      errorMessage.classList.add('hidden');
+
+      const formData = {
+        identifier: document.getElementById('identifier').value,
+        password: document.getElementById('password').value
+      };
+
+      fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          Swal.fire({
+            icon: 'success',
+            title: 'Welcome back!',
+            text: 'You have been successfully signed in.',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            window.location.href = '/dashboard';
+          });
+        } else {
+          // Show error
+          errorText.textContent = data.message || 'Sign in failed. Please try again.';
+          errorMessage.classList.remove('hidden');
+
+          // Reset button
+          btnText.classList.remove('hidden');
+          btnLoading.classList.add('hidden');
+          submitBtn.disabled = false;
+        }
+      })
+      .catch(error => {
+        errorText.textContent = 'An error occurred. Please try again.';
+        errorMessage.classList.remove('hidden');
+
+        btnText.classList.remove('hidden');
+        btnLoading.classList.add('hidden');
+        submitBtn.disabled = false;
+      });
+    });
+  });
+</script>

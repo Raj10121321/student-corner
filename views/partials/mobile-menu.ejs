@@ -1,0 +1,141 @@
+<%
+const isAuthenticated = typeof req !== 'undefined' && req.session && req.session.user;
+%>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-50 hidden">
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-secondary-900/50 backdrop-blur-sm" id="mobile-menu-backdrop"></div>
+
+  <!-- Menu Panel -->
+  <aside class="absolute inset-y-0 right-0 w-full max-w-md bg-white dark:bg-secondary-900 shadow-large">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-secondary-200 p-4 dark:border-secondary-800">
+      <div class="flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary-600 to-primary-500 shadow-glow">
+          <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <span class="text-lg font-bold text-secondary-900 dark:text-white">Menu</span>
+      </div>
+      <button id="close-mobile-menu" class="rounded-lg p-2 text-secondary-600 hover:bg-secondary-100 dark:text-secondary-400 dark:hover:bg-secondary-800">
+        <i data-feather="x" class="h-5 w-5"></i>
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex-1 overflow-y-auto p-4">
+      <% if (isAuthenticated) { %>
+        <!-- User Card -->
+        <div class="mb-6 rounded-xl border border-secondary-200 bg-secondary-50 p-4 dark:border-secondary-800 dark:bg-secondary-800">
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary-600 to-primary-500 text-white text-lg font-semibold">
+              <%= (req.session.user && req.session.user.name) ? req.session.user.name.charAt(0).toUpperCase() : 'U' %>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-medium text-secondary-900 dark:text-white truncate">
+                <%= (req.session.user && req.session.user.name) ? req.session.user.name : 'User' %>
+              </p>
+              <p class="text-sm text-secondary-500 dark:text-secondary-400 truncate">
+                <%= (req.session.user && req.session.user.email) ? req.session.user.email : '' %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="space-y-1">
+          <a href="/dashboard" class="nav-link">
+            <i data-feather="home" class="h-5 w-5"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="/events" class="nav-link">
+            <i data-feather="calendar" class="h-5 w-5"></i>
+            <span>Events</span>
+          </a>
+          <a href="/hackathons" class="nav-link">
+            <i data-feather="code" class="h-5 w-5"></i>
+            <span>Hackathons</span>
+          </a>
+          <a href="/my-events" class="nav-link">
+            <i data-feather="bookmark" class="h-5 w-5"></i>
+            <span>My Events</span>
+          </a>
+          <a href="/my-hackathons" class="nav-link">
+            <i data-feather="trophy" class="h-5 w-5"></i>
+            <span>My Hackathons</span>
+          </a>
+          <a href="/edit-profile" class="nav-link">
+            <i data-feather="user" class="h-5 w-5"></i>
+            <span>Edit Profile</span>
+          </a>
+        </nav>
+
+        <div class="my-6 border-t border-secondary-200 dark:border-secondary-800"></div>
+
+        <!-- Logout -->
+        <a href="/logout" class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium text-accent-error hover:bg-red-50 dark:hover:bg-red-900/20">
+          <i data-feather="log-out" class="h-5 w-5"></i>
+          <span>Logout</span>
+        </a>
+      <% } else { %>
+        <!-- Guest Navigation -->
+        <nav class="space-y-1">
+          <a href="/#features" class="nav-link">Features</a>
+          <a href="/#events" class="nav-link">Events</a>
+          <a href="/#hackathons" class="nav-link">Hackathons</a>
+          <a href="/#community" class="nav-link">Community</a>
+        </nav>
+
+        <div class="my-6 border-t border-secondary-200 dark:border-secondary-800"></div>
+
+        <!-- Auth Buttons -->
+        <div class="space-y-3">
+          <a href="/signin" class="btn-secondary w-full">Sign In</a>
+          <a href="/signup" class="btn-primary w-full">Get Started</a>
+        </div>
+      <% } %>
+    </div>
+
+    <!-- Footer -->
+    <div class="border-t border-secondary-200 p-4 dark:border-secondary-800">
+      <p class="text-center text-sm text-secondary-500 dark:text-secondary-400">
+        © 2024 Student Corner. All rights reserved.
+      </p>
+    </div>
+  </aside>
+</div>
+
+<script>
+  // Mobile Menu Toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeMobileMenu = document.getElementById('close-mobile-menu');
+  const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+
+  function toggleMobileMenu() {
+    mobileMenu.classList.toggle('hidden');
+    document.body.classList.toggle('overflow-hidden');
+  }
+
+  if (mobileMenuButton) {
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+  }
+  if (closeMobileMenu) {
+    closeMobileMenu.addEventListener('click', toggleMobileMenu);
+  }
+  if (mobileMenuBackdrop) {
+    mobileMenuBackdrop.addEventListener('click', toggleMobileMenu);
+  }
+
+  // Close menu on link click
+  if (mobileMenu) {
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      });
+    });
+  }
+</script>

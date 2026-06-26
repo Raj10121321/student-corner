@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set New Password | TechNexus</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    body {
+      background-color: #0b1326;
+      color: #dae2fd;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid #334155;
+    }
+
+    .password-strength {
+      height: 4px;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#c0c1ff",
+            "on-primary": "#1000a9",
+            "secondary": "#adc6ff",
+            "tertiary": "#4edea3",
+            "error": "#ffb4ab",
+            "background": "#0b1326",
+            "on-background": "#dae2fd",
+            "surface": "#0b1326",
+            "on-surface": "#dae2fd",
+            "surface-variant": "#2d3449",
+            "on-surface-variant": "#c7c4d7",
+            "outline": "#908fa0",
+            "outline-variant": "#464554",
+            "surface-container": "#171f33",
+            "surface-container-high": "#222a3d",
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "gutter": "24px",
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "stack-lg": "32px"
+          },
+          fontFamily: {
+            "body-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-mono": ["JetBrains Mono"],
+            "button-text": ["Inter"]
+          },
+          fontSize: {
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "button-text": ["15px", { "lineHeight": "16px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-background text-on-background min-h-screen flex">
+  <!-- Left Panel - Security Tips -->
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-tertiary/20 via-background to-primary/20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:32px_32px]"></div>
+    <div class="relative z-10 flex flex-col justify-center px-20">
+      <div class="mb-8">
+        <div class="w-16 h-16 rounded-2xl bg-tertiary/10 flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-4xl text-tertiary">enhanced_encryption</span>
+        </div>
+        <h1 class="font-headline-lg text-headline-lg text-on-surface mb-4">Create a strong password</h1>
+        <p class="text-on-surface-variant text-lg max-w-md">Your account security is important. Use a strong password that you don't use elsewhere.</p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-tertiary">check_circle</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">At least 8 characters</h3>
+            <p class="text-on-surface-variant text-body-sm">Use a mix of letters, numbers & symbols</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary">vpn_key</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">Unique to this account</h3>
+            <p class="text-on-surface-variant text-body-sm">Don't reuse passwords from other sites</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-secondary">security</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">Store it securely</h3>
+            <p class="text-on-surface-variant text-body-sm">Use a password manager for extra security</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Panel - New Password Form -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+    <div class="w-full max-w-md">
+      <!-- Logo for mobile -->
+      <div class="lg:hidden mb-8 text-center">
+        <h1 class="font-headline-lg text-headline-lg text-tertiary">TechNexus</h1>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8">
+        <div class="mb-8">
+          <div class="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center mb-4 lg:hidden">
+            <span class="material-symbols-outlined text-2xl text-tertiary">enhanced_encryption</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg mb-2">Set new password</h2>
+          <p class="text-on-surface-variant">Create a secure password for your account</p>
+        </div>
+
+        <form id="passwordUpdateForm" class="space-y-5">
+          <input type="hidden" name="identifier" id="identifier" value="<%= identifier %>">
+
+          <div>
+            <label for="newPassword" class="block font-label-mono text-label-mono text-on-surface mb-2">
+              NEW PASSWORD
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-on-surface-variant">
+                <span class="material-symbols-outlined text-lg">lock</span>
+              </span>
+              <input
+                type="password"
+                name="newPassword"
+                id="newPassword"
+                required
+                minlength="8"
+                class="w-full bg-surface-dim border border-outline-variant rounded-lg pl-10 pr-12 py-3 text-body-md focus:ring-2 focus:ring-tertiary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50"
+                placeholder="Enter your new password"
+              >
+              <button
+                type="button"
+                id="toggleNewPassword"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-on-surface-variant hover:text-on-surface transition-colors"
+              >
+                <span class="material-symbols-outlined text-lg">visibility</span>
+              </button>
+            </div>
+            <!-- Password strength indicator -->
+            <div class="mt-2">
+              <div class="flex gap-1">
+                <div class="password-strength flex-1 bg-error" data-strength="1"></div>
+                <div class="password-strength flex-1 bg-error" data-strength="2"></div>
+                <div class="password-strength flex-1 bg-warning" data-strength="3"></div>
+                <div class="password-strength flex-1 bg-tertiary" data-strength="4"></div>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1" id="strengthText">Password strength</p>
+            </div>
+          </div>
+
+          <div>
+            <label for="confirmPassword" class="block font-label-mono text-label-mono text-on-surface mb-2">
+              CONFIRM PASSWORD
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-on-surface-variant">
+                <span class="material-symbols-outlined text-lg">lock</span>
+              </span>
+              <input
+                type="password"
+                name="confirmPassword"
+                id="confirmPassword"
+                required
+                class="w-full bg-surface-dim border border-outline-variant rounded-lg pl-10 pr-12 py-3 text-body-md focus:ring-2 focus:ring-tertiary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50"
+                placeholder="Confirm your new password"
+              >
+              <button
+                type="button"
+                id="toggleConfirmPassword"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-on-surface-variant hover:text-on-surface transition-colors"
+              >
+                <span class="material-symbols-outlined text-lg">visibility</span>
+              </button>
+            </div>
+            <p class="mt-2 text-xs text-on-surface-variant" id="matchText"></p>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-tertiary text-on-tertiary font-button-text text-button-text py-3 rounded-lg hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-2"
+          >
+            <span>Update Password</span>
+            <span class="material-symbols-outlined">check</span>
+          </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-outline-variant text-center">
+          <p class="text-on-surface-variant text-body-sm">
+            Remembered your password?
+            <a href="/signin" class="text-tertiary font-medium hover:underline ml-1">Sign in</a>
+          </p>
+        </div>
+
+        <!-- Security Notice -->
+        <div class="mt-6 p-4 rounded-lg bg-surface-container-low border border-outline-variant">
+          <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-lg text-tertiary">info</span>
+            <div>
+              <p class="text-body-sm text-on-surface-variant">For your security, you'll be signed out from all devices after updating your password.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle password visibility
+    document.getElementById('toggleNewPassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('newPassword');
+      const icon = this.querySelector('.material-symbols-outlined');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        passwordInput.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    });
+
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('confirmPassword');
+      const icon = this.querySelector('.material-symbols-outlined');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        passwordInput.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    });
+
+    // Password strength checker
+    const newPassword = document.getElementById('newPassword');
+    const strengthBars = document.querySelectorAll('.password-strength');
+    const strengthText = document.getElementById('strengthText');
+
+    newPassword.addEventListener('input', function() {
+      const password = this.value;
+      let strength = 0;
+
+      if (password.length >= 8) strength++;
+      if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+      if (/\d/.test(password)) strength++;
+      if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+      strengthBars.forEach((bar, index) => {
+        if (index < strength) {
+          bar.style.opacity = '1';
+        } else {
+          bar.style.opacity = '0.2';
+        }
+      });
+
+      const texts = ['Weak', 'Fair', 'Good', 'Strong'];
+      strengthText.textContent = texts[strength - 1] || 'Password strength';
+    });
+
+    // Password match checker
+    const confirmPassword = document.getElementById('confirmPassword');
+    const matchText = document.getElementById('matchText');
+
+    function checkMatch() {
+      if (confirmPassword.value) {
+        if (newPassword.value === confirmPassword.value) {
+          matchText.textContent = '✓ Passwords match';
+          matchText.classList.add('text-tertiary');
+          matchText.classList.remove('text-error');
+        } else {
+          matchText.textContent = '✗ Passwords do not match';
+          matchText.classList.add('text-error');
+          matchText.classList.remove('text-tertiary');
+        }
+      } else {
+        matchText.textContent = '';
+      }
+    }
+
+    confirmPassword.addEventListener('input', checkMatch);
+    newPassword.addEventListener('input', checkMatch);
+
+    // Form submission
+    document.getElementById('passwordUpdateForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const identifier = document.getElementById('identifier').value;
+      const newPasswordVal = document.getElementById('newPassword').value;
+      const confirmPasswordVal = document.getElementById('confirmPassword').value;
+
+      if (newPasswordVal !== confirmPasswordVal) {
+        Swal.fire({
+          title: 'Passwords Do Not Match',
+          text: 'Please ensure both passwords are identical.',
+          icon: 'warning',
+          confirmButtonText: 'Try Again',
+          background: '#171f33',
+          color: '#dae2fd',
+          confirmButtonColor: '#4edea3'
+        });
+        return;
+      }
+
+      if (newPasswordVal.length < 8) {
+        Swal.fire({
+          title: 'Password Too Short',
+          text: 'Your password must be at least 8 characters long.',
+          icon: 'warning',
+          confirmButtonText: 'Try Again',
+          background: '#171f33',
+          color: '#dae2fd',
+          confirmButtonColor: '#4edea3'
+        });
+        return;
+      }
+
+      fetch('/update-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          identifier: identifier,
+          newPassword: newPasswordVal,
+          confirmPassword: confirmPasswordVal
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          Swal.fire({
+            title: 'Password Updated!',
+            text: 'Your password has been successfully updated. Please sign in with your new password.',
+            icon: 'success',
+            confirmButtonText: 'Continue to Sign In',
+            background: '#171f33',
+            color: '#dae2fd',
+            confirmButtonColor: '#4edea3'
+          }).then(() => {
+            window.location.href = "/signin";
+          });
+        } else {
+          Swal.fire({
+            title: 'Update Failed',
+            text: data.message || 'Unable to update password. Please try again.',
+            icon: 'error',
+            confirmButtonText: 'Try Again',
+            background: '#171f33',
+            color: '#dae2fd',
+            confirmButtonColor: '#4edea3'
+          });
+        }
+      })
+      .catch(error => {
+        Swal.fire({
+          title: 'Error',
+          text: 'An unexpected error occurred. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          background: '#171f33',
+          color: '#dae2fd',
+          confirmButtonColor: '#4edea3'
+        });
+      });
+    });
+
+    // Micro-interactions for buttons
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('mousedown', () => {
+        btn.style.transform = 'scale(0.97)';
+      });
+      btn.addEventListener('mouseup', () => {
+        btn.style.transform = '';
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Past Events | TechNexus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary-fixed-dim": "#c0c1ff",
+                "inverse-surface": "#dae2fd",
+                "tertiary-container": "#00885d",
+                "tertiary": "#4edea3",
+                "primary-container": "#8083ff",
+                "on-primary-fixed": "#07006c",
+                "surface-container": "#171f33",
+                "surface-tint": "#c0c1ff",
+                "on-primary-fixed-variant": "#2f2ebe",
+                "background": "#0b1326",
+                "surface-container-lowest": "#060e20",
+                "on-tertiary-fixed": "#002113",
+                "surface-container-low": "#131b2e",
+                "surface-bright": "#31394d",
+                "outline-variant": "#464554",
+                "surface-container-high": "#222a3d",
+                "inverse-on-surface": "#283044",
+                "on-error-container": "#ffdad6",
+                "surface-container-highest": "#2d3449",
+                "surface-dim": "#0b1326",
+                "on-secondary-container": "#e6ecff",
+                "on-secondary-fixed": "#001a42",
+                "secondary-fixed-dim": "#adc6ff",
+                "secondary-fixed": "#d8e2ff",
+                "on-secondary": "#002e6a",
+                "outline": "#908fa0",
+                "on-tertiary-fixed-variant": "#005236",
+                "on-tertiary": "#003824",
+                "error": "#ffb4ab",
+                "on-surface": "#dae2fd",
+                "tertiary-fixed-dim": "#4edea3",
+                "on-error": "#690005",
+                "on-primary-container": "#0d0096",
+                "on-surface-variant": "#c7c4d7",
+                "error-container": "#93000a",
+                "on-background": "#dae2fd",
+                "surface-variant": "#2d3449",
+                "surface": "#0b1326",
+                "primary": "#c0c1ff",
+                "inverse-primary": "#494bd6",
+                "on-secondary-fixed-variant": "#004395",
+                "on-tertiary-container": "#000703",
+                "primary-fixed": "#e1e0ff",
+                "secondary-container": "#0566d9",
+                "secondary": "#adc6ff",
+                "tertiary-fixed": "#6ffbbe",
+                "on-primary": "#1000a9"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "gutter": "24px",
+                "stack-sm": "8px",
+                "margin-mobile": "16px",
+                "margin-desktop": "48px",
+                "stack-md": "16px",
+                "base-unit": "4px",
+                "container-max": "1280px",
+                "stack-lg": "32px"
+            },
+            "fontFamily": {
+                "headline-lg-mobile": ["Inter"],
+                "body-sm": ["Inter"],
+                "button-text": ["Inter"],
+                "body-md": ["Inter"],
+                "headline-lg": ["Inter"],
+                "label-mono": ["JetBrains Mono"],
+                "headline-xl": ["Inter"],
+                "body-lg": ["Inter"],
+                "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "button-text": ["15px", {"lineHeight": "16px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #c0c1ff 0%, #4edea3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar (User Context) -->
+<header class="bg-surface-container-low sticky top-0 z-50 border-b border-outline-variant">
+<nav class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-stack-lg">
+<span class="text-headline-md font-headline-md font-bold text-primary">TechNexus</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="#">Dashboard</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">My Events</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="#">My Hackathons</a>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary p-2 transition-all active:scale-95">search</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline">
+<img class="w-full h-full object-cover" data-alt="A professional high-contrast headshot of a software engineer in their late 20s, featuring soft studio lighting against a dark navy blue background. The aesthetic is clean and modern, following the tech-forward dark-mode design system with subtle indigo reflections on the subject's glasses." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzlQhKc0j7bflfJB7Mrp2g7ZreZYt1iFylAnp5cD8pj3bV8m38_1t1xeRTy4OLghh-g6SLbFKBOv7GfD0-WgiqCj4SV2LUxqaK5qJMIFduU-CBRLXlFBx2kQjM0Img3O0EdHo3TnTi3o0b4z77i7QZDPWJwPgvhJwYzzMdY9JN2wpGlIQGDNSCRE_qbQqHXZgMtpAeWehSGN-WXN62BcuDdgeF8TxMpgQDY7wYngUFx-x5-_Uj5SLr5w"/>
+</div>
+</div>
+</nav>
+</header>
+<main class="min-h-screen">
+<!-- Hero Section / Context -->
+<section class="relative py-stack-lg px-margin-desktop max-w-container-max mx-auto">
+<div class="absolute top-0 right-0 -z-10 w-1/3 h-full opacity-10">
+
+</div>
+<div class="flex flex-col gap-base-unit">
+<span class="font-label-mono text-label-mono text-tertiary uppercase tracking-widest">Archive</span>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Past Events</h1>
+<p class="text-on-surface-variant max-w-2xl mt-stack-sm">
+                    Revisit the milestones of the TechNexus community. Explore previous hackathons, winning projects, and historical participant data from our world-class coordination platform.
+                </p>
+</div>
+<!-- Stats Bar -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mt-stack-lg">
+<div class="glass-card p-stack-md rounded-xl">
+<span class="font-label-mono text-label-mono text-on-surface-variant">TOTAL EVENTS</span>
+<div class="text-headline-md font-bold text-primary">124</div>
+</div>
+<div class="glass-card p-stack-md rounded-xl">
+<span class="font-label-mono text-label-mono text-on-surface-variant">PARTICIPANTS</span>
+<div class="text-headline-md font-bold text-primary">14.2k</div>
+</div>
+<div class="glass-card p-stack-md rounded-xl">
+<span class="font-label-mono text-label-mono text-on-surface-variant">PRIZES AWARDED</span>
+<div class="text-headline-md font-bold text-primary">$450k</div>
+</div>
+<div class="glass-card p-stack-md rounded-xl">
+<span class="font-label-mono text-label-mono text-on-surface-variant">AVG. RATING</span>
+<div class="text-headline-md font-bold text-primary">4.9/5</div>
+</div>
+</div>
+</section>
+<!-- Archive Filter Bar -->
+<section class="px-margin-desktop max-w-container-max mx-auto mb-stack-lg">
+<div class="flex flex-wrap items-center justify-between gap-stack-md border-y border-outline-variant py-stack-md">
+<div class="flex items-center gap-stack-md">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-button-text">All Years</button>
+<button class="text-on-surface-variant hover:text-primary px-4 py-2 rounded-lg font-button-text">2023</button>
+<button class="text-on-surface-variant hover:text-primary px-4 py-2 rounded-lg font-button-text">2022</button>
+<button class="text-on-surface-variant hover:text-primary px-4 py-2 rounded-lg font-button-text">2021</button>
+</div>
+<div class="flex items-center gap-stack-sm">
+<span class="font-label-mono text-label-mono text-on-surface-variant">SORT BY:</span>
+<select class="bg-surface-container border-none text-on-surface rounded-lg font-body-sm focus:ring-1 focus:ring-primary">
+<option>Most Recent</option>
+<option>Prize Pool</option>
+<option>Participant Count</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Bento Grid Archive -->
+<section class="px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter mb-20">
+<!-- Featured Past Event (Large Card) -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl border border-outline-variant bg-surface-container-low hover:border-primary transition-all duration-300">
+<div class="absolute inset-0 z-0">
+<div class="bg-cover bg-center w-full h-full scale-105 group-hover:scale-100 transition-transform duration-700 opacity-40" data-alt="A cinematic wide shot of a high-tech hackathon venue at night, illuminated by neon purple and teal light. Dozens of developers are working at sleek desks with multiple monitors, surrounded by futuristic architectural elements. The mood is intense, professional, and captures the scale of a flagship global tech competition." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCKpny2XPjg3vnjL6FOShvFL7_trGZGzIYdI8xYGUdKoqw15vw9wpF4rLl-Nbsrz84VbEGMNlQ4xfPtbcrrMyamP-TakG3gBaBCpls6SlzPeMb5VL5IQzo9n-wq-MhJVkC7FMoUnkyNAmZArdY5t_gbzt9UFPtSiG513t9CS23WAPIdzRa1QWxoLRYj17-hKfrpW4uCWdXZ7aza9V_27nlHGn7a4XrBHFUZWIQQu_RiytXhnHWH2akm8w')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+</div>
+<div class="relative z-10 p-stack-lg flex flex-col h-full justify-end min-h-[400px]">
+<div class="flex items-center gap-stack-sm mb-stack-sm">
+<span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-mono text-[11px] uppercase">Flagship 2023</span>
+<span class="text-label-mono text-on-surface-variant">OCT 12-14, 2023</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-white mb-stack-sm">Global AI Genesis Hackathon</h3>
+<p class="text-on-surface-variant max-w-xl mb-stack-lg">The world's largest gathering of generative AI developers, resulting in 420 submitted projects and $100k in seed funding awarded to top teams.</p>
+<div class="flex items-center gap-stack-lg">
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-on-surface-variant">REGISTRATIONS</span>
+<span class="font-bold text-primary">3,450</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-on-surface-variant">COUNTRIES</span>
+<span class="font-bold text-primary">54</span>
+</div>
+<button class="ml-auto bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 px-6 py-2 rounded-lg font-button-text transition-all active:scale-95 flex items-center gap-2">
+                            View Gallery <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Side Card 1 -->
+<div class="md:col-span-4 glass-card rounded-xl p-stack-md flex flex-col group border-outline-variant hover:border-primary transition-all duration-300">
+<div class="h-40 rounded-lg overflow-hidden mb-stack-md relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close-up of high-speed optical fibers glowing with blue and violet light in a data center environment. The image is sharp, professional, and represents cutting-edge networking technology. The aesthetic is clean, dark, and perfectly aligned with a professional corporate modern tech identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMWW_Du9St0q_b-7ns2Zve8Z24_mZg--mU1BMYBdZZEE1V0AvPzjJPHko__PB5rpkLI5EECGIcQqk2Sx_EcJREPVJzsZsNsIU1hMqRqsN29JrOAVi5BwWcDtxVdS0Qur8ASxUIG4VP3J-PHAqxFRIX4AJ4TKJMa2dcBgVHZSDR-A7fKVeyvHNTg2pAhN6IqiJnJcs1vHbPKVQ2zQxOMcOpOMWZ6GvTJf45cpS8gG4qMatCBjY3D9Dd-Q"/>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary mb-base-unit uppercase">Workshop Series</span>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Infrastructure 2.0</h4>
+<p class="text-body-sm text-on-surface-variant mb-stack-lg flex-grow">A deep dive into serverless architectures and edge computing with experts from Google Cloud.</p>
+<div class="flex justify-between items-center pt-stack-md border-t border-outline-variant">
+<span class="text-label-mono text-on-surface-variant">JUNE 2023</span>
+<span class="text-label-mono text-primary font-bold">COMPLETED</span>
+</div>
+</div>
+<!-- Small Detail Card 1 -->
+<div class="md:col-span-3 glass-card rounded-xl p-stack-md flex flex-col justify-between hover:border-primary transition-all">
+<div>
+<div class="flex justify-between items-start mb-stack-md">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg" data-weight="fill">code</span>
+<span class="text-label-mono text-on-surface-variant">2023</span>
+</div>
+<h5 class="font-headline-md text-headline-md text-on-surface leading-tight">Web3 Frontiers</h5>
+</div>
+<div class="mt-stack-lg">
+<div class="w-full bg-surface-container-highest h-2 rounded-full mb-base-unit">
+<div class="bg-secondary h-full rounded-full w-full"></div>
+</div>
+<span class="text-label-mono text-on-surface-variant text-[11px]">PROJECTS SUBMITTED: 89</span>
+</div>
+</div>
+<!-- Small Detail Card 2 -->
+<div class="md:col-span-3 glass-card rounded-xl p-stack-md flex flex-col justify-between hover:border-primary transition-all">
+<div>
+<div class="flex justify-between items-start mb-stack-md">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg" data-weight="fill">security</span>
+<span class="text-label-mono text-on-surface-variant">2023</span>
+</div>
+<h5 class="font-headline-md text-headline-md text-on-surface leading-tight">Cyber Guard III</h5>
+</div>
+<div class="mt-stack-lg">
+<div class="w-full bg-surface-container-highest h-2 rounded-full mb-base-unit">
+<div class="bg-tertiary h-full rounded-full w-full"></div>
+</div>
+<span class="text-label-mono text-on-surface-variant text-[11px]">VULNERABILITIES FIXED: 1,420</span>
+</div>
+</div>
+<!-- Highlight Row 1 -->
+<div class="md:col-span-6 glass-card rounded-xl p-stack-lg flex gap-stack-lg items-center relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-500"></div>
+<div class="hidden sm:block w-32 h-32 rounded-xl overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="An abstract 3D render of interconnected crystalline structures floating in a dark void. The crystals reflect soft indigo and teal light, symbolizing blockchain nodes or data clusters. The lighting is low-key and professional, fitting for a sophisticated tech-forward archive page." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1zfDQ49W-eFAqgMDl1iBxvobB_OPsRAWqQi-6l_C0MViZe4b6YL0kEiOSRTH5Gb4D3_g5GjHTFOPRRyHGvOLxkVAtx8eiBCZq28RmX-mSnBZMnLdaH10mD89zA3w8drKeM0UmPkSJJ5XqbYxDRqQwABkzwaNnTOPz7etCrL5ZocAR0yPwS3cpwOItZQemB5gZp_RsQY9GVq10N3db-GD8aVZtpRH-QQuDEF7uYALT8RPkq-W57IUuaw"/>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface">DeFi Summer Hack</h4>
+<p class="text-body-sm text-on-surface-variant mt-base-unit">The definitive blockchain event of 2023 with $12M in TVL committed to participant protocols during the 48-hour sprint.</p>
+<div class="flex gap-stack-md mt-stack-md">
+<span class="font-label-mono text-[12px] text-primary">#FINTECH</span>
+<span class="font-label-mono text-[12px] text-primary">#ETHEREUM</span>
+</div>
+</div>
+</div>
+<!-- Past Event List Item Style -->
+<div class="md:col-span-12 glass-card rounded-xl overflow-hidden">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container-highest/30">
+<th class="px-6 py-4 font-label-mono text-on-surface-variant text-[12px]">EVENT NAME</th>
+<th class="px-6 py-4 font-label-mono text-on-surface-variant text-[12px] hidden md:table-cell">TYPE</th>
+<th class="px-6 py-4 font-label-mono text-on-surface-variant text-[12px] hidden sm:table-cell">PARTICIPANTS</th>
+<th class="px-6 py-4 font-label-mono text-on-surface-variant text-[12px]">DATE</th>
+<th class="px-6 py-4 font-label-mono text-on-surface-variant text-[12px] text-right">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-bright/10 transition-colors">
+<td class="px-6 py-4 font-bold text-on-surface">DataSphere Summit 2022</td>
+<td class="px-6 py-4 hidden md:table-cell"><span class="bg-surface-container-high px-2 py-1 rounded text-body-sm">Conference</span></td>
+<td class="px-6 py-4 hidden sm:table-cell text-on-surface-variant">2,100</td>
+<td class="px-6 py-4 text-on-surface-variant">Dec 10, 2022</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline font-button-text">Recap</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-bright/10 transition-colors">
+<td class="px-6 py-4 font-bold text-on-surface">Cloud Native Jam</td>
+<td class="px-6 py-4 hidden md:table-cell"><span class="bg-surface-container-high px-2 py-1 rounded text-body-sm">Hackathon</span></td>
+<td class="px-6 py-4 hidden sm:table-cell text-on-surface-variant">450</td>
+<td class="px-6 py-4 text-on-surface-variant">Nov 15, 2022</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline font-button-text">Recap</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-bright/10 transition-colors">
+<td class="px-6 py-4 font-bold text-on-surface">Quantum Leap Demo Day</td>
+<td class="px-6 py-4 hidden md:table-cell"><span class="bg-surface-container-high px-2 py-1 rounded text-body-sm">Pitch Day</span></td>
+<td class="px-6 py-4 hidden sm:table-cell text-on-surface-variant">120</td>
+<td class="px-6 py-4 text-on-surface-variant">Oct 02, 2022</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline font-button-text">Recap</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant">
+<div class="w-full py-stack-lg px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+<div class="flex flex-col gap-stack-md">
+<span class="font-headline-md text-headline-md text-primary font-bold">TechNexus</span>
+<p class="text-body-sm text-on-surface-variant">
+                    The premier platform for technical coordination and high-impact hackathons globally. Empowering the next generation of builders.
+                </p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">public</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">groups</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">rss_feed</span>
+</div>
+</div>
+<div>
+<h5 class="font-label-mono text-label-mono text-secondary mb-stack-md uppercase">Platform</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline decoration-transparent hover:decoration-primary transition-all" href="#">About Us</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline decoration-transparent hover:decoration-primary transition-all" href="#">Hackathons</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline decoration-transparent hover:decoration-primary transition-all" href="#">Partnering</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-mono text-label-mono text-secondary mb-stack-md uppercase">Support</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline decoration-transparent hover:decoration-primary transition-all" href="#">Contact</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline decoration-transparent hover:decoration-primary transition-all" href="#">Help Center</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline decoration-transparent hover:decoration-primary transition-all" href="#">Status</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-mono text-label-mono text-secondary mb-stack-md uppercase">Legal</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline decoration-transparent hover:decoration-primary transition-all" href="#">Privacy Policy</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline decoration-transparent hover:decoration-primary transition-all" href="#">Terms of Service</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline decoration-transparent hover:decoration-primary transition-all" href="#">Cookie Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="w-full max-w-container-max mx-auto px-margin-desktop py-stack-md border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-body-sm text-on-surface-variant">© 2024 TechNexus Hackathon Platform. All rights reserved.</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-label-mono text-[11px] text-on-surface-variant uppercase">All Systems Operational</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple intersection observer for reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= hackathonDetails.eventName %> | TechNexus</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    body { background-color: #0b1326; color: #dae2fd; }
+    .tonal-layer-1 { background-color: #1E293B; border: 1px solid #334155; }
+  </style>
+</head>
+
+<body class="bg-background text-on-background min-h-screen">
+  <!-- Header -->
+  <nav class="bg-surface-container-low border-b border-outline-variant sticky top-0 z-50">
+    <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+      <a class="text-headline-md font-bold text-primary" href="/dashboard">TechNexus</a>
+      <div class="flex items-center gap-6">
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="/events">Events</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="/hackathons">Hackathons</a>
+        <a class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-container text-on-primary-container text-sm" href="/edit-profile">
+          <%= (typeof user !== 'undefined' && user.name) ? user.name.charAt(0).toUpperCase() : 'U' %>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 mb-stack-lg text-on-surface-variant">
+      <a href="/hackathons" class="hover:text-tertiary flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">arrow_back</span> Hackathons
+      </a>
+      <span class="material-symbols-outlined text-sm">chevron_right</span>
+      <span class="text-on-surface truncate max-w-xs"><%= hackathonDetails.eventName %></span>
+    </div>
+
+    <!-- Hackathon Header -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-stack-lg">
+      <!-- Hackathon Image -->
+      <div class="lg:col-span-2">
+        <% if (hackathonDetails.img) { %>
+          <img src="<%= hackathonDetails.img %>" alt="<%= hackathonDetails.eventName %>" class="w-full h-96 object-cover rounded-xl">
+        <% } else { %>
+          <div class="w-full h-96 rounded-xl bg-surface-container-highest flex items-center justify-center">
+            <span class="material-symbols-outlined text-6xl text-on-surface-variant/30">code</span>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- Hackathon Info Card -->
+      <div class="tonal-layer-1 rounded-xl p-6 flex flex-col h-fit">
+        <div class="flex items-center gap-2 mb-4">
+          <% if (hackathonDetails.status === 'active') { %>
+            <span class="px-3 py-1 rounded-full bg-tertiary/10 text-tertiary font-label-mono text-xs uppercase">Active</span>
+          <% } else { %>
+            <span class="px-3 py-1 rounded-full bg-error/10 text-error font-label-mono text-xs uppercase">Past</span>
+          <% } %>
+          <span class="px-3 py-1 rounded-full bg-tertiary/10 text-tertiary font-label-mono text-xs uppercase">Hackathon</span>
+        </div>
+
+        <h1 class="font-headline-lg text-headline-lg mb-4"><%= hackathonDetails.eventName %></h1>
+
+        <div class="space-y-4 mb-6">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+            <div>
+              <p class="text-body-sm font-medium"><%= new Date(hackathonDetails.deadlineDate).toLocaleDateString() %></p>
+              <p class="text-on-surface-variant text-xs"><%= hackathonDetails.day %>, <%= hackathonDetails.month %></p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-on-surface-variant">schedule</span>
+            <div>
+              <p class="text-body-sm font-medium"><%= hackathonDetails.startingTime %> - <%= hackathonDetails.endingTime %></p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-on-surface-variant">location_on</span>
+            <div>
+              <p class="text-body-sm font-medium"><%= hackathonDetails.location %>, <%= hackathonDetails.country %></p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-on-surface-variant">person</span>
+            <div>
+              <p class="text-body-sm font-medium">Age: <%= hackathonDetails.age %>+</p>
+            </div>
+          </div>
+        </div>
+
+        <% if (hackathonDetails.isEnrolled && hackathonDetails.status === 'active') { %>
+          <button onclick="unenroll('<%= hackathonDetails.id %>', 'hackathon')" class="w-full bg-error text-on-error py-3 rounded-lg font-button-text hover:opacity-90 transition-all">Unenroll</button>
+        <% } else if (!hackathonDetails.isEnrolled && hackathonDetails.status === 'active') { %>
+          <button onclick="enroll('<%= hackathonDetails.id %>', 'hackathon')" class="w-full bg-tertiary text-on-tertiary py-3 rounded-lg font-button-text hover:opacity-90 transition-all">Enroll Now</button>
+        <% } else { %>
+          <button disabled class="w-full bg-surface-container-highest text-on-surface-variant py-3 rounded-lg font-button-text cursor-not-allowed">Hackathon Ended</button>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="tonal-layer-1 rounded-xl p-8 mb-stack-lg">
+      <h2 class="font-headline-md text-headline-md mb-4">About This Hackathon</h2>
+      <p class="text-body-md text-on-surface-variant leading-relaxed"><%= hackathonDetails.description %></p>
+    </div>
+
+    <!-- Related Hackathons -->
+    <section>
+      <h2 class="font-headline-md text-headline-md mb-6">Related Hackathons</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% relatedHackathons.forEach(hackathon => { %>
+          <div class="tonal-layer-1 rounded-xl overflow-hidden flex flex-col group cursor-pointer hover:border-tertiary transition-all">
+            <div class="h-48 relative">
+              <% if (hackathon.img) { %>
+                <img src="<%= hackathon.img %>" alt="<%= hackathon.eventName %>" class="w-full h-full object-cover">
+              <% } else { %>
+                <div class="w-full h-full bg-surface-container-highest flex items-center justify-center">
+                  <span class="material-symbols-outlined text-4xl text-on-surface-variant/30">code</span>
+                </div>
+              <% } %>
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <h3 class="font-headline-md text-headline-md mb-2 group-hover:text-tertiary transition-colors"><%= hackathon.eventName %></h3>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+                  <span class="material-symbols-outlined text-sm">calendar_today</span>
+                  <span><%= new Date(hackathon.deadlineDate).toLocaleDateString() %></span>
+                </div>
+                <div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+                  <span class="material-symbols-outlined text-sm">location_on</span>
+                  <span><%= hackathon.location %></span>
+                </div>
+              </div>
+              <div class="mt-auto flex justify-between items-center">
+                <a href="/hackathon/<%= hackathon.id %>" class="text-tertiary font-label-mono text-sm hover:underline">View Details</a>
+                <% if (hackathon.isEnrolled) { %>
+                  <span class="text-tertiary font-label-mono text-xs">Enrolled</span>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-lowest border-t border-outline-variant mt-stack-lg">
+    <div class="max-w-container-max mx-auto px-margin-desktop py-6 text-center">
+      <p class="text-on-surface-variant text-sm">© 2024 TechNexus Hackathon Platform. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function enroll(eventId, eventType) {
+      fetch('/enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ eventId, eventType }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          Swal.fire({
+            title: 'Enrolled!',
+            text: 'You have successfully enrolled in this hackathon.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            background: '#171f33',
+            color: '#dae2fd',
+            confirmButtonColor: '#4edea3'
+          }).then(() => location.reload());
+        } else {
+          Swal.fire({
+            title: 'Enrollment Failed',
+            text: data.message,
+            icon: 'error',
+            confirmButtonText: 'OK',
+            background: '#171f33',
+            color: '#dae2fd',
+            confirmButtonColor: '#ffb4ab'
+          });
+        }
+      });
+    }
+
+    function unenroll(eventId, eventType) {
+      fetch('/unenroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ eventId, eventType }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          location.reload();
+        } else {
+          Swal.fire({
+            title: 'Failed',
+            text: data.message,
+            icon: 'error',
+            confirmButtonText: 'OK',
+            background: '#171f33',
+            color: '#dae2fd',
+            confirmButtonColor: '#ffb4ab'
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

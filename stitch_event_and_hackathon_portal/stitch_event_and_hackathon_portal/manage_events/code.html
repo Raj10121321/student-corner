@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Event Management | TechNexus Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-item {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for data-heavy views */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1326;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #464554;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#c0c1ff",
+                        "inverse-surface": "#dae2fd",
+                        "tertiary-container": "#00885d",
+                        "tertiary": "#4edea3",
+                        "primary-container": "#8083ff",
+                        "on-primary-fixed": "#07006c",
+                        "surface-container": "#171f33",
+                        "surface-tint": "#c0c1ff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "background": "#0b1326",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-low": "#131b2e",
+                        "surface-bright": "#31394d",
+                        "outline-variant": "#464554",
+                        "surface-container-high": "#222a3d",
+                        "inverse-on-surface": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#2d3449",
+                        "surface-dim": "#0b1326",
+                        "on-secondary-container": "#e6ecff",
+                        "on-secondary-fixed": "#001a42",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-secondary": "#002e6a",
+                        "outline": "#908fa0",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary": "#003824",
+                        "error": "#ffb4ab",
+                        "on-surface": "#dae2fd",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-error": "#690005",
+                        "on-primary-container": "#0d0096",
+                        "on-surface-variant": "#c7c4d7",
+                        "error-container": "#93000a",
+                        "on-background": "#dae2fd",
+                        "surface-variant": "#2d3449",
+                        "surface": "#0b1326",
+                        "primary": "#c0c1ff",
+                        "inverse-primary": "#494bd6",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-tertiary-container": "#000703",
+                        "primary-fixed": "#e1e0ff",
+                        "secondary-container": "#0566d9",
+                        "secondary": "#adc6ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary": "#1000a9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px",
+                        "stack-md": "16px",
+                        "base-unit": "4px",
+                        "container-max": "1280px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "button-text": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "button-text": ["15px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant w-60 z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary leading-tight">Admin Panel</h1>
+<p class="text-on-surface-variant font-label-mono text-[11px] uppercase tracking-widest mt-1">Management Suite</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1 px-3">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant px-4 py-2 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">group</span>
+<span class="font-label-mono text-label-mono">Users</span>
+</a>
+<a class="flex items-center gap-3 bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-lg px-4 py-2 transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined active-nav-item">calendar_today</span>
+<span class="font-label-mono text-label-mono">Events</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant px-4 py-2 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">code</span>
+<span class="font-label-mono text-label-mono">Hackathons</span>
+</a>
+</nav>
+<div class="px-4 mb-6">
+<button class="w-full py-3 bg-primary text-on-primary font-button-text rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                Create New
+            </button>
+</div>
+<div class="mt-auto px-3 pt-6 border-t border-outline-variant flex flex-col gap-1">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-4 py-2 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">settings</span>
+<span class="font-label-mono text-label-mono">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-4 py-2 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-error">logout</span>
+<span class="font-label-mono text-label-mono">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-60 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center w-full px-6 h-14 ml-0 bg-surface-container-highest dark:bg-surface-container-highest shadow-sm z-40 sticky top-0">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+<input class="w-full bg-surface-dim border-none rounded-full py-1.5 pl-10 pr-4 text-body-sm focus:ring-2 focus:ring-primary/50 text-on-surface placeholder:text-outline transition-all" placeholder="Search events, participants..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-bright transition-all active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-bright transition-all active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-1"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="font-label-mono text-[12px] text-on-surface font-bold leading-none">Admin User</p>
+<p class="font-label-mono text-[10px] text-on-surface-variant leading-none mt-1">Super Admin</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional close-up studio portrait of a corporate administrator in a high-tech dark-themed office. The lighting is moody with subtle blue rim lighting reflecting off the glass partitions in the background. The aesthetic is clean, professional, and sophisticated, mirroring the corporate modern dark mode design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZbcQso_FLJX-ezL87gNDTdjD14cMtCncKqrRRoUnzUCKoC6tbc_C3uvO9YYKG2cGGUbCqZ6_srr0WkMZuiJmKgnVbN8X_3xgp-0UNqQMW7Efsap1oSxGx544KFeTbVb6p7W7BfekEOpFI6uWxnYUEWpjiuRw_K5VraGn5IDD_9C2wXe6E03FYpmiqoPRBOjN9QXpTbb8XCaN-FdQIsrQNTc2eQUokissU4e6KtA2XNQXeHMW-gZnfbw"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-8 max-w-container-max w-full mx-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-stack-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Manage Events</h2>
+<p class="text-on-surface-variant mt-1">Track, monitor, and moderate all active hackathons and community events.</p>
+</div>
+<div class="flex gap-stack-sm">
+<button class="px-4 py-2 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-high transition-colors flex items-center gap-2 font-button-text">
+<span class="material-symbols-outlined text-body-md">filter_list</span>
+                        Filter
+                    </button>
+<button class="px-4 py-2 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-high transition-colors flex items-center gap-2 font-button-text">
+<span class="material-symbols-outlined text-body-md">file_download</span>
+                        Export CSV
+                    </button>
+</div>
+</div>
+<!-- Stats Overview (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between h-32">
+<span class="text-on-surface-variant font-label-mono text-[12px] uppercase">Active Events</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline-lg text-primary leading-none">24</span>
+<span class="text-tertiary font-label-mono text-xs">+3 this week</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between h-32">
+<span class="text-on-surface-variant font-label-mono text-[12px] uppercase">Total Registrations</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline-lg text-secondary leading-none">1,842</span>
+<span class="text-on-surface-variant font-label-mono text-xs">avg 76/event</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between h-32">
+<span class="text-on-surface-variant font-label-mono text-[12px] uppercase">Prizes Allocated</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline-lg text-tertiary leading-none">$45k</span>
+<span class="text-on-surface-variant font-label-mono text-xs">USD Total</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between h-32">
+<span class="text-on-surface-variant font-label-mono text-[12px] uppercase">Pending Reviews</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline-lg text-error leading-none">08</span>
+<span class="text-error font-label-mono text-xs">Urgent</span>
+</div>
+</div>
+</div>
+<!-- Main Table Container -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant overflow-hidden shadow-xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest/50 border-b border-outline-variant">
+<th class="px-6 py-4 font-label-mono text-xs uppercase text-on-surface-variant tracking-wider">Event Name &amp; Metadata</th>
+<th class="px-6 py-4 font-label-mono text-xs uppercase text-on-surface-variant tracking-wider">Status</th>
+<th class="px-6 py-4 font-label-mono text-xs uppercase text-on-surface-variant tracking-wider">Participants</th>
+<th class="px-6 py-4 font-label-mono text-xs uppercase text-on-surface-variant tracking-wider">Timeline</th>
+<th class="px-6 py-4 font-label-mono text-xs uppercase text-on-surface-variant tracking-wider">Prize Pool</th>
+<th class="px-6 py-4 font-label-mono text-xs uppercase text-on-surface-variant tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Table Row 1 -->
+<tr class="hover:bg-surface-bright/20 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary">terminal</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface group-hover:text-primary transition-colors">Global AI Innovators 2024</p>
+<p class="text-xs text-on-surface-variant">TechNexus Internal • ID: #EVT-001</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2.5 py-1 rounded-full text-[11px] font-label-mono bg-tertiary/10 text-tertiary border border-tertiary/20">LIVE</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 max-w-[80px]">
+<div class="bg-primary h-1.5 rounded-full" style="width: 82%"></div>
+</div>
+<span class="font-label-mono text-xs text-on-surface">412 / 500</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-xs font-label-mono text-on-surface uppercase">Ends in 2D 4H</p>
+<p class="text-[10px] text-on-surface-variant">March 15-17</p>
+</td>
+<td class="px-6 py-5">
+<span class="font-label-mono text-on-surface">$15,000</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-on-surface-variant hover:text-secondary transition-all">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-on-surface-variant hover:text-error transition-all">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-surface-bright/20 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 flex items-center justify-center border border-secondary/20">
+<span class="material-symbols-outlined text-secondary">database</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface group-hover:text-secondary transition-colors">Rust Backend Challenge</p>
+<p class="text-xs text-on-surface-variant">Regional • ID: #EVT-042</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2.5 py-1 rounded-full text-[11px] font-label-mono bg-on-secondary-fixed-variant/10 text-on-secondary-fixed-variant border border-secondary/20">UPCOMING</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 max-w-[80px]">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 45%"></div>
+</div>
+<span class="font-label-mono text-xs text-on-surface">112 / 250</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-xs font-label-mono text-on-surface uppercase">Starts in 6D</p>
+<p class="text-[10px] text-on-surface-variant">March 22-24</p>
+</td>
+<td class="px-6 py-5">
+<span class="font-label-mono text-on-surface">$5,000</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-on-surface-variant hover:text-secondary transition-all">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-on-surface-variant hover:text-error transition-all">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Table Row 3 -->
+<tr class="hover:bg-surface-bright/20 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/20 flex items-center justify-center border border-tertiary/20">
+<span class="material-symbols-outlined text-tertiary">eco</span>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface group-hover:text-tertiary transition-colors">EcoTech Sustainability Hack</p>
+<p class="text-xs text-on-surface-variant">Community • ID: #EVT-108</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2.5 py-1 rounded-full text-[11px] font-label-mono bg-on-surface-variant/10 text-on-surface-variant border border-outline-variant">COMPLETED</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 max-w-[80px]">
+<div class="bg-on-surface-variant h-1.5 rounded-full" style="width: 100%"></div>
+</div>
+<span class="font-label-mono text-xs text-on-surface">840 / 800</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-xs font-label-mono text-on-surface-variant uppercase">Ended Feb 28</p>
+<p class="text-[10px] text-on-surface-variant">Feb 26-28</p>
+</td>
+<td class="px-6 py-5">
+<span class="font-label-mono text-on-surface">$20,000</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-on-surface-variant hover:text-secondary transition-all">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-on-surface-variant hover:text-error transition-all">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination -->
+<div class="px-6 py-4 bg-surface-container-highest/20 border-t border-outline-variant flex items-center justify-between">
+<p class="font-label-mono text-xs text-on-surface-variant">Showing 1 to 3 of 24 results</p>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded bg-surface-container-highest text-on-surface hover:brightness-125 transition-all text-xs font-label-mono border border-outline-variant disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1.5 rounded bg-primary text-on-primary font-label-mono text-xs shadow-md">1</button>
+<button class="px-3 py-1.5 rounded bg-surface-container-highest text-on-surface hover:brightness-125 transition-all text-xs font-label-mono border border-outline-variant">2</button>
+<button class="px-3 py-1.5 rounded bg-surface-container-highest text-on-surface hover:brightness-125 transition-all text-xs font-label-mono border border-outline-variant">3</button>
+<button class="px-3 py-1.5 rounded bg-surface-container-highest text-on-surface hover:brightness-125 transition-all text-xs font-label-mono border border-outline-variant">Next</button>
+</div>
+</div>
+</div>
+<!-- Contextual Help / Activity Feed Overlay (Asymmetric placement) -->
+<div class="mt-stack-lg grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<div class="lg:col-span-2 bg-surface-container-low p-8 rounded-xl border border-outline-variant relative overflow-hidden group">
+<div class="relative z-10">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Automated Event Moderation</h4>
+<p class="text-on-surface-variant max-w-xl mb-6">Our system uses advanced heuristic analysis to detect duplicate registrations and bot entries in real-time. Currently, 4 flagging rules are active.</p>
+<button class="px-6 py-2.5 bg-secondary-container text-on-secondary-container rounded-lg font-button-text hover:brightness-110 active:scale-95 transition-all flex items-center gap-2">
+                            Review Rules
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="absolute -right-8 -bottom-8 opacity-5 group-hover:opacity-10 transition-opacity rotate-12">
+<span class="material-symbols-outlined text-[180px]">security</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant flex flex-col gap-4">
+<h5 class="font-label-mono text-xs uppercase text-primary font-bold">Recent System Logs</h5>
+<div class="flex flex-col gap-3">
+<div class="flex gap-3 text-xs border-l-2 border-tertiary pl-3 py-1">
+<div>
+<p class="text-on-surface font-bold">Event #EVT-001 updated</p>
+<p class="text-on-surface-variant">Modified by Admin at 14:22</p>
+</div>
+</div>
+<div class="flex gap-3 text-xs border-l-2 border-secondary pl-3 py-1">
+<div>
+<p class="text-on-surface font-bold">Payouts released</p>
+<p class="text-on-surface-variant">EcoTech Prize Pool cleared</p>
+</div>
+</div>
+<div class="flex gap-3 text-xs border-l-2 border-error pl-3 py-1">
+<div>
+<p class="text-on-surface font-bold">Critical Alert</p>
+<p class="text-on-surface-variant">Server latency spike detected</p>
+</div>
+</div>
+</div>
+<button class="mt-auto text-xs font-label-mono text-on-surface-variant hover:text-primary transition-colors text-left underline underline-offset-4 decoration-primary/30">View detailed audit log</button>
+</div>
+</div>
+</div>
+<!-- Sticky Footer for Platform Context -->
+<footer class="mt-auto w-full py-stack-lg px-6 grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant">
+<div class="md:col-span-1">
+<h3 class="font-headline-md text-headline-md text-primary dark:text-primary">TechNexus</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Professional Hackathon Management Infrastructure.</p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-mono text-xs text-secondary uppercase font-bold mb-1">Navigation</span>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-all" href="#">About Us</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-all" href="#">Contact</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-mono text-xs text-secondary uppercase font-bold mb-1">Legal</span>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-all" href="#">Privacy Policy</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-all" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col items-end justify-end">
+<p class="font-body-sm text-body-sm text-on-surface-variant opacity-60">© 2024 TechNexus Hackathon Platform. All rights reserved.</p>
+</div>
+</footer>
+</main>
+<script>
+        // Micro-interaction for table rows
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', (e) => {
+                if (!e.target.closest('button')) {
+                    // Logic for selecting a row or showing details
+                    console.log('Row clicked');
+                }
+            });
+        });
+    </script>
+</body></html>

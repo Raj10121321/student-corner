@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TechNexus | Hackathon Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .hero-gradient {
+            background: linear-gradient(to top, #0b1326 0%, rgba(11, 19, 38, 0.4) 50%, rgba(11, 19, 38, 0) 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#c0c1ff",
+                        "inverse-surface": "#dae2fd",
+                        "tertiary-container": "#00885d",
+                        "tertiary": "#4edea3",
+                        "primary-container": "#8083ff",
+                        "on-primary-fixed": "#07006c",
+                        "surface-container": "#171f33",
+                        "surface-tint": "#c0c1ff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "background": "#0b1326",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-low": "#131b2e",
+                        "surface-bright": "#31394d",
+                        "outline-variant": "#464554",
+                        "surface-container-high": "#222a3d",
+                        "inverse-on-surface": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#2d3449",
+                        "surface-dim": "#0b1326",
+                        "on-secondary-container": "#e6ecff",
+                        "on-secondary-fixed": "#001a42",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-secondary": "#002e6a",
+                        "outline": "#908fa0",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary": "#003824",
+                        "error": "#ffb4ab",
+                        "on-surface": "#dae2fd",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-error": "#690005",
+                        "on-primary-container": "#0d0096",
+                        "on-surface-variant": "#c7c4d7",
+                        "error-container": "#93000a",
+                        "on-background": "#dae2fd",
+                        "surface-variant": "#2d3449",
+                        "surface": "#0b1326",
+                        "primary": "#c0c1ff",
+                        "inverse-primary": "#494bd6",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-tertiary-container": "#000703",
+                        "primary-fixed": "#e1e0ff",
+                        "secondary-container": "#0566d9",
+                        "secondary": "#adc6ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary": "#1000a9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px",
+                        "stack-md": "16px",
+                        "base-unit": "4px",
+                        "container-max": "1280px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "button-text": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "button-text": ["15px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body-md text-on-surface bg-background overflow-x-hidden">
+<!-- TopNavBar (User Context) -->
+<nav class="bg-surface-container-low dark:bg-surface-container-low docked full-width top-0 sticky border-b border-outline-variant dark:border-outline-variant z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary">TechNexus</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Dashboard</a>
+<a class="text-primary dark:text-primary font-bold border-b-2 border-primary pb-1" href="#">My Events</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">My Hackathons</a>
+</div>
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer for a tech profile avatar. The subject is a young adult with a friendly expression, wearing modern glasses and a dark neutral sweater. The background is a soft-focus office setting with warm ambient lighting and subtle tech-inspired decor, matching the professional dark-themed UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARF-RtymmaLURvRegCpxPDoAbUV8I3vG46BB4zu7WP5VVuhT7JrHTEeMS468gE_ojcFHzmTo49IqSkWnbPeV6Rsa_DB7m1o7OhpJDdc1CE3Qx5ZO0ELnd3PV_g3lKa3dgAjj2xZYOr-p8pGl9mzCxJ4V3g9Cn0-qlffmSIqaeeloSfKFqtotsJLbbgHxpOFB2WRS5jlKs_he0iiLkV_512u_Gbedf7TRrR3yqN6MlxlJZUbTND8trgGg"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="min-h-screen">
+<!-- Hero Section -->
+<section class="relative w-full h-[614px] min-h-[400px]">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic wide shot of a high-tech hackathon venue at night. Glowing neon indigo and cyan lights illuminate rows of workstations with sleek laptops. In the background, large digital displays show complex code and data visualizations. The atmosphere is energetic and futuristic, dominated by deep slate and indigo tones typical of a professional tech event." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAr4gUcafduw5IoNywlsw88Xw8RvNrBHTXit_fZ6E1-LUeMobTRtrIrqs_f9eEHn6yrNZW78DuqPln0XbDKLBqyyLCW5y5Lwt4FtfKPc0wJubzabermq4Z6Ws-w6yJ0Z_JW7yKUrSOWy-WfcY1xVHh2KwfZ9C13xT1V-POalFooKvPl8P_vXBTapk6O-9RPg-CN9oX-Fw615YvyRkVAlGEa5DdYjTgZ9NbBM6G6DkpiPjLGvmUckDSnMQ')"></div>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop h-full flex flex-col justify-end pb-stack-lg">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-primary-container/20 text-primary font-label-mono text-label-mono border border-primary/30 rounded-full">ARTIFICIAL INTELLIGENCE</span>
+<span class="px-3 py-1 bg-tertiary-container/20 text-tertiary font-label-mono text-label-mono border border-tertiary/30 rounded-full">OPEN ENROLLMENT</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl mb-4 max-w-3xl">Neural Frontiers: The 2024 Global AI Hackathon</h1>
+<div class="flex flex-wrap gap-6 text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+<span class="font-label-mono text-label-mono">OCT 24 - OCT 26, 2024</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-label-mono text-label-mono">VIRTUAL &amp; SAN FRANCISCO, CA</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">group</span>
+<span class="font-label-mono text-label-mono">1,240 PARTICIPANTS</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Grid (Asymmetric) -->
+<section class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter items-start">
+<!-- Left: Description and Details -->
+<div class="lg:col-span-2 space-y-stack-lg">
+<div class="space-y-stack-md">
+<h2 class="font-headline-md text-headline-md border-b border-outline-variant pb-2">About the Event</h2>
+<div class="space-y-4 text-on-surface-variant leading-relaxed">
+<p>Push the boundaries of what's possible with large language models and generative agents. Neural Frontiers is a 48-hour intensive hackathon designed for senior engineers and researchers looking to bridge the gap between theoretical AI and practical application.</p>
+<p>Participants will have access to private compute clusters, cutting-edge APIs from our partners, and mentorship from lead architects at major AI labs. Whether you're building autonomous coding assistants or revolutionizing creative workflows, this is the stage to showcase your vision.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-6 bg-surface-container rounded-xl border border-outline-variant">
+<h3 class="font-headline-md text-primary mb-3">Prizes</h3>
+<ul class="space-y-2 font-label-mono text-label-mono">
+<li class="flex justify-between"><span>1ST PLACE</span> <span class="text-on-surface">$25,000</span></li>
+<li class="flex justify-between"><span>2ND PLACE</span> <span class="text-on-surface">$10,000</span></li>
+<li class="flex justify-between"><span>3RD PLACE</span> <span class="text-on-surface">$5,000</span></li>
+</ul>
+</div>
+<div class="p-6 bg-surface-container rounded-xl border border-outline-variant">
+<h3 class="font-headline-md text-tertiary mb-3">Judging</h3>
+<ul class="space-y-2 font-label-mono text-label-mono">
+<li class="flex justify-between"><span>INNOVATION</span> <span class="text-on-surface">40%</span></li>
+<li class="flex justify-between"><span>EXECUTION</span> <span class="text-on-surface">30%</span></li>
+<li class="flex justify-between"><span>POTENTIAL</span> <span class="text-on-surface">30%</span></li>
+</ul>
+</div>
+</div>
+<!-- Map Section -->
+<div class="rounded-xl overflow-hidden border border-outline-variant h-64 relative">
+<div class="absolute top-4 left-4 z-10 glass-card px-4 py-2 rounded-lg">
+<p class="font-label-mono text-label-mono text-on-surface">VENUE: INNOVATION HUB SF</p>
+</div>
+<img class="w-full h-full object-cover" data-alt="A stylized digital map of San Francisco's SOMA district with a prominent tech-focused innovation hub highlighted. The map uses a dark, minimalist theme with glowing primary-fixed-dim color accents for roads and key landmarks. The visual style is sleek and professional, designed to fit into a high-end corporate dashboard UI." data-location="San Francisco" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQTpeShKV0DYoD31N0bbdJ_UizlwSBtSt6T3XEb4CfB42oOZ_W9gUXEFbus77XDuI2QM7AMs2MVo94vRGpbyiudRgSvA-Rq-iBE2hk0kDrQihuDSCE1tKDKFuoHiWH7upCLcPjryxxujkW28YzKn8e4H3R25tl7-DCiH1Es2fktx0qeymyKqy-9jbHZWCdCvNx3Vjlee8zavd0W2hTshvcemQX5ZcLx2VeZdQC7IEUBor2NKd2-l5pMw"/>
+</div>
+</div>
+<!-- Right: Sticky CTA Sidebar -->
+<aside class="sticky top-24">
+<div class="glass-card p-8 rounded-xl space-y-6">
+<div class="space-y-4" id="enrollment-status">
+<!-- Enrolled Status Display -->
+<div id="status-not-enrolled">
+<div class="flex justify-between items-center mb-6">
+<div>
+<p class="font-label-mono text-label-mono text-on-surface-variant uppercase">Registration Ends</p>
+<p class="font-headline-md text-primary">2D 14H 22M</p>
+</div>
+<div class="text-right">
+<p class="font-label-mono text-label-mono text-on-surface-variant uppercase">Spots Left</p>
+<p class="font-headline-md">142</p>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary font-button-text text-button-text rounded-lg hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2" onclick="enrollUser()">
+<span class="material-symbols-outlined">rocket_launch</span>
+                                    ENROLL NOW
+                                </button>
+</div>
+<div class="hidden animate-in fade-in slide-in-from-bottom-4 duration-500" id="status-enrolled">
+<div class="p-4 bg-tertiary-container/10 border border-tertiary/20 rounded-lg flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="font-label-mono text-label-mono text-tertiary font-bold">YOU ARE ENROLLED</p>
+<p class="text-xs text-on-surface-variant">Check your dashboard for onboarding materials.</p>
+</div>
+</div>
+<button class="w-full py-4 bg-surface-container-high text-on-surface font-button-text text-button-text rounded-lg border border-outline-variant hover:bg-surface-bright transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">description</span>
+                                    VIEW DASHBOARD
+                                </button>
+</div>
+</div>
+<div class="pt-6 border-t border-outline-variant space-y-4">
+<h4 class="font-label-mono text-label-mono text-on-surface-variant">EVENT ORGANIZER</h4>
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary/20 rounded flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">memory</span>
+</div>
+<div>
+<p class="font-body-md font-bold">TechNexus Labs</p>
+<p class="text-xs text-on-surface-variant">Verified Organizer</p>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-highest transition-colors">
+<span class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined">share</span>
+                                    Share Event
+                                </span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-highest transition-colors">
+<span class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined">mail</span>
+                                    Contact Host
+                                </span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</section>
+<!-- Related Events Section -->
+<section class="max-w-container-max mx-auto px-margin-desktop py-stack-lg border-t border-outline-variant">
+<h2 class="font-headline-md text-headline-md mb-gutter">Similar Hackathons</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Related Card 1 -->
+<div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden group hover:border-primary/50 transition-all">
+<div class="h-40 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A focused close-up of a developer's hands typing on a glowing mechanical keyboard in a dimly lit room. Multiple monitors in the background show cascading lines of code in a terminal. The aesthetic is moody and tech-forward, utilizing deep blues and neon purple light accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9DI-mYEuaZgzIChvUKmQcicjeqkDVE-HtGjA9JU-t1w3LMppjtO7hNRGj21k8U3RFvRHNHC3uc6p8sEbyREo2HLLgW9BslJdGEdaF6kDij_upaa4kPCEJnyxr8FpIaD2fuv4mpHxFGCd_hgXkOzHEfsmtfKEIl9ZKSiNoVjUH4jYmHjmM01DTAQY8NdQ5E7r4qtzsGM8yFEf2kZveEseeIshG-ZckR4UFswl1WqHkD4Q-Hwp2NQKD2Q"/>
+</div>
+<div class="p-5 space-y-3">
+<span class="font-label-mono text-[10px] text-tertiary border border-tertiary/30 px-2 py-0.5 rounded">NEXT WEEK</span>
+<h3 class="font-headline-md text-body-lg font-bold">BlockBuild 2024</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2">The largest decentralized finance hackathon focusing on zero-knowledge proofs.</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-mono text-label-mono text-primary">$15K Prize</span>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Related Card 2 -->
+<div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden group hover:border-primary/50 transition-all">
+<div class="h-40 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Abstract digital visualization of a neural network with glowing interconnected nodes and pathways. The scene is set against a deep dark navy background, with bright light-blue and white glowing lines representing data flow. Professional, clean, and futuristic scientific aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG-IS-1m0QkmXnrcXciNM4WrF0zkVss27BagbveuDdd5_HMHx0TvAKtyfFqbG6GQW9vdQ8tAg_ywxxbeHJuZAeLqtux8wGbh8omBIIxaya9xpdtsB5QnWtuTwU1VCd2EoLZUJ1QKH_mTiYRQWxdXFv-YuNlzg3k5lae83rxkgO53ygLLPoMZrKNT2_MtWwrusOQmVntptx0izlUgGm2F4_KmM0KokdBMI-se6HPZKK3bgQX31nE6vHWA"/>
+</div>
+<div class="p-5 space-y-3">
+<span class="font-label-mono text-[10px] text-primary border border-primary/30 px-2 py-0.5 rounded">VIRTUAL</span>
+<h3 class="font-headline-md text-body-lg font-bold">CloudNative Summit</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2">Optimize scalable architectures and serverless workflows in this cloud challenge.</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-mono text-label-mono text-primary">$10K Prize</span>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Related Card 3 -->
+<div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden group hover:border-primary/50 transition-all">
+<div class="h-40 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A minimalist architectural shot of a modern tech campus building featuring glass facades and sharp geometric lines. The lighting is early evening golden hour, reflecting soft oranges and purples off the glass. A clean, high-end professional atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2vccNIoN4RZRjpoBm4zGSzYhooUP5bFJyOXzIDZ6zVvwQeLFXoagiwN5hmVSZY90kOcljyRjyQa_eI_blqMla9oaZHfgAZaAxoWwNuQdZGkZw-I3qGNdKXFirmj6X7xrBX__3EkA5N49Su_hFRu_Moq3iuedk7xDQlpDlkHLv7eqIZgJ0z98NEv3oPF_HhA1CMGu0QCTdQbrGJ4zSTSuhDyxLfTvmJ73AChls81Wanzo8I6k3-brfyg"/>
+</div>
+<div class="p-5 space-y-3">
+<span class="font-label-mono text-[10px] text-tertiary border border-tertiary/30 px-2 py-0.5 rounded">HAPPENING NOW</span>
+<h3 class="font-headline-md text-body-lg font-bold">CyberShield CTF</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2">Advanced capture-the-flag competition for cybersecurity professionals and enthusiasts.</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-mono text-label-mono text-primary">$20K Prize</span>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-desktop bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant dark:border-outline-variant">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary mb-4">TechNexus</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Empowering the next generation of technical leaders through competitive innovation.</p>
+</div>
+<div>
+<h4 class="font-label-mono text-label-mono text-secondary dark:text-secondary mb-4 uppercase">Navigation</h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li><a class="text-on-surface-variant hover:text-primary underline" href="#">About Us</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline" href="#">Contact</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline" href="#">Hackathons</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-mono text-label-mono text-secondary dark:text-secondary mb-4 uppercase">Legal</h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li><a class="text-on-surface-variant hover:text-primary underline" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="flex flex-col space-y-4">
+<h4 class="font-label-mono text-label-mono text-secondary dark:text-secondary mb-2 uppercase">Connect</h4>
+<div class="flex space-x-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">language</span></div></div></div></footer></body></html>

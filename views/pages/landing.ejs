@@ -1,0 +1,449 @@
+<%-
+layout('main-layout', {
+  title: 'Student Corner - Your Gateway to Tech Events',
+  currentPath: '/'
+})
+-%>
+
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-gradient-to-br from-secondary-900 via-primary-900 to-secondary-900 py-20 sm:py-32">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 bg-hero-pattern opacity-10"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-secondary-900/50"></div>
+
+  <!-- Animated Elements -->
+  <div class="absolute top-20 left-10 h-72 w-72 rounded-full bg-primary-500/20 blur-3xl animate-pulse-slow"></div>
+  <div class="absolute bottom-20 right-10 h-96 w-96 rounded-full bg-purple-500/20 blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+
+  <div class="section relative">
+    <div class="mx-auto max-w-4xl text-center">
+      <!-- Badge -->
+      <div class="mb-8 inline-flex animate-fade-in">
+        <span class="badge badge-primary bg-primary-500/10 text-primary-300 border-primary-500/20">
+          <i data-feather="zap" class="mr-2 h-4 w-4"></i>
+          Discover 100+ Tech Events & Hackathons
+        </span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl animate-slide-up">
+        Your Gateway to
+        <span class="bg-gradient-to-r from-primary-400 via-purple-400 to-primary-400 bg-clip-text text-transparent animate-gradient-xy">
+          Tech Events
+        </span>
+      </h1>
+
+      <!-- Subheading -->
+      <p class="mb-10 text-lg text-secondary-300 sm:text-xl md:text-2xl animate-slide-up" style="animation-delay: 0.1s;">
+        Discover, join, and excel in amazing hackathons and tech events. Connect with innovators and build your future.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center animate-slide-up" style="animation-delay: 0.2s;">
+        <a href="/signup" class="btn-primary w-full sm:w-auto px-8 py-4 text-lg">
+          <i data-feather="rocket" class="mr-2 h-5 w-5"></i>
+          Get Started Free
+        </a>
+        <a href="/#events" class="btn-secondary bg-white/10 text-white border-white/20 hover:bg-white/20 hover:text-white w-full sm:w-auto px-8 py-4 text-lg">
+          <i data-feather="calendar" class="mr-2 h-5 w-5"></i>
+          Browse Events
+        </a>
+      </div>
+
+      <!-- Social Proof -->
+      <div class="mt-12 flex flex-col items-center gap-6 animate-slide-up" style="animation-delay: 0.3s;">
+        <div class="flex items-center gap-2 text-secondary-400">
+          <div class="flex -space-x-2">
+            <img class="h-8 w-8 rounded-full border-2 border-primary-900 object-cover" src="/images/Profiles/user1.jpg" alt="User">
+            <img class="h-8 w-8 rounded-full border-2 border-primary-900 object-cover" src="/images/Profiles/user2.jpg" alt="User">
+            <img class="h-8 w-8 rounded-full border-2 border-primary-900 object-cover" src="/images/Profiles/user3.jpg" alt="User">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary-900 bg-primary-500 text-xs font-medium text-white">
+              +5k
+            </div>
+          </div>
+          <span class="text-sm">Students already onboard</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="border-b border-secondary-200 bg-white py-12 dark:border-secondary-800 dark:bg-secondary-900">
+  <div class="section">
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+      <div class="text-center">
+        <div class="text-3xl font-bold text-secondary-900 dark:text-white">100+</div>
+        <div class="text-sm text-secondary-600 dark:text-secondary-400">Active Events</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-secondary-900 dark:text-white">5000+</div>
+        <div class="text-sm text-secondary-600 dark:text-secondary-400">Students</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-secondary-900 dark:text-white">50+</div>
+        <div class="text-sm text-secondary-600 dark:text-secondary-400">Universities</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-bold text-secondary-900 dark:text-white">200+</div>
+        <div class="text-sm text-secondary-600 dark:text-secondary-400">Companies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-20 bg-secondary-50 dark:bg-secondary-950">
+  <div class="section">
+    <div class="mb-16 text-center">
+      <h2 class="mb-4 text-3xl font-bold text-secondary-900 dark:text-white sm:text-4xl">
+        Everything You Need to
+        <span class="text-gradient">Grow</span>
+      </h2>
+      <p class="text-lg text-secondary-600 dark:text-secondary-400">
+        Discover powerful features designed to help you find and join the best tech events
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Feature 1 -->
+      <div class="card p-8 text-center">
+        <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+          <i data-feather="search" class="h-6 w-6"></i>
+        </div>
+        <h3 class="mb-2 text-xl font-semibold text-secondary-900 dark:text-white">Smart Discovery</h3>
+        <p class="text-secondary-600 dark:text-secondary-400">
+          Find events that match your interests and skills with our intelligent recommendation engine
+        </p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="card p-8 text-center">
+        <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+          <i data-feather="bell" class="h-6 w-6"></i>
+        </div>
+        <h3 class="mb-2 text-xl font-semibold text-secondary-900 dark:text-white">Instant Updates</h3>
+        <p class="text-secondary-600 dark:text-secondary-400">
+          Get real-time notifications about new events, deadlines, and opportunities
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="card p-8 text-center">
+        <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+          <i data-feather="users" class="h-6 w-6"></i>
+        </div>
+        <h3 class="mb-2 text-xl font-semibold text-secondary-900 dark:text-white">Community</h3>
+        <p class="text-secondary-600 dark:text-secondary-400">
+          Connect with like-minded students, mentors, and industry professionals
+        </p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="card p-8 text-center">
+        <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+          <i data-feather="trending-up" class="h-6 w-6"></i>
+        </div>
+        <h3 class="mb-2 text-xl font-semibold text-secondary-900 dark:text-white">Track Progress</h3>
+        <p class="text-secondary-600 dark:text-secondary-400">
+          Keep track of your enrolled events, achievements, and skill development journey
+        </p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="card p-8 text-center">
+        <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+          <i data-feather="shield" class="h-6 w-6"></i>
+        </div>
+        <h3 class="mb-2 text-xl font-semibold text-secondary-900 dark:text-white">Verified Events</h3>
+        <p class="text-secondary-600 dark:text-secondary-400">
+          All events are verified and curated to ensure quality and legitimacy
+        </p>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="card p-8 text-center">
+        <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+          <i data-feather="award" class="h-6 w-6"></i>
+        </div>
+        <h3 class="mb-2 text-xl font-semibold text-secondary-900 dark:text-white">Certificates</h3>
+        <p class="text-secondary-600 dark:text-secondary-400">
+          Earn certificates and badges for your participation and achievements
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Events Preview Section -->
+<section id="events" class="py-20 bg-white dark:bg-secondary-900">
+  <div class="section">
+    <div class="mb-16 text-center">
+      <h2 class="mb-4 text-3xl font-bold text-secondary-900 dark:text-white sm:text-4xl">
+        Featured
+        <span class="text-gradient">Events</span>
+      </h2>
+      <p class="text-lg text-secondary-600 dark:text-secondary-400">
+        Check out these amazing upcoming events and hackathons
+      </p>
+    </div>
+
+    <!-- Events Grid (placeholder - would be populated dynamically) -->
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div class="card card-hover overflow-hidden">
+        <div class="relative h-48">
+          <img src="/images/hackathons/hack1.jpg" alt="Event" class="h-full w-full object-cover">
+          <div class="absolute top-3 right-3">
+            <span class="badge badge-success">Open</span>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="mb-2 text-lg font-semibold text-secondary-900 dark:text-white">Tech Innovation Challenge 2024</h3>
+          <div class="mb-3 flex items-center gap-2 text-sm text-secondary-600 dark:text-secondary-400">
+            <i data-feather="map-pin" class="h-4 w-4"></i>
+            <span>Gandhinagar, India</span>
+          </div>
+          <div class="mb-4 flex items-center justify-between">
+            <span class="text-sm text-secondary-500 dark:text-secondary-400">
+              <i data-feather="calendar" class="mr-1 h-4 w-4"></i>
+              Sept 15, 2024
+            </span>
+          </div>
+          <a href="/signup" class="btn-primary w-full text-center">Learn More</a>
+        </div>
+      </div>
+
+      <div class="card card-hover overflow-hidden">
+        <div class="relative h-48">
+          <img src="/images/hackathons/hack2.jpg" alt="Event" class="h-full w-full object-cover">
+          <div class="absolute top-3 right-3">
+            <span class="badge badge-success">Open</span>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="mb-2 text-lg font-semibold text-secondary-900 dark:text-white">CodeCrunch Hackathon</h3>
+          <div class="mb-3 flex items-center gap-2 text-sm text-secondary-600 dark:text-secondary-400">
+            <i data-feather="map-pin" class="h-4 w-4"></i>
+            <span>Toronto, Canada</span>
+          </div>
+          <div class="mb-4 flex items-center justify-between">
+            <span class="text-sm text-secondary-500 dark:text-secondary-400">
+              <i data-feather="calendar" class="mr-1 h-4 w-4"></i>
+              Nov 8, 2024
+            </span>
+          </div>
+          <a href="/signup" class="btn-primary w-full text-center">Learn More</a>
+        </div>
+      </div>
+
+      <div class="card card-hover overflow-hidden">
+        <div class="relative h-48">
+          <img src="/images/hackathons/hack3.jpg" alt="Event" class="h-full w-full object-cover">
+          <div class="absolute top-3 right-3">
+            <span class="badge badge-success">Open</span>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="mb-2 text-lg font-semibold text-secondary-900 dark:text-white">Summer Beats Music Festival</h3>
+          <div class="mb-3 flex items-center gap-2 text-sm text-secondary-600 dark:text-secondary-400">
+            <i data-feather="map-pin" class="h-4 w-4"></i>
+            <span>New York, USA</span>
+          </div>
+          <div class="mb-4 flex items-center justify-between">
+            <span class="text-sm text-secondary-500 dark:text-secondary-400">
+              <i data-feather="calendar" class="mr-1 h-4 w-4"></i>
+              Aug 15, 2024
+            </span>
+          </div>
+          <a href="/signup" class="btn-primary w-full text-center">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- View All Button -->
+    <div class="mt-12 text-center">
+      <a href="/signup" class="btn-secondary inline-flex items-center gap-2">
+        View All Events
+        <i data-feather="arrow-right" class="h-4 w-4"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Community Section -->
+<section id="community" class="py-20 bg-secondary-50 dark:bg-secondary-950">
+  <div class="section">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <h2 class="mb-4 text-3xl font-bold text-secondary-900 dark:text-white sm:text-4xl">
+          Join Our
+          <span class="text-gradient">Community</span>
+        </h2>
+        <p class="mb-6 text-lg text-secondary-600 dark:text-secondary-400">
+          Be part of a thriving community of students, developers, and innovators. Share experiences, learn together, and grow your network.
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+              <i data-feather="message-circle" class="h-5 w-5"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-secondary-900 dark:text-white">Connect & Collaborate</h3>
+              <p class="text-sm text-secondary-600 dark:text-secondary-400">Find teammates for hackathons and collaborative projects</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+              <i data-feather="book-open" class="h-5 w-5"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-secondary-900 dark:text-white">Learn & Grow</h3>
+              <p class="text-sm text-secondary-600 dark:text-secondary-400">Access resources, tutorials, and mentorship programs</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+              <i data-feather="briefcase" class="h-5 w-5"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-secondary-900 dark:text-white">Career Opportunities</h3>
+              <p class="text-sm text-secondary-600 dark:text-secondary-400">Get discovered by top companies and recruiters</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <a href="/signup" class="btn-primary inline-flex items-center gap-2">
+            Join Community
+            <i data-feather="arrow-right" class="h-4 w-4"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="space-y-6">
+        <div class="card p-6">
+          <div class="mb-4 flex items-center gap-4">
+            <img src="/images/Profiles/user1.jpg" alt="User" class="h-12 w-12 rounded-full object-cover">
+            <div>
+              <h4 class="font-semibold text-secondary-900 dark:text-white">Rahul Sharma</h4>
+              <p class="text-sm text-secondary-600 dark:text-secondary-400">Computer Science Student</p>
+            </div>
+          </div>
+          <p class="text-secondary-600 dark:text-secondary-400">
+            "Student Corner helped me discover amazing hackathons and connect with talented developers. I've learned so much and even won my first hackathon!"
+          </p>
+        </div>
+
+        <div class="card p-6">
+          <div class="mb-4 flex items-center gap-4">
+            <img src="/images/Profiles/user2.jpg" alt="User" class="h-12 w-12 rounded-full object-cover">
+            <div>
+              <h4 class="font-semibold text-secondary-900 dark:text-white">Priya Patel</h4>
+              <p class="text-sm text-secondary-600 dark:text-secondary-400">Design Student</p>
+            </div>
+          </div>
+          <p class="text-secondary-600 dark:text-secondary-400">
+            "The platform is so easy to use and the events are well-curated. I've found so many opportunities to showcase my design skills."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-br from-primary-600 to-purple-600">
+  <div class="section text-center">
+    <h2 class="mb-4 text-3xl font-bold text-white sm:text-4xl">
+      Ready to Start Your Journey?
+    </h2>
+    <p class="mb-8 text-lg text-primary-100">
+      Join thousands of students already using Student Corner to discover amazing opportunities
+    </p>
+    <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <a href="/signup" class="inline-flex items-center gap-2 rounded-lg border border-transparent bg-white px-8 py-4 text-sm font-medium text-primary-600 shadow-soft transition-all hover:shadow-medium hover:-translate-y-0.5">
+        Get Started Free
+        <i data-feather="arrow-right" class="h-4 w-4"></i>
+      </a>
+      <a href="/#features" class="inline-flex items-center gap-2 rounded-lg border border-white/20 px-8 py-4 text-sm font-medium text-white transition-all hover:bg-white/10">
+        Learn More
+        <i data-feather="chevron-down" class="h-4 w-4"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="py-20 bg-white dark:bg-secondary-900">
+  <div class="section">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="mb-4 text-3xl font-bold text-secondary-900 dark:text-white sm:text-4xl">
+        Stay Updated
+      </h2>
+      <p class="mb-8 text-lg text-secondary-600 dark:text-secondary-400">
+        Subscribe to our newsletter to get the latest events and opportunities delivered to your inbox
+      </p>
+
+      <form action="/subscribe" method="POST" class="flex flex-col gap-4 sm:flex-row">
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          class="input-field flex-1"
+        >
+        <button type="submit" class="btn-primary whitespace-nowrap">
+          Subscribe Now
+          <i data-feather="send" class="ml-2 h-4 w-4"></i>
+        </button>
+      </form>
+
+      <p class="mt-4 text-sm text-secondary-500 dark:text-secondary-400">
+        No spam, unsubscribe anytime. We respect your privacy.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Smooth reveal animations on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href !== '#features' && href !== '#events' && href !== '#community') {
+          return;
+        }
+
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  });
+</script>

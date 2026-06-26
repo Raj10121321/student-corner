@@ -1,0 +1,290 @@
+<%-
+layout('admin-layout', {
+  title: 'Admin Dashboard - Student Corner',
+  currentPath: '/admin/dashboard',
+  pageTitle: 'Dashboard',
+  admin: typeof admin !== 'undefined' ? admin : null
+})
+-%>
+
+<!-- Admin Dashboard Header -->
+<div class="mb-8">
+  <h1 class="text-2xl font-bold text-secondary-900 dark:text-white">Dashboard Overview</h1>
+  <p class="mt-1 text-sm text-secondary-600 dark:text-secondary-400">
+    Welcome back! Here's what's happening with your platform today.
+  </p>
+</div>
+
+<!-- Stats Cards -->
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+  <div class="card p-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-secondary-600 dark:text-secondary-400">Total Users</p>
+        <p class="mt-2 text-3xl font-bold text-secondary-900 dark:text-white"><%= typeof userCount !== 'undefined' ? userCount : 0 %></p>
+        <p class="mt-2 text-sm text-accent-success">+12% from last month</p>
+      </div>
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+        <i data-feather="users" class="h-6 w-6"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="card p-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-secondary-600 dark:text-secondary-400">Total Events</p>
+        <p class="mt-2 text-3xl font-bold text-secondary-900 dark:text-white"><%= typeof eventCount !== 'undefined' ? eventCount : 0 %></p>
+        <p class="mt-2 text-sm text-accent-success">+8% from last month</p>
+      </div>
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
+        <i data-feather="calendar" class="h-6 w-6"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="card p-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-secondary-600 dark:text-secondary-400">Hackathons</p>
+        <p class="mt-2 text-3xl font-bold text-secondary-900 dark:text-white"><%= typeof hackathonCount !== 'undefined' ? hackathonCount : 0 %></p>
+        <p class="mt-2 text-sm text-accent-warning">+3% from last month</p>
+      </div>
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-warning/10 text-accent-warning dark:bg-accent-warning/20">
+        <i data-feather="trophy" class="h-6 w-6"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="card p-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-secondary-600 dark:text-secondary-400">Active Now</p>
+        <p class="mt-2 text-3xl font-bold text-secondary-900 dark:text-white">
+          <%= (typeof userCount !== 'undefined' ? Math.floor(userCount * 0.4) : 0) %>
+        </p>
+        <p class="mt-2 text-sm text-secondary-500 dark:text-secondary-400">Users online</p>
+      </div>
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-success/10 text-accent-success dark:bg-accent-success/20">
+        <i data-feather="activity" class="h-6 w-6"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Charts and Activity Section -->
+<div class="grid gap-8 lg:grid-cols-2 mb-8">
+  <!-- User Growth Chart -->
+  <div class="card">
+    <div class="border-b border-secondary-200 p-6 dark:border-secondary-800">
+      <h3 class="font-semibold text-secondary-900 dark:text-white">User Growth</h3>
+    </div>
+    <div class="p-6">
+      <canvas id="userGrowthChart" height="300"></canvas>
+    </div>
+  </div>
+
+  <!-- Event Engagement Chart -->
+  <div class="card">
+    <div class="border-b border-secondary-200 p-6 dark:border-secondary-800">
+      <h3 class="font-semibold text-secondary-900 dark:text-white">Event Engagement</h3>
+    </div>
+    <div class="p-6">
+      <canvas id="eventEngagementChart" height="300"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="mb-8">
+  <h2 class="mb-4 text-lg font-semibold text-secondary-900 dark:text-white">Quick Actions</h2>
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <a href="/admin/users/add" class="card card-hover p-6 flex items-center gap-4">
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+        <i data-feather="user-plus" class="h-6 w-6"></i>
+      </div>
+      <div>
+        <p class="font-semibold text-secondary-900 dark:text-white">Add User</p>
+        <p class="text-sm text-secondary-600 dark:text-secondary-400">Create new user</p>
+      </div>
+    </a>
+
+    <a href="/admin/events/add" class="card card-hover p-6 flex items-center gap-4">
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
+        <i data-feather="plus-circle" class="h-6 w-6"></i>
+      </div>
+      <div>
+        <p class="font-semibold text-secondary-900 dark:text-white">Add Event</p>
+        <p class="text-sm text-secondary-600 dark:text-secondary-400">Create new event</p>
+      </div>
+    </a>
+
+    <a href="/admin/hackathons/add" class="card card-hover p-6 flex items-center gap-4">
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-warning/10 text-accent-warning dark:bg-accent-warning/20">
+        <i data-feather="award" class="h-6 w-6"></i>
+      </div>
+      <div>
+        <p class="font-semibold text-secondary-900 dark:text-white">Add Hackathon</p>
+        <p class="text-sm text-secondary-600 dark:text-secondary-400">Create new hackathon</p>
+      </div>
+    </a>
+
+    <a href="/admin/newsletter" class="card card-hover p-6 flex items-center gap-4">
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-success/10 text-accent-success dark:bg-accent-success/20">
+        <i data-feather="mail" class="h-6 w-6"></i>
+      </div>
+      <div>
+        <p class="font-semibold text-secondary-900 dark:text-white">Send Newsletter</p>
+        <p class="text-sm text-secondary-600 dark:text-secondary-400">Email subscribers</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- Recent Activity -->
+<div class="card">
+  <div class="border-b border-secondary-200 p-6 dark:border-secondary-800">
+    <h3 class="font-semibold text-secondary-900 dark:text-white">Recent Activity</h3>
+  </div>
+  <div class="divide-y divide-secondary-200 dark:divide-secondary-800">
+    <div class="flex items-center gap-4 p-6">
+      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent-success/10 text-accent-success">
+        <i data-feather="user-plus" class="h-5 w-5"></i>
+      </div>
+      <div class="flex-1">
+        <p class="font-medium text-secondary-900 dark:text-white">New user registered</p>
+        <p class="text-sm text-secondary-600 dark:text-secondary-400">John Doe joined the platform</p>
+      </div>
+      <span class="text-sm text-secondary-500 dark:text-secondary-400">2 min ago</span>
+    </div>
+
+    <div class="flex items-center gap-4 p-6">
+      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 text-primary-600 dark:bg-primary-900/30">
+        <i data-feather="calendar" class="h-5 w-5"></i>
+      </div>
+      <div class="flex-1">
+        <p class="font-medium text-secondary-900 dark:text-white">New event created</p>
+        <p class="text-sm text-secondary-600 dark:text-secondary-400">Tech Innovation Challenge 2024</p>
+      </div>
+      <span class="text-sm text-secondary-500 dark:text-secondary-400">1 hour ago</span>
+    </div>
+
+    <div class="flex items-center gap-4 p-6">
+      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 text-purple-600 dark:bg-purple-900/30">
+        <i data-feather="users" class="h-5 w-5"></i>
+      </div>
+      <div class="flex-1">
+        <p class="font-medium text-secondary-900 dark:text-white">Event enrollment</p>
+        <p class="text-sm text-secondary-600 dark:text-secondary-400">5 users enrolled in Summer Hackathon</p>
+      </div>
+      <span class="text-sm text-secondary-500 dark:text-secondary-400">3 hours ago</span>
+    </div>
+
+    <div class="flex items-center gap-4 p-6">
+      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent-warning/10 text-accent-warning">
+        <i data-feather="edit-3" class="h-5 w-5"></i>
+      </div>
+      <div class="flex-1">
+        <p class="font-medium text-secondary-900 dark:text-white">Event updated</p>
+        <p class="text-sm text-secondary-600 dark:text-secondary-400">CodeCrunch hackathon details modified</p>
+      </div>
+      <span class="text-sm text-secondary-500 dark:text-secondary-400">5 hours ago</span>
+    </div>
+
+    <div class="flex items-center gap-4 p-6">
+      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent-error/10 text-accent-error">
+        <i data-feather="trash-2" class="h-5 w-5"></i>
+      </div>
+      <div class="flex-1">
+        <p class="font-medium text-secondary-900 dark:text-white">Event deleted</p>
+        <p class="text-sm text-secondary-600 dark:text-secondary-400">Past event removed from database</p>
+      </div>
+      <span class="text-sm text-secondary-500 dark:text-secondary-400">1 day ago</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // User Growth Chart
+    const userGrowthCtx = document.getElementById('userGrowthChart').getContext('2d');
+    new Chart(userGrowthCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Users',
+          data: [120, 190, 300, 500, 700, <%= typeof userCount !== 'undefined' ? userCount : 1000 %>],
+          borderColor: '#4f46e5',
+          backgroundColor: 'rgba(79, 70, 229, 0.1)',
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
+      }
+    });
+
+    // Event Engagement Chart
+    const eventEngagementCtx = document.getElementById('eventEngagementChart').getContext('2d');
+    new Chart(eventEngagementCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Events', 'Hackathons', 'Workshops', 'Webinars'],
+        datasets: [{
+          label: 'Enrollments',
+          data: [65, 59, 80, 81],
+          backgroundColor: [
+            'rgba(79, 70, 229, 0.8)',
+            'rgba(139, 92, 246, 0.8)',
+            'rgba(236, 72, 153, 0.8)',
+            'rgba(34, 211, 238, 0.8)'
+          ],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
+      }
+    });
+  });
+</script>

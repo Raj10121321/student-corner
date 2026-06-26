@@ -1,0 +1,127 @@
+<%
+const isAuthenticated = typeof req !== 'undefined' && req.session && req.session.user;
+const currentUser = isAuthenticated ? req.session.user : null;
+%>
+
+<!-- TopNavBar -->
+<nav class="bg-surface-container-low dark:bg-surface-container-low border-b border-outline-variant dark:border-outline-variant docked full-width top-0 sticky z-50">
+  <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+    <div class="flex items-center gap-stack-lg">
+      <a class="text-headline-md font-headline-md font-bold text-primary dark:text-primary" href="/">TechNexus</a>
+      <% if (isAuthenticated) { %>
+        <div class="hidden md:flex gap-stack-md">
+          <a class="<%= (typeof currentPath !== 'undefined' && currentPath === '/dashboard') ? 'text-primary dark:text-primary font-bold border-b-2 border-primary pb-1' : 'text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim' %> transition-colors font-label-mono text-label-mono" href="/dashboard">Dashboard</a>
+          <a class="<%= (typeof currentPath !== 'undefined' && currentPath === '/events') ? 'text-primary dark:text-primary font-bold border-b-2 border-primary pb-1' : 'text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim' %> transition-colors font-label-mono text-label-mono" href="/events">Events</a>
+          <a class="<%= (typeof currentPath !== 'undefined' && currentPath === '/hackathons') ? 'text-primary dark:text-primary font-bold border-b-2 border-primary pb-1' : 'text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim' %> transition-colors font-label-mono text-label-mono" href="/hackathons">Hackathons</a>
+        </div>
+      <% } else { %>
+        <div class="hidden md:flex gap-stack-md">
+          <a class="text-primary dark:text-primary font-bold border-b-2 border-primary pb-1 font-label-mono text-label-mono transition-colors" href="/#events">Events</a>
+          <a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-label-mono text-label-mono" href="/#hackathons">Hackathons</a>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="flex items-center gap-stack-md">
+      <% if (isAuthenticated) { %>
+        <!-- Search -->
+        <div class="hidden md:flex items-center bg-surface-container-high rounded-full px-4 py-1.5 border border-outline-variant">
+          <span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span>
+          <input class="bg-transparent border-none focus:ring-0 text-body-sm placeholder:text-on-surface-variant w-48" placeholder="Search events..." type="text"/>
+        </div>
+
+        <!-- Notifications -->
+        <button class="relative p-2 rounded-full hover:bg-surface-bright dark:hover:bg-surface-bright transition-all text-on-surface-variant">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="absolute top-1 right-1 flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-error"></span>
+          </span>
+        </button>
+
+        <!-- User Menu -->
+        <div class="relative">
+          <button id="user-menu-button" class="flex items-center gap-2 rounded-lg p-1 hover:bg-surface-variant dark:hover:bg-surface-variant transition-all">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-container text-on-primary-container text-sm font-medium">
+              <%= (currentUser && currentUser.name) ? currentUser.name.charAt(0).toUpperCase() : 'U' %>
+            </div>
+            <span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div id="user-menu-dropdown" class="absolute right-0 mt-2 w-56 rounded-xl border border-outline-variant bg-surface-container py-2 shadow-glass hidden">
+            <div class="px-4 py-3 border-b border-outline-variant">
+              <p class="text-sm font-medium text-on-surface">
+                <%= (currentUser && currentUser.name) ? currentUser.name : 'User' %>
+              </p>
+              <p class="text-xs text-on-surface-variant truncate">
+                <%= (currentUser && currentUser.email) ? currentUser.email : '' %>
+              </p>
+            </div>
+
+            <div class="py-2">
+              <a href="/dashboard" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant">
+                <span class="material-symbols-outlined text-lg">dashboard</span>
+                <span class="font-label-mono">Dashboard</span>
+              </a>
+              <a href="/edit-profile" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant">
+                <span class="material-symbols-outlined text-lg">person</span>
+                <span class="font-label-mono">Edit Profile</span>
+              </a>
+              <a href="/my-events" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant">
+                <span class="material-symbols-outlined text-lg">bookmark</span>
+                <span class="font-label-mono">My Events</span>
+              </a>
+              <a href="/my-hackathons" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant">
+                <span class="material-symbols-outlined text-lg">emoji_events</span>
+                <span class="font-label-mono">My Hackathons</span>
+              </a>
+            </div>
+
+            <div class="border-t border-outline-variant py-2">
+              <a href="/logout" class="flex items-center gap-3 px-4 py-2 text-sm text-error hover:bg-error/10">
+                <span class="material-symbols-outlined text-lg">logout</span>
+                <span class="font-label-mono">Logout</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      <% } else { %>
+        <!-- Auth Buttons -->
+        <button class="text-on-surface-variant font-medium hover:text-primary transition-colors px-4 py-2 font-button-text text-button-text active:scale-95 duration-150">
+          <a href="/signin">Sign In</a>
+        </button>
+        <button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-button-text transition-transform active:scale-95 duration-150">
+          <a href="/signup" class="text-on-primary-container">Sign Up</a>
+        </button>
+      <% } %>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="md:hidden rounded-lg p-2 text-on-surface-variant hover:bg-surface-variant">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // User Menu Toggle
+  const userMenuButton = document.getElementById('user-menu-button');
+  const userMenuDropdown = document.getElementById('user-menu-dropdown');
+
+  if (userMenuButton && userMenuDropdown) {
+    userMenuButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userMenuDropdown.classList.toggle('hidden');
+    });
+
+    // Close on click outside
+    document.addEventListener('click', () => {
+      userMenuDropdown.classList.add('hidden');
+    });
+
+    userMenuDropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+</script>

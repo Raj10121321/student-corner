@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TechNexus | Hackathon Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#c0c1ff",
+                    "inverse-surface": "#dae2fd",
+                    "tertiary-container": "#00885d",
+                    "tertiary": "#4edea3",
+                    "primary-container": "#8083ff",
+                    "on-primary-fixed": "#07006c",
+                    "surface-container": "#171f33",
+                    "surface-tint": "#c0c1ff",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "background": "#0b1326",
+                    "surface-container-lowest": "#060e20",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-container-low": "#131b2e",
+                    "surface-bright": "#31394d",
+                    "outline-variant": "#464554",
+                    "surface-container-high": "#222a3d",
+                    "inverse-on-surface": "#283044",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#2d3449",
+                    "surface-dim": "#0b1326",
+                    "on-secondary-container": "#e6ecff",
+                    "on-secondary-fixed": "#001a42",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-secondary": "#002e6a",
+                    "outline": "#908fa0",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-tertiary": "#003824",
+                    "error": "#ffb4ab",
+                    "on-surface": "#dae2fd",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-error": "#690005",
+                    "on-primary-container": "#0d0096",
+                    "on-surface-variant": "#c7c4d7",
+                    "error-container": "#93000a",
+                    "on-background": "#dae2fd",
+                    "surface-variant": "#2d3449",
+                    "surface": "#0b1326",
+                    "primary": "#c0c1ff",
+                    "inverse-primary": "#494bd6",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-tertiary-container": "#000703",
+                    "primary-fixed": "#e1e0ff",
+                    "secondary-container": "#0566d9",
+                    "secondary": "#adc6ff",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-primary": "#1000a9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "48px",
+                    "stack-md": "16px",
+                    "base-unit": "4px",
+                    "container-max": "1280px",
+                    "stack-lg": "32px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "button-text": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-mono": ["JetBrains Mono"],
+                    "headline-xl": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "button-text": ["15px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar (User Context) -->
+<header class="bg-surface-container-low dark:bg-surface-container-low docked full-width top-0 sticky border-b border-outline-variant dark:border-outline-variant z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-stack-lg">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary">TechNexus</span>
+<nav class="hidden md:flex gap-stack-lg">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Dashboard</a>
+<a class="text-primary dark:text-primary font-bold border-b-2 border-primary pb-1" href="#">My Events</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">My Hackathons</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer in their late 20s, with soft rim lighting against a dark navy technical background. The lighting is cool-toned and crisp, emphasizing a tech-forward and professional persona. High-end portrait photography style, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx4PzTwoiLaJ-vX7ktk1ZSlEesF_lDMLFaidccgtyHtn9RV5MaCXpTcyJiLzc8jyK2gzmgIFBybYw-fh2srBTotp47JhDdPuiOOh3yTeybSkHhCBEWMq84xyRi0doj_74gIrr0wl--3WLVv57_1LvwUjPhFlmbbaSpHtt4NmTyia0-hrSmSukQLOQPNybmuPsNJvgiLxgBaxuFUxF4ekdi8aEmrZ0GISkCB-c722mcExoIzPA1dqR6-w"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<!-- Hero Section -->
+<section class="relative rounded-xl overflow-hidden mb-stack-lg h-[400px] flex items-end">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10"></div>
+<img class="w-full h-full object-cover" data-alt="A cinematic wide-angle view of a futuristic tech workspace at night, filled with glowing holographic displays and multiple monitors showing complex code. The atmosphere is professional and moody, with deep indigo and slate tones, accented by neon primary-color light streaks. Ultra-detailed 8k resolution digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEVDvRzZ60j6hktimc-IaVg684Z_QT8afoN8cIW-LNFsvi3qX3n-Y0jLyUPhAIJJayW_sshIh9E4HLKC4JTtGqA6wETUMP9uiU8yZ2_EBo3QPIRu5HKM-zEQEK9I1tMpH4wSZkBQiz9I5n67vJO9VSBA5jDHcP_bFLpRvHDyNL5Dyn_uls1uRt62xA37GorUEMjFghxDVcp-k-zCW2Kymxi3_7suzV-vDmh-KYOZZU7ecpsB5ETl2hpw"/>
+</div>
+<div class="relative z-20 p-stack-lg w-full flex flex-col md:flex-row justify-between items-end gap-stack-md">
+<div class="max-w-2xl">
+<span class="font-label-mono text-label-mono bg-primary/20 text-primary px-3 py-1 rounded-full mb-stack-sm inline-block uppercase tracking-wider">Active Hackathon</span>
+<h1 class="font-headline-xl text-headline-xl mb-stack-sm">Nexus Protocol: Web3 Security</h1>
+<p class="text-on-surface-variant font-body-lg text-body-lg max-w-xl">Join the elite rank of security researchers and developers to secure the next generation of decentralized finance. Build, audit, and win.</p>
+</div>
+<div class="flex flex-col gap-stack-sm items-end">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-mono text-label-mono">ENROLLED</span>
+</div>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-button-text text-button-text hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                        Enter Workspace
+                    </button>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Main Content Column -->
+<div class="lg:col-span-8 space-y-stack-lg">
+<!-- Bento Grid: Stats & Quick Info -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<div class="glass-card p-stack-md rounded-xl border border-outline-variant">
+<span class="text-on-surface-variant font-label-mono text-label-mono block mb-2 uppercase">Prize Pool</span>
+<div class="text-headline-md font-headline-md text-tertiary">$50,000</div>
+<span class="text-on-surface-variant text-body-sm font-body-sm mt-1 block">Paid in USDC &amp; NEX tokens</span>
+</div>
+<div class="glass-card p-stack-md rounded-xl border border-outline-variant">
+<span class="text-on-surface-variant font-label-mono text-label-mono block mb-2 uppercase">Time Left</span>
+<div class="text-headline-md font-headline-md text-primary">02D : 14H : 45M</div>
+<span class="text-on-surface-variant text-body-sm font-body-sm mt-1 block">Submission ends Dec 24</span>
+</div>
+<div class="glass-card p-stack-md rounded-xl border border-outline-variant">
+<span class="text-on-surface-variant font-label-mono text-label-mono block mb-2 uppercase">Participants</span>
+<div class="text-headline-md font-headline-md text-secondary">1,248</div>
+<div class="flex -space-x-2 mt-2">
+<div class="w-6 h-6 rounded-full border-2 border-background bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up avatar of a tech enthusiast with glasses, warm orange lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA08HoDaznMRCyheLcOhldZnG9WRfm1vUJoiklogpVFdcM9q9_99uFVMxfkFMHE39OrYEVbxisfk-MNqPxnCpDOn6swXvaEpWCIWJBNlOuRHZF9NybJvgPweMHab2vEuEHEH92F9AjPEIBjyYntB6JfO6-u0LbgHrxY9CUjB3kWRSYHk3_Z21xjQV8u6URfkPs7Nr88NOq4pZftAPpIT6Zs0G8zb8RPi6WEuyXyDUptR4q8DVGyuC13DQ"/>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-background bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Abstract 3D avatar icon with geometric shapes, blue and teal palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6L7Gn_Oc0ZThbskSFe7mu9kMWbAqMUPgT4eFsjz8oGx70ST1sPTfcpcQYPQni6vOGxtwhz0D69x8ruJtZ6wC3D4rKpLwhGKMbhOktncJhchDY4tm3-KPzqH-BVBmems_sekf3lnM5QcrVQmnx8YMg6-6R6bUrugU1HYQsBjNy-mIbfE8BqydmMOPxYuFeCUsPCWXSeeq8oIkUhbw6_DDjw33sGl-lb7zrNfGg_nZ6qUpvLF-9HIBFdA"/>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-background bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young female developer smiling, bright studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_fp984r35gVCBgmk5_R17SzjaGAsnfeuzNDoTFKxHZqvfwaiEqeKWmhK7y_kPJY_CgficPunSLxZWcW2_9oTlQ66sOgvDzLMeaa82qQT8DV_Efl7O50KAiF1vmAFVC1Rf4-J4mJax4nT0ifDpifcHWgvGuCPxLFPem9g8WbZZQp1DvUb1vQZAU3hJt98DAOMMNqM25Hmu_MYL-C_vat8Yz8CTkJXl7TOjtezItNcqJej7MWvS1l1Dlg"/>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-background bg-surface-container-high flex items-center justify-center text-[10px] font-bold">
+                                +1k
+                            </div>
+</div>
+</div>
+</div>
+<!-- Detailed Rules Section -->
+<div class="bg-surface-container p-stack-lg rounded-xl border border-outline-variant">
+<h2 class="font-headline-md text-headline-md mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">gavel</span>
+                        Hackathon Rules
+                    </h2>
+<div class="space-y-stack-md text-on-surface-variant">
+<div class="flex gap-stack-md">
+<span class="font-label-mono text-label-mono text-primary bg-primary/10 w-8 h-8 flex items-center justify-center rounded shrink-0">01</span>
+<div>
+<h3 class="text-on-surface font-bold mb-1">Open Source Requirement</h3>
+<p class="text-body-md font-body-md">All code must be hosted on a public GitHub repository under an MIT license to be eligible for the main prize pool.</p>
+</div>
+</div>
+<div class="flex gap-stack-md">
+<span class="font-label-mono text-label-mono text-primary bg-primary/10 w-8 h-8 flex items-center justify-center rounded shrink-0">02</span>
+<div>
+<h3 class="text-on-surface font-bold mb-1">Team Formation</h3>
+<p class="text-body-md font-body-md">Teams can consist of 1 to 5 members. Cross-disciplinary teams (devs, designers, researchers) are highly encouraged.</p>
+</div>
+</div>
+<div class="flex gap-stack-md">
+<span class="font-label-mono text-label-mono text-primary bg-primary/10 w-8 h-8 flex items-center justify-center rounded shrink-0">03</span>
+<div>
+<h3 class="text-on-surface font-bold mb-1">Originality</h3>
+<p class="text-body-md font-body-md">Projects started before the hackathon start date are not eligible. Integrating existing libraries is allowed if clearly documented.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Tracks & Prizes Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="bg-surface-container-high p-stack-md rounded-xl border border-outline-variant hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary/10 rounded-lg text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">security</span>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary">$20,000</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Smart Contract Security</h3>
+<p class="text-on-surface-variant text-body-sm mb-4">Focus on formal verification and novel auditing techniques for EVM-based protocols.</p>
+<ul class="space-y-2 text-on-surface-variant text-body-sm font-label-mono">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 1st Place: $12k</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary/60"></span> 2nd Place: $8k</li>
+</ul>
+</div>
+<div class="bg-surface-container-high p-stack-md rounded-xl border border-outline-variant hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary/10 rounded-lg text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">dataset</span>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary">$15,000</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">DeFi Data Analytics</h3>
+<p class="text-on-surface-variant text-body-sm mb-4">Build advanced dashboards or predictive models for on-chain liquidity flows.</p>
+<ul class="space-y-2 text-on-surface-variant text-body-sm font-label-mono">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> 1st Place: $10k</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary/60"></span> 2nd Place: $5k</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Sidebar Column -->
+<aside class="lg:col-span-4 space-y-stack-lg">
+<!-- Enrollment Status Card -->
+<div class="bg-surface-container-highest p-stack-lg rounded-xl border border-primary/30 shadow-2xl shadow-primary/5">
+<h3 class="font-label-mono text-label-mono uppercase mb-4 text-primary tracking-widest">Enrolled Member</h3>
+<div class="flex items-center gap-stack-md mb-stack-md p-3 bg-surface-container rounded-lg border border-outline-variant">
+<div class="w-12 h-12 rounded-full overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Technical professional headshot, blue rim lighting, dark slate background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ2LzoG93ADvAQSooBxGIzAejwBJhb_IanKOvHz54r96V4dqN1w_bDFfT3r0TgBfwrR8vHudjeb8YyVg_dUUQQ1fIfDpNfAfb_HNi3br4y_jvmtHc-qmEmfXk4b2BM4tt3SKBEycV4H1vH_j-OeflLC5GbhcrrXTJ-6UYTGmVCSz47YCWE-2LNcfKcELriA8UDp9kJN_ZlFtC8UUHCx94_MwuhfJ8lAxySwc8sqZ3u7J6O1Gva0tCXJg"/>
+</div>
+<div>
+<div class="font-bold">Alex Rivera</div>
+<div class="text-on-surface-variant text-body-sm">Team: Void_Walkers</div>
+</div>
+</div>
+<div class="space-y-stack-sm mb-stack-lg">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Profile Completion</span>
+<span class="text-primary font-bold">85%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[85%]"></div>
+</div>
+</div>
+<button class="w-full border border-outline-variant text-on-surface py-3 rounded-lg font-button-text text-button-text hover:bg-surface-bright transition-all mb-3">
+                        View Team Dashboard
+                    </button>
+<button class="w-full text-error/80 text-body-sm font-label-mono hover:text-error transition-colors">
+                        Unenroll from Hackathon
+                    </button>
+</div>
+<!-- Schedule Section -->
+<div class="bg-surface-container p-stack-lg rounded-xl border border-outline-variant">
+<h3 class="font-headline-md text-headline-md mb-stack-md">Timeline</h3>
+<div class="relative border-l-2 border-outline-variant ml-2 space-y-stack-lg pb-2">
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-tertiary ring-4 ring-background"></div>
+<span class="font-label-mono text-[11px] text-tertiary uppercase">Completed</span>
+<h4 class="font-bold text-on-surface">Registration</h4>
+<p class="text-on-surface-variant text-body-sm">Ended on Dec 10, 2023</p>
+</div>
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-background animate-pulse"></div>
+<span class="font-label-mono text-[11px] text-primary uppercase">Active Now</span>
+<h4 class="font-bold text-on-surface">Hacking Period</h4>
+<p class="text-on-surface-variant text-body-sm">Ends on Dec 24, 23:59 UTC</p>
+</div>
+<div class="relative pl-6 opacity-50">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-outline-variant ring-4 ring-background"></div>
+<span class="font-label-mono text-[11px] text-on-surface-variant uppercase">Upcoming</span>
+<h4 class="font-bold text-on-surface">Judging Phase</h4>
+<p class="text-on-surface-variant text-body-sm">Dec 25 - Dec 30, 2023</p>
+</div>
+<div class="relative pl-6 opacity-50">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-outline-variant ring-4 ring-background"></div>
+<span class="font-label-mono text-[11px] text-on-surface-variant uppercase">Upcoming</span>
+<h4 class="font-bold text-on-surface">Winners Ceremony</h4>
+<p class="text-on-surface-variant text-body-sm">Jan 02, 2024</p>
+</div>
+</div>
+</div>
+<!-- Resource Links -->
+<div class="bg-surface-container-low p-stack-md rounded-xl border border-outline-variant">
+<h3 class="font-label-mono text-label-mono uppercase mb-stack-md text-on-surface-variant">Resources</h3>
+<div class="flex flex-col gap-2">
+<a class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">description</span>
+<span class="text-body-md">Technical Documentation</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">chat_bubble</span>
+<span class="text-body-md">Discord Community</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">code</span>
+<span class="text-body-md">Starter Templates</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest full-width border-t border-outline-variant dark:border-outline-variant mt-stack-lg">
+<div class="w-full py-stack-lg px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="font-headline-md text-headline-md text-primary dark:text-primary mb-4 block">TechNexus</span>
+<p class="text-on-surface-variant text-body-sm font-body-sm">Empowering the next generation of technical innovators through high-stakes hackathons and global community.</p>
+</div>
+<div>
+<h4 class="font-label-mono text-label-mono text-secondary mb-4">Platform</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant font-body-sm hover:text-primary transition-colors" href="#">Browse Hackathons</a></li>
+<li><a class="text-on-surface-variant font-body-sm hover:text-primary transition-colors" href="#">Success Stories</a></li>
+<li><a class="text-on-surface-variant font-body-sm hover:text-primary transition-colors" href="#">For Organizers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-mono text-label-mono text-secondary mb-4">Company</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant font-body-sm hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="text-on-surface-variant font-body-sm hover:text-primary transition-colors" href="#">Contact</a></li>
+<li><a class="text-on-surface-variant font-body-sm hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-mono text-label-mono text-secondary mb-4">Newsletter</h4>
+<p class="text-on-surface-variant text-body-sm mb-4">Stay updated on upcoming prize pools.</p>
+<div class="flex gap-2">
+<input class="bg-surface-container-high border-outline-variant rounded-lg px-3 py-2 text-sm w-full focus:ring-primary focus:border-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary text-on-primary p-2 rounded-lg material-symbols-outlined">send</button>
+</div>
+</div>
+</div>
+<div class="w-full px-margin-desktop max-w-container-max mx-auto py-stack-md border-t border-outline-variant/30 flex justify-center">
+<span class="text-on-surface-variant text-body-sm font-body-sm">© 2024 TechNexus Hackathon Platform. All rights reserved.</span>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Update countdown timer
+        function updateTimer() {
+            const now = new Date();
+            const end = new Date();
+            end.setDate(now.getDate() + 2);
+            end.setHours(23, 59, 59);
+            
+            // This is just a UI placeholder update for effect
+            // Real logic would calculate difference
+        }
+        setInterval(updateTimer, 1000);
+
+        // Micro-interaction: Active state on track cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackathons | TechNexus</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    body { background-color: #0b1326; color: #dae2fd; }
+    .tonal-layer-1 { background-color: #1E293B; border: 1px solid #334155; }
+  </style>
+</head>
+
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+  <!-- Header -->
+  <nav class="bg-surface-container-low border-b border-outline-variant sticky top-0 z-50">
+    <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+      <div class="flex items-center gap-8">
+        <a class="text-headline-md font-bold text-primary" href="/dashboard">TechNexus</a>
+        <div class="hidden md:flex gap-6">
+          <a class="text-on-surface-variant hover:text-primary transition-colors" href="/events">Events</a>
+          <a class="text-primary font-bold border-b-2 border-primary pb-1" href="/hackathons">Hackathons</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-6">
+        <a class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-container text-on-primary-container text-sm" href="/edit-profile">
+          <%= (typeof user !== 'undefined' && user.name) ? user.name.charAt(0).toUpperCase() : 'U' %>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow">
+    <!-- Hero -->
+    <section class="relative py-16">
+      <div class="max-w-container-max mx-auto px-margin-desktop">
+        <h1 class="font-headline-xl text-headline-xl mb-4">Build the Future with <span class="text-tertiary">Elite Hackathons</span></h1>
+        <p class="text-body-lg text-on-surface-variant max-w-2xl">Join high-stakes competitions, collaborate with global talent, and showcase your skills to top tech companies.</p>
+      </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <section class="bg-surface-container sticky top-16 z-40 border-b border-outline-variant">
+      <div class="max-w-container-max mx-auto px-margin-desktop py-4 flex items-center gap-4">
+        <button class="bg-tertiary text-on-tertiary px-5 py-2 rounded-full text-sm font-medium">All Hackathons</button>
+        <button class="bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-5 py-2 rounded-full text-sm font-medium transition-colors">Upcoming</button>
+        <button class="bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-5 py-2 rounded-full text-sm font-medium transition-colors">Ongoing</button>
+        <button class="bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-5 py-2 rounded-full text-sm font-medium transition-colors">Past</button>
+      </div>
+    </section>
+
+    <!-- Hackathons Grid -->
+    <section class="max-w-container-max mx-auto px-margin-desktop py-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% upcomingHackthons.forEach(hackathon => { %>
+          <div class="tonal-layer-1 rounded-xl overflow-hidden flex flex-col group hover:border-tertiary transition-all">
+            <div class="h-48 relative">
+              <% if (hackathon.img) { %>
+                <img src="<%= hackathon.img %>" alt="<%= hackathon.eventName %>" class="w-full h-full object-cover">
+              <% } else { %>
+                <div class="w-full h-full bg-surface-container-highest flex items-center justify-center">
+                  <span class="material-symbols-outlined text-6xl text-on-surface-variant/30">code</span>
+                </div>
+              <% } %>
+              <div class="absolute top-4 left-4">
+                <span class="bg-background/80 backdrop-blur-md text-tertiary text-xs px-3 py-1 rounded-full border border-tertiary/20 uppercase">Hackathon</span>
+              </div>
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <h3 class="font-headline-md text-headline-md mb-2 group-hover:text-tertiary transition-colors"><%= hackathon.eventName %></h3>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+                  <span class="material-symbols-outlined text-sm">calendar_today</span>
+                  <span><%= new Date(hackathon.deadlineDate).toLocaleDateString() %></span>
+                </div>
+                <div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+                  <span class="material-symbols-outlined text-sm">location_on</span>
+                  <span><%= hackathon.location %></span>
+                </div>
+              </div>
+              <div class="mt-auto flex justify-between items-center">
+                <a href="/hackathon/<%= hackathon.id %>" class="text-tertiary font-medium hover:underline text-sm">View Details</a>
+                <% if (hackathon.isEnrolled) { %>
+                  <form class="enroll-form" data-event-id="<%= hackathon.id %>" data-action="unenroll">
+                    <input type="hidden" name="eventId" value="<%= hackathon.id %>">
+                    <input type="hidden" name="eventType" value="hackathon">
+                    <button type="submit" class="text-error text-xs hover:underline">Unenroll</button>
+                  </form>
+                <% } else { %>
+                  <form class="enroll-form" data-event-id="<%= hackathon.id %>" data-action="enroll">
+                    <input type="hidden" name="eventId" value="<%= hackathon.id %>">
+                    <input type="hidden" name="eventType" value="hackathon">
+                    <button type="submit" class="bg-tertiary text-on-tertiary px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-all">Enroll</button>
+                  </form>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
+      <% if (upcomingHackthons.length === 0) { %>
+        <div class="text-center py-12">
+          <span class="material-symbols-outlined text-6xl text-on-surface-variant/30 mb-4">hackathon_box</span>
+          <p class="text-on-surface-variant text-lg">No hackathons available at the moment.</p>
+        </div>
+      <% } %>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-lowest border-t border-outline-variant">
+    <div class="max-w-container-max mx-auto px-margin-desktop py-6 text-center">
+      <p class="text-on-surface-variant text-sm">© 2024 TechNexus Hackathon Platform. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.enroll-form').forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const eventId = this.dataset.eventId;
+        const action = this.dataset.action;
+
+        fetch(`/${action}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            eventId: eventId,
+            eventType: 'hackathon'
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            Swal.fire({
+              title: 'Success!',
+              text: data.message,
+              icon: 'success',
+              confirmButtonText: 'OK',
+              background: '#171f33',
+              color: '#dae2fd',
+              confirmButtonColor: '#4edea3'
+            }).then(() => location.reload());
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: data.message,
+              icon: 'error',
+              confirmButtonText: 'OK',
+              background: '#171f33',
+              color: '#dae2fd',
+              confirmButtonColor: '#ffb4ab'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

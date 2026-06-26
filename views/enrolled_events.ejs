@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Events | TechNexus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    body { background-color: #0b1326; color: #dae2fd; }
+    .tonal-layer-1 { background-color: #1E293B; border: 1px solid #334155; }
+  </style>
+</head>
+
+<body class="min-h-screen flex">
+  <nav class="w-64 bg-surface-container border-r border-outline-variant p-6 hidden md:flex flex-col">
+    <div class="flex items-center gap-3 mb-8"><span class="text-headline-md font-bold text-primary">TechNexus</span></div>
+    <ul class="space-y-2 flex-1">
+      <li><a href="/dashboard" class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-lg"><span class="material-symbols-outlined">dashboard</span> Dashboard</a></li>
+      <li><a href="/events" class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-lg"><span class="material-symbols-outlined">event</span> Events</a></li>
+      <li><a href="/my-events" class="flex items-center gap-3 bg-primary/10 text-primary px-4 py-3 rounded-lg"><span class="material-symbols-outlined">bookmark</span> My Events</a></li>
+      <li><a href="/edit-profile" class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-lg"><span class="material-symbols-outlined">person</span> Edit Profile</a></li>
+    </ul>
+    <a href="/logout" class="flex items-center gap-3 text-error px-4 py-3 rounded-lg"><span class="material-symbols-outlined">logout</span> Logout</a>
+  </nav>
+
+  <div class="flex-1 p-8">
+    <header class="flex justify-between items-center mb-8">
+      <h1 class="font-headline-xl text-headline-xl">My Enrolled Events</h1>
+      <div class="flex items-center gap-4">
+        <a href="/edit-profile" class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold"><%= user.name.charAt(0).toUpperCase() %></a>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% EnrolledEvents.forEach(event => { %>
+        <div class="tonal-layer-1 rounded-xl overflow-hidden flex flex-col">
+          <div class="h-48 bg-surface-container-highest flex items-center justify-center">
+            <span class="material-symbols-outlined text-6xl text-on-surface-variant/30">event</span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <h3 class="font-headline-md text-headline-md mb-2"><%= event.name %></h3>
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+                <span class="material-symbols-outlined text-sm">calendar_today</span>
+                <span><%= new Date(event.deadline).toLocaleDateString() %></span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+                <span class="material-symbols-outlined text-sm">location_on</span>
+                <span><%= event.location %></span>
+              </div>
+            </div>
+            <div class="mt-auto flex justify-between items-center">
+              <span class="text-tertiary font-label-mono text-xs">Enrolled</span>
+              <a href="/event/<%= event.id %>" class="text-primary font-label-mono text-sm hover:underline">View Details</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+    <% if (EnrolledEvents.length === 0) { %>
+      <div class="text-center py-12">
+        <span class="material-symbols-outlined text-6xl text-on-surface-variant/30 mb-4">event_busy</span>
+        <p class="text-on-surface-variant">No enrolled events yet. Start exploring!</p>
+        <a href="/events" class="inline-block mt-4 bg-primary text-on-primary px-6 py-3 rounded-lg">Browse Events</a>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

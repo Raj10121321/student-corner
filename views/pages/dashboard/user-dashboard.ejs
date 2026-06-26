@@ -1,0 +1,390 @@
+<%-
+layout('main-layout', {
+  title: 'Dashboard - Student Corner',
+  currentPath: '/dashboard'
+})
+-%>
+
+<!-- Dashboard Header -->
+<div class="hero-gradient border-b border-secondary-200 dark:border-secondary-800">
+  <div class="section py-8">
+    <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+      <div>
+        <h1 class="text-3xl font-bold text-secondary-900 dark:text-white">
+          Welcome back, <%= typeof user !== 'undefined' && user.name ? user.name : 'Student' %>! 👋
+        </h1>
+        <p class="mt-2 text-secondary-600 dark:text-secondary-400">
+          Here's what's happening with your events and hackathons today
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="/events" class="btn-secondary inline-flex items-center gap-2">
+          <i data-feather="calendar" class="h-4 w-4"></i>
+          Browse Events
+        </a>
+        <a href="/edit-profile" class="btn-primary inline-flex items-center gap-2">
+          <i data-feather="edit-2" class="h-4 w-4"></i>
+          Edit Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard Content -->
+<div class="section py-8">
+  <div class="grid gap-8 lg:grid-cols-3">
+    <!-- Main Content Area -->
+    <div class="space-y-8 lg:col-span-2">
+      <!-- Stats Cards -->
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="card p-6 animate-fade-in">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-secondary-600 dark:text-secondary-400">Enrolled Events</p>
+              <p class="mt-2 text-3xl font-bold text-secondary-900 dark:text-white">
+                <%= typeof EnrolledEvents !== 'undefined' ? EnrolledEvents.length : 0 %>
+              </p>
+            </div>
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+              <i data-feather="bookmark" class="h-6 w-6"></i>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-2 text-sm">
+            <span class="flex items-center gap-1 text-accent-success">
+              <i data-feather="trending-up" class="h-4 w-4"></i>
+              +2 this month
+            </span>
+          </div>
+        </div>
+
+        <div class="card p-6 animate-fade-in" style="animation-delay: 0.1s;">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-secondary-600 dark:text-secondary-400">Hackathons</p>
+              <p class="mt-2 text-3xl font-bold text-secondary-900 dark:text-white">
+                <%= typeof EnrolledHackthons !== 'undefined' ? EnrolledHackthons.length : 0 %>
+              </p>
+            </div>
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
+              <i data-feather="trophy" class="h-6 w-6"></i>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-2 text-sm">
+            <span class="flex items-center gap-1 text-accent-success">
+              <i data-feather="trending-up" class="h-4 w-4"></i>
+              +1 this month
+            </span>
+          </div>
+        </div>
+
+        <div class="card p-6 animate-fade-in" style="animation-delay: 0.2s;">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-secondary-600 dark:text-secondary-400">Upcoming</p>
+              <p class="mt-2 text-3xl font-bold text-secondary-900 dark:text-white">
+                <%= (typeof EnrolledEvents !== 'undefined' ? EnrolledEvents.filter(e => e.status === 'active').length : 0) + (typeof EnrolledHackthons !== 'undefined' ? EnrolledHackthons.filter(h => h.status === 'active').length : 0) %>
+              </p>
+            </div>
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-success/10 text-accent-success dark:bg-accent-success/20">
+              <i data-feather="clock" class="h-6 w-6"></i>
+            </div>
+          </div>
+          <div class="mt-4 text-sm text-secondary-500 dark:text-secondary-400">
+            Next event in 3 days
+          </div>
+        </div>
+
+        <div class="card p-6 animate-fade-in" style="animation-delay: 0.3s;">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-secondary-600 dark:text-secondary-400">Completed</p>
+              <p class="mt-2 text-3xl font-bold text-secondary-900 dark:text-white">
+                <%= (typeof EnrolledEvents !== 'undefined' ? EnrolledEvents.filter(e => e.status === 'past').length : 0) + (typeof EnrolledHackthons !== 'undefined' ? EnrolledHackthons.filter(h => h.status === 'past').length : 0) %>
+              </p>
+            </div>
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-warning/10 text-accent-warning dark:bg-accent-warning/20">
+              <i data-feather="check-circle" class="h-6 w-6"></i>
+            </div>
+          </div>
+          <div class="mt-4 text-sm text-secondary-500 dark:text-secondary-400">
+            Great progress!
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming Events Section -->
+      <div class="card animate-fade-in" style="animation-delay: 0.4s;">
+        <div class="flex items-center justify-between border-b border-secondary-200 p-6 dark:border-secondary-800">
+          <div>
+            <h3 class="text-lg font-semibold text-secondary-900 dark:text-white">Upcoming Events</h3>
+            <p class="text-sm text-secondary-600 dark:text-secondary-400">Your registered events and hackathons</p>
+          </div>
+          <a href="/my-events" class="btn-ghost text-sm">
+            View All
+            <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
+          </a>
+        </div>
+
+        <div class="divide-y divide-secondary-200 dark:divide-secondary-800">
+          <% if (typeof EnrolledEvents !== 'undefined' && EnrolledEvents.length > 0) { %>
+            <% EnrolledEvents.slice(0, 3).forEach((event, index) => { %>
+              <div class="flex items-center gap-4 p-6 transition-colors hover:bg-secondary-50 dark:hover:bg-secondary-800/50">
+                <div class="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg">
+                  <img src="<%= event.image || '/images/placeholder-event.jpg' %>" alt="<%= event.name %>" class="h-full w-full object-cover">
+                </div>
+
+                <div class="flex-1 min-w-0">
+                  <h4 class="font-semibold text-secondary-900 dark:text-white truncate">
+                    <%= event.name %>
+                  </h4>
+                  <div class="mt-1 flex items-center gap-4 text-sm text-secondary-600 dark:text-secondary-400">
+                    <span class="flex items-center gap-1">
+                      <i data-feather="calendar" class="h-4 w-4"></i>
+                      <%= event.day ? event.month + ' ' + event.day : 'TBD' %>
+                    </span>
+                    <span class="flex items-center gap-1">
+                      <i data-feather="map-pin" class="h-4 w-4"></i>
+                      <%= event.location || 'TBD' %>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="shrink-0">
+                  <span class="badge badge-success">Active</span>
+                </div>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <div class="p-12 text-center">
+              <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary-100 dark:bg-secondary-800">
+                <i data-feather="calendar" class="h-8 w-8 text-secondary-400"></i>
+              </div>
+              <h4 class="text-lg font-semibold text-secondary-900 dark:text-white">No enrolled events yet</h4>
+              <p class="mt-2 text-sm text-secondary-600 dark:text-secondary-400">
+                Start exploring events and hackathons to join!
+              </p>
+              <a href="/events" class="btn-primary mt-4 inline-flex items-center gap-2">
+                Browse Events
+                <i data-feather="arrow-right" class="h-4 w-4"></i>
+              </a>
+            </div>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Recommended Events -->
+      <div class="card animate-fade-in" style="animation-delay: 0.5s;">
+        <div class="flex items-center justify-between border-b border-secondary-200 p-6 dark:border-secondary-800">
+          <div>
+            <h3 class="text-lg font-semibold text-secondary-900 dark:text-white">Recommended for You</h3>
+            <p class="text-sm text-secondary-600 dark:text-secondary-400">Based on your interests and activity</p>
+          </div>
+          <a href="/events" class="btn-ghost text-sm">
+            Discover More
+            <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
+          </a>
+        </div>
+
+        <div class="grid gap-4 p-6 sm:grid-cols-2">
+          <% if (typeof upcomingEvents !== 'undefined' && upcomingEvents.length > 0) { %>
+            <% upcomingEvents.slice(0, 4).forEach((event, index) => { %>
+              <div class="group cursor-pointer rounded-lg border border-secondary-200 bg-white p-4 transition-all hover:border-primary-500 hover:shadow-medium dark:border-secondary-800 dark:bg-secondary-900">
+                <div class="mb-3 flex items-start justify-between">
+                  <div class="flex-1">
+                    <h5 class="font-semibold text-secondary-900 dark:text-white line-clamp-1">
+                      <%= event.eventName %>
+                    </h5>
+                    <div class="mt-1 flex items-center gap-2 text-xs text-secondary-600 dark:text-secondary-400">
+                      <span class="flex items-center gap-1">
+                        <i data-feather="calendar" class="h-3 w-3"></i>
+                        <%= event.month + ' ' + event.day %>
+                      </span>
+                      <span class="flex items-center gap-1">
+                        <i data-feather="map-pin" class="h-3 w-3"></i>
+                        <%= event.location %>
+                      </span>
+                    </div>
+                  </div>
+                  <span class="badge badge-primary">Hot</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs text-secondary-500 dark:text-secondary-400">
+                    <%= event.age || 'All ages' %>
+                  </span>
+                  <a href="/event/<%= event.id %>" class="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400">
+                    View →
+                  </a>
+                </div>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <div class="col-span-2 text-center py-8">
+              <p class="text-secondary-600 dark:text-secondary-400">No events available at the moment</p>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="space-y-8">
+      <!-- Profile Card -->
+      <div class="card animate-fade-in" style="animation-delay: 0.2s;">
+        <div class="p-6">
+          <div class="flex items-center gap-4">
+            <div class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-600 to-primary-500 text-2xl font-bold text-white shadow-glow">
+              <%= typeof user !== 'undefined' && user.name ? user.name.charAt(0).toUpperCase() : 'U' %>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h4 class="font-semibold text-secondary-900 dark:text-white truncate">
+                <%= typeof user !== 'undefined' && user.name ? user.name : 'User Name' %>
+              </h4>
+              <p class="text-sm text-secondary-600 dark:text-secondary-400 truncate">
+                <%= typeof user !== 'undefined' && user.email ? user.email : 'user@email.com' %>
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6 space-y-3">
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-secondary-600 dark:text-secondary-400">Member since</span>
+              <span class="font-medium text-secondary-900 dark:text-white">2024</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-secondary-600 dark:text-secondary-400">Events joined</span>
+              <span class="font-medium text-secondary-900 dark:text-white">
+                <%= typeof EnrolledEvents !== 'undefined' ? EnrolledEvents.length : 0 %>
+              </span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-secondary-600 dark:text-secondary-400">Hackathons</span>
+              <span class="font-medium text-secondary-900 dark:text-white">
+                <%= typeof EnrolledHackthons !== 'undefined' ? EnrolledHackthons.length : 0 %>
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-secondary-200 dark:border-secondary-800">
+            <a href="/edit-profile" class="btn-secondary w-full text-center">
+              <i data-feather="settings" class="mr-2 h-4 w-4"></i>
+              Edit Profile
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="card animate-fade-in" style="animation-delay: 0.3s;">
+        <div class="border-b border-secondary-200 p-4 dark:border-secondary-800">
+          <h3 class="font-semibold text-secondary-900 dark:text-white">Quick Actions</h3>
+        </div>
+        <div class="p-4">
+          <div class="space-y-2">
+            <a href="/events" class="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-secondary-100 dark:hover:bg-secondary-800">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+                <i data-feather="search" class="h-5 w-5"></i>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-secondary-900 dark:text-white">Find Events</p>
+                <p class="text-xs text-secondary-600 dark:text-secondary-400">Discover new opportunities</p>
+              </div>
+            </a>
+
+            <a href="/hackathons" class="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-secondary-100 dark:hover:bg-secondary-800">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
+                <i data-feather="code" class="h-5 w-5"></i>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-secondary-900 dark:text-white">Browse Hackathons</p>
+                <p class="text-xs text-secondary-600 dark:text-secondary-400">Coding challenges & competitions</p>
+              </div>
+            </a>
+
+            <a href="/my-events" class="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-secondary-100 dark:hover:bg-secondary-800">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-success/10 text-accent-success dark:bg-accent-success/20">
+                <i data-feather="bookmark" class="h-5 w-5"></i>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-secondary-900 dark:text-white">My Events</p>
+                <p class="text-xs text-secondary-600 dark:text-secondary-400">View your enrollments</p>
+              </div>
+            </a>
+
+            <a href="/my-hackathons" class="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-secondary-100 dark:hover:bg-secondary-800">
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-warning/10 text-accent-warning dark:bg-accent-warning/20">
+                <i data-feather="award" class="h-5 w-5"></i>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-secondary-900 dark:text-white">My Hackathons</p>
+                <p class="text-xs text-secondary-600 dark:text-secondary-400">Your hackathon journey</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Feed -->
+      <div class="card animate-fade-in" style="animation-delay: 0.4s;">
+        <div class="border-b border-secondary-200 p-4 dark:border-secondary-800">
+          <h3 class="font-semibold text-secondary-900 dark:text-white">Recent Activity</h3>
+        </div>
+        <div class="p-4">
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-success/10 text-accent-success">
+                <i data-feather="check-circle" class="h-4 w-4"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm text-secondary-900 dark:text-white">Enrolled in Tech Innovation Challenge</p>
+                <p class="text-xs text-secondary-500 dark:text-secondary-400">2 hours ago</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-600 dark:bg-primary-900/30">
+                <i data-feather="calendar" class="h-4 w-4"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm text-secondary-900 dark:text-white">Viewed upcoming events</p>
+                <p class="text-xs text-secondary-500 dark:text-secondary-400">5 hours ago</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-warning/10 text-accent-warning">
+                <i data-feather="edit-3" class="h-4 w-4"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm text-secondary-900 dark:text-white">Updated profile information</p>
+                <p class="text-xs text-secondary-500 dark:text-secondary-400">1 day ago</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="#" class="mt-4 block text-center text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400">
+            View all activity
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Animate stats on scroll
+    const stats = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    stats.forEach(stat => observer.observe(stat));
+  });
+</script>

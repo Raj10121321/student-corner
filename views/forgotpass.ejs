@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forgot Password | TechNexus</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    body {
+      background-color: #0b1326;
+      color: #dae2fd;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid #334155;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#c0c1ff",
+            "on-primary": "#1000a9",
+            "secondary": "#adc6ff",
+            "tertiary": "#4edea3",
+            "error": "#ffb4ab",
+            "background": "#0b1326",
+            "on-background": "#dae2fd",
+            "surface": "#0b1326",
+            "on-surface": "#dae2fd",
+            "surface-variant": "#2d3449",
+            "on-surface-variant": "#c7c4d7",
+            "outline": "#908fa0",
+            "outline-variant": "#464554",
+            "surface-container": "#171f33",
+            "surface-container-low": "#131b2e",
+            "surface-container-high": "#222a3d",
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "gutter": "24px",
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "stack-lg": "32px"
+          },
+          fontFamily: {
+            "body-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-mono": ["JetBrains Mono"],
+            "button-text": ["Inter"]
+          },
+          fontSize: {
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "button-text": ["15px", { "lineHeight": "16px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-background text-on-background min-h-screen flex">
+  <!-- Left Panel - Illustration -->
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-error/10 via-background to-secondary/10 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:32px_32px]"></div>
+    <div class="relative z-10 flex flex-col justify-center px-20">
+      <div class="mb-8">
+        <div class="w-16 h-16 rounded-2xl bg-error/10 flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-4xl text-error">lock_reset</span>
+        </div>
+        <h1 class="font-headline-lg text-headline-lg text-on-surface mb-4">Forgot your password?</h1>
+        <p class="text-on-surface-variant text-lg max-w-md">No worries! We'll send you instructions to reset your password. Enter your email or phone number below.</p>
+      </div>
+
+      <div class="space-y-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-error">email</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">Email Recovery</h3>
+            <p class="text-on-surface-variant text-body-sm">Receive OTP via email instantly</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-secondary">sms</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">SMS Recovery</h3>
+            <p class="text-on-surface-variant text-body-sm">Get OTP via text message</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary">schedule</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">Quick Process</h3>
+            <p class="text-on-surface-variant text-body-sm">Reset your password in under 2 minutes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Panel - Forgot Password Form -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+    <div class="w-full max-w-md">
+      <!-- Logo for mobile -->
+      <div class="lg:hidden mb-8 text-center">
+        <h1 class="font-headline-lg text-headline-lg text-primary">TechNexus</h1>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8">
+        <div class="mb-8">
+          <div class="w-12 h-12 rounded-xl bg-error/10 flex items-center justify-center mb-4 lg:hidden">
+            <span class="material-symbols-outlined text-2xl text-error">lock_reset</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg mb-2">Reset Password</h2>
+          <p class="text-on-surface-variant">Enter your email or phone number to receive a verification code</p>
+        </div>
+
+        <form id="forgotPasswordForm" class="space-y-6">
+          <div>
+            <label for="identifier" class="block font-label-mono text-label-mono text-on-surface mb-2">
+              EMAIL OR PHONE NUMBER
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-on-surface-variant">
+                <span class="material-symbols-outlined text-lg">alternate_email</span>
+              </span>
+              <input
+                type="text"
+                name="identifier"
+                id="identifier"
+                required
+                class="w-full bg-surface-dim border border-outline-variant rounded-lg pl-10 pr-4 py-3 text-body-md focus:ring-2 focus:ring-error focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50"
+                placeholder="Enter your email or phone number"
+              >
+            </div>
+            <p class="mt-2 text-xs text-on-surface-variant">We'll send you a verification code to reset your password</p>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-error text-on-error font-button-text text-button-text py-3 rounded-lg hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-2"
+          >
+            <span>Send Verification Code</span>
+            <span class="material-symbols-outlined">send</span>
+          </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-outline-variant text-center space-y-4">
+          <div>
+            <p class="text-on-surface-variant text-body-sm">
+              Remembered your password?
+              <a href="/signin" class="text-primary font-medium hover:underline ml-1">Sign in</a>
+            </p>
+          </div>
+          <div>
+            <p class="text-on-surface-variant text-body-sm">
+              Don't have an account?
+              <a href="/signup" class="text-tertiary font-medium hover:underline ml-1">Sign up</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Help Section -->
+        <div class="mt-6 p-4 rounded-lg bg-surface-container-low border border-outline-variant">
+          <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-lg text-on-surface-variant">info</span>
+            <div>
+              <p class="text-body-sm text-on-surface-variant">Need help? Contact our support team for assistance with account recovery.</p>
+              <a href="#" class="text-primary text-sm hover:underline mt-1 inline-block">Contact Support</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Form submission
+    document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const identifier = document.querySelector('input[name="identifier"]').value;
+
+      // The form will submit normally to the backend
+      // But let's add loading state
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Sending...';
+
+      this.submit();
+
+      // Re-enable button if there's an error (handled by page reload)
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }, 3000);
+    });
+
+    // Micro-interactions for buttons
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('mousedown', () => {
+        btn.style.transform = 'scale(0.97)';
+      });
+      btn.addEventListener('mouseup', () => {
+        btn.style.transform = '';
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  </script>
+</body>
+</html>

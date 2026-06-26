@@ -1,0 +1,494 @@
+<%-
+layout('main-layout', {
+  title: typeof eventDetails !== 'undefined' ? eventDetails.eventname + ' - Event Details' : 'Event Details',
+  currentPath: '/event'
+})
+-%>
+
+<%
+if (typeof eventDetails === 'undefined') {
+  // If no event details provided, redirect or show error
+%>
+  <div class="section py-16 text-center">
+    <div class="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-secondary-100 dark:bg-secondary-800">
+      <i data-feather="alert-circle" class="h-12 w-12 text-secondary-400"></i>
+    </div>
+    <h3 class="text-xl font-semibold text-secondary-900 dark:text-white">Event Not Found</h3>
+    <p class="mt-2 text-secondary-600 dark:text-secondary-400">
+      The event you're looking for doesn't exist or has been removed.
+    </p>
+    <a href="/events" class="btn-primary mt-6 inline-flex items-center gap-2">
+      Browse Events
+      <i data-feather="arrow-right" class="h-4 w-4"></i>
+    </a>
+  </div>
+<%
+} else {
+  const event = eventDetails;
+  const isEnrolled = event.isEnrolled || false;
+  const enrollAction = isEnrolled ? '/unenroll' : '/enroll';
+%>
+
+<!-- Event Hero -->
+<div class="relative overflow-hidden bg-gradient-to-br from-secondary-900 to-primary-900">
+  <!-- Background Image with Overlay -->
+  <div class="absolute inset-0">
+    <img src="<%= event.img || event.logo || '/images/placeholder-event.jpg' %>" alt="<%= event.eventname %>" class="h-full w-full object-cover opacity-20">
+  </div>
+
+  <div class="relative section py-16">
+    <div class="grid gap-8 lg:grid-cols-2">
+      <!-- Event Image -->
+      <div class="order-2 lg:order-1">
+        <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+          <img src="<%= event.img || event.logo || '/images/placeholder-event.jpg' %>" alt="<%= event.eventname %>" class="h-full w-full object-cover">
+
+          <!-- Status Badge -->
+          <div class="absolute top-4 left-4">
+            <span class="badge <%= event.status === 'active' ? 'badge-success' : 'badge-warning' %>">
+              <%= event.status === 'active' ? 'Registration Open' : 'Registration Closed' %>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Info -->
+      <div class="order-1 lg:order-2 text-white">
+        <div class="mb-4">
+          <span class="badge badge-primary bg-white/10 border-white/20 text-white">Event</span>
+        </div>
+
+        <h1 class="text-4xl font-bold sm:text-5xl lg:text-6xl">
+          <%= event.eventname %>
+        </h1>
+
+        <p class="mt-6 text-lg text-secondary-300 line-clamp-3">
+          <%= event.description || 'Join us for this amazing event!' %>
+        </p>
+
+        <!-- Key Details -->
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+              <i data-feather="calendar" class="h-6 w-6"></i>
+            </div>
+            <div>
+              <p class="text-sm text-secondary-300">Date</p>
+              <p class="font-semibold">
+                <%= event.month ? event.month + ' ' + event.day : 'TBD' %>
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+              <i data-feather="clock" class="h-6 w-6"></i>
+            </div>
+            <div>
+              <p class="text-sm text-secondary-300">Time</p>
+              <p class="font-semibold">
+                <%= event.startingtime ? event.startingtime : 'TBD' %>
+                <%= event.endingtime ? '- ' + event.endingtime : '' %>
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+              <i data-feather="map-pin" class="h-6 w-6"></i>
+            </div>
+            <div>
+              <p class="text-sm text-secondary-300">Location</p>
+              <p class="font-semibold">
+                <%= event.location || 'TBD' %>
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+              <i data-feather="users" class="h-6 w-6"></i>
+            </div>
+            <div>
+              <p class="text-sm text-secondary-300">Eligibility</p>
+              <p class="font-semibold">
+                <%= event.age || 'All ages' %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <% if (isEnrolled) { %>
+            <button onclick="unenrollEvent('<%= event.id %>')" class="btn-danger flex-1">
+              <i data-feather="x-circle" class="mr-2 h-5 w-5"></i>
+              Unenroll from Event
+            </button>
+          <% } else { %>
+            <button onclick="enrollEvent('<%= event.id %>')" class="btn-primary flex-1" <%= event.status !== 'active' ? 'disabled' : '' %>>
+              <i data-feather="check-circle" class="mr-2 h-5 w-5"></i>
+              <%= event.status === 'active' ? 'Enroll Now' : 'Registration Closed' %>
+            </button>
+          <% } %>
+
+          <button class="btn-secondary flex-1 bg-white/10 text-white border-white/20 hover:bg-white/20">
+            <i data-feather="share-2" class="mr-2 h-5 w-5"></i>
+            Share Event
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Event Details Content -->
+<div class="section py-12">
+  <div class="grid gap-12 lg:grid-cols-3">
+    <!-- Main Content -->
+    <div class="space-y-8 lg:col-span-2">
+      <!-- About Section -->
+      <div class="card">
+        <div class="border-b border-secondary-200 p-6 dark:border-secondary-800">
+          <h2 class="text-2xl font-bold text-secondary-900 dark:text-white">About This Event</h2>
+        </div>
+        <div class="p-6">
+          <div class="prose prose-lg dark:prose-invert max-w-none">
+            <p class="text-secondary-600 dark:text-secondary-400 leading-relaxed">
+              <%= event.description || 'Join us for an exciting event filled with learning, networking, and innovation. This event brings together students, professionals, and enthusiasts from various backgrounds to share knowledge and experiences.' %>
+            </p>
+
+            <% if (event.country) { %>
+              <p class="mt-4 text-secondary-600 dark:text-secondary-400">
+                <strong>Country:</strong> <%= event.country %>
+              </p>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
+      <!-- What You'll Learn -->
+      <div class="card">
+        <div class="border-b border-secondary-200 p-6 dark:border-secondary-800">
+          <h2 class="text-2xl font-bold text-secondary-900 dark:text-white">What You'll Gain</h2>
+        </div>
+        <div class="p-6">
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div class="flex items-start gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+                <i data-feather="zap" class="h-5 w-5"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary-900 dark:text-white">Hands-on Experience</h4>
+                <p class="text-sm text-secondary-600 dark:text-secondary-400">Practical learning opportunities</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+                <i data-feather="users" class="h-5 w-5"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary-900 dark:text-white">Networking</h4>
+                <p class="text-sm text-secondary-600 dark:text-secondary-400">Connect with industry professionals</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+                <i data-feather="award" class="h-5 w-5"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary-900 dark:text-white">Certificates</h4>
+                <p class="text-sm text-secondary-600 dark:text-secondary-400">Receive participation certificates</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+                <i data-feather="gift" class="h-5 w-5"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-secondary-900 dark:text-white">Goodies</h4>
+                <p class="text-sm text-secondary-600 dark:text-secondary-400">Event swag and materials</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Schedule/Timeline -->
+      <div class="card">
+        <div class="border-b border-secondary-200 p-6 dark:border-secondary-800">
+          <h2 class="text-2xl font-bold text-secondary-900 dark:text-white">Event Schedule</h2>
+        </div>
+        <div class="p-6">
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex flex-col items-center">
+                <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+                  <i data-feather="play" class="h-4 w-4"></i>
+                </div>
+                <div class="w-0.5 flex-1 bg-secondary-200 dark:bg-secondary-700"></div>
+              </div>
+              <div class="flex-1 pb-6">
+                <p class="font-semibold text-secondary-900 dark:text-white">Registration & Check-in</p>
+                <p class="text-sm text-secondary-600 dark:text-secondary-400">
+                  <%= event.startingtime ? 'Starts at ' + event.startingtime : 'Time TBD' %>
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex flex-col items-center">
+                <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+                  <i data-feather="users" class="h-4 w-4"></i>
+                </div>
+                <div class="w-0.5 flex-1 bg-secondary-200 dark:bg-secondary-700"></div>
+              </div>
+              <div class="flex-1 pb-6">
+                <p class="font-semibold text-secondary-900 dark:text-white">Opening Ceremony</p>
+                <p class="text-sm text-secondary-600 dark:text-secondary-400">Welcome speech and introduction</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex flex-col items-center">
+                <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+                  <i data-feather="activity" class="h-4 w-4"></i>
+                </div>
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold text-secondary-900 dark:text-white">Main Event</p>
+                <p class="text-sm text-secondary-600 dark:text-secondary-400">Activities, workshops, and sessions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="space-y-6">
+      <!-- Quick Info Card -->
+      <div class="card">
+        <div class="p-6">
+          <h3 class="mb-4 font-semibold text-secondary-900 dark:text-white">Event Details</h3>
+
+          <div class="space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-secondary-200 dark:border-secondary-800">
+              <span class="text-sm text-secondary-600 dark:text-secondary-400">Status</span>
+              <span class="badge <%= event.status === 'active' ? 'badge-success' : 'badge-warning' %>">
+                <%= event.status === 'active' ? 'Open' : 'Closed' %>
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between pb-3 border-b border-secondary-200 dark:border-secondary-800">
+              <span class="text-sm text-secondary-600 dark:text-secondary-400">Date</span>
+              <span class="text-sm font-medium text-secondary-900 dark:text-white">
+                <%= event.month && event.day ? event.month + ' ' + event.day : 'TBD' %>
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between pb-3 border-b border-secondary-200 dark:border-secondary-800">
+              <span class="text-sm text-secondary-600 dark:text-secondary-400">Time</span>
+              <span class="text-sm font-medium text-secondary-900 dark:text-white">
+                <%= event.startingtime ? event.startingtime : 'TBD' %>
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-secondary-600 dark:text-secondary-400">Location</span>
+              <span class="text-sm font-medium text-secondary-900 dark:text-white">
+                <%= event.location || 'TBD' %>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deadline Countdown -->
+      <div class="card bg-gradient-to-br from-primary-600 to-purple-600 text-white">
+        <div class="p-6">
+          <h3 class="mb-4 font-semibold">Registration Deadline</h3>
+
+          <div class="grid grid-cols-4 gap-2 text-center">
+            <div>
+              <div id="days" class="text-2xl font-bold">00</div>
+              <div class="text-xs opacity-80">Days</div>
+            </div>
+            <div>
+              <div id="hours" class="text-2xl font-bold">00</div>
+              <div class="text-xs opacity-80">Hours</div>
+            </div>
+            <div>
+              <div id="minutes" class="text-2xl font-bold">00</div>
+              <div class="text-xs opacity-80">Minutes</div>
+            </div>
+            <div>
+              <div id="seconds" class="text-2xl font-bold">00</div>
+              <div class="text-xs opacity-80">Seconds</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Organizers -->
+      <div class="card">
+        <div class="p-6">
+          <h3 class="mb-4 font-semibold text-secondary-900 dark:text-white">Organizers</h3>
+
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary-600 to-primary-500 text-white font-semibold">
+                SC
+              </div>
+              <div>
+                <p class="font-medium text-secondary-900 dark:text-white">Student Corner</p>
+                <p class="text-xs text-secondary-600 dark:text-secondary-400">Event Organizer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Events -->
+  <div class="border-t border-secondary-200 py-12 dark:border-secondary-800">
+    <div class="section">
+      <h2 class="mb-6 text-2xl font-bold text-secondary-900 dark:text-white">Related Events</h2>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <% if (typeof relatedEvents !== 'undefined' && relatedEvents.length > 0) { %>
+          <% relatedEvents.forEach((relatedEvent) => { %>
+            <div class="card card-hover overflow-hidden">
+              <div class="relative h-40">
+                <img src="<%= relatedEvent.img || relatedEvent.logo || '/images/placeholder-event.jpg' %>" alt="<%= relatedEvent.eventname %>" class="h-full w-full object-cover">
+              </div>
+              <div class="p-4">
+                <h4 class="font-semibold text-secondary-900 dark:text-white line-clamp-1">
+                  <%= relatedEvent.eventname %>
+                </h4>
+                <div class="mt-2 flex items-center gap-2 text-sm text-secondary-600 dark:text-secondary-400">
+                  <i data-feather="calendar" class="h-4 w-4"></i>
+                  <%= relatedEvent.month + ' ' + relatedEvent.day %>
+                </div>
+                <a href="/event/<%= relatedEvent.id %>" class="btn-primary mt-4 w-full text-center">
+                  View Details
+                </a>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <p class="col-span-full text-center text-secondary-600 dark:text-secondary-400">
+            No related events available
+          </p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Countdown Timer
+  const deadline = new Date('<%= event.deadlinedate || event.deadlineDate || '2024-12-31' %>');
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = deadline - now;
+
+    if (distance < 0) {
+      document.getElementById('days').textContent = '00';
+      document.getElementById('hours').textContent = '00';
+      document.getElementById('minutes').textContent = '00';
+      document.getElementById('seconds').textContent = '00';
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // Enrollment functions
+  function enrollEvent(eventId) {
+    Swal.fire({
+      title: 'Enroll in Event',
+      text: 'Are you sure you want to enroll in this event?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, enroll me!',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#4f46e5',
+      cancelButtonColor: '#64748b',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch('/enroll', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ eventId, eventType: 'event' })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Enrolled!',
+              text: 'You have been successfully enrolled.',
+              timer: 2000,
+              showConfirmButton: false
+            }).then(() => location.reload());
+          } else {
+            Swal.fire('Error', data.message || 'Failed to enroll', 'error');
+          }
+        });
+      }
+    });
+  }
+
+  function unenrollEvent(eventId) {
+    Swal.fire({
+      title: 'Unenroll from Event',
+      text: 'Are you sure you want to unenroll?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, unenroll',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#ef4444',
+      cancelButtonColor: '#64748b',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch('/unenroll', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ eventId, eventType: 'event' })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Unenrolled!',
+              text: 'You have been successfully unenrolled.',
+              timer: 2000,
+              showConfirmButton: false
+            }).then(() => location.reload());
+          } else {
+            Swal.fire('Error', data.message || 'Failed to unenroll', 'error');
+          }
+        });
+      }
+    });
+  }
+</script>
+<% } %>

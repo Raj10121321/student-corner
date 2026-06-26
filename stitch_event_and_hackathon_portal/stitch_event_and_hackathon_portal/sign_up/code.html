@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up | TechNexus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#c0c1ff",
+                    "inverse-surface": "#dae2fd",
+                    "tertiary-container": "#00885d",
+                    "tertiary": "#4edea3",
+                    "primary-container": "#8083ff",
+                    "on-primary-fixed": "#07006c",
+                    "surface-container": "#171f33",
+                    "surface-tint": "#c0c1ff",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "background": "#0b1326",
+                    "surface-container-lowest": "#060e20",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-container-low": "#131b2e",
+                    "surface-bright": "#31394d",
+                    "outline-variant": "#464554",
+                    "surface-container-high": "#222a3d",
+                    "inverse-on-surface": "#283044",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#2d3449",
+                    "surface-dim": "#0b1326",
+                    "on-secondary-container": "#e6ecff",
+                    "on-secondary-fixed": "#001a42",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-secondary": "#002e6a",
+                    "outline": "#908fa0",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-tertiary": "#003824",
+                    "error": "#ffb4ab",
+                    "on-surface": "#dae2fd",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-error": "#690005",
+                    "on-primary-container": "#0d0096",
+                    "on-surface-variant": "#c7c4d7",
+                    "error-container": "#93000a",
+                    "on-background": "#dae2fd",
+                    "surface-variant": "#2d3449",
+                    "surface": "#0b1326",
+                    "primary": "#c0c1ff",
+                    "inverse-primary": "#494bd6",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-tertiary-container": "#000703",
+                    "primary-fixed": "#e1e0ff",
+                    "secondary-container": "#0566d9",
+                    "secondary": "#adc6ff",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-primary": "#1000a9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "48px",
+                    "stack-md": "16px",
+                    "base-unit": "4px",
+                    "container-max": "1280px",
+                    "stack-lg": "32px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "button-text": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-mono": ["JetBrains Mono"],
+                    "headline-xl": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "button-text": ["15px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .auth-card-blur {
+            backdrop-filter: blur(12px);
+            background-color: rgba(30, 41, 59, 0.7);
+        }
+        .input-glow:focus-within {
+            box-shadow: 0 0 0 1px #6366F1, 0 0 12px rgba(99, 102, 241, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopNavBar (Transactional Suppressed Navigation Cluster) -->
+<header class="bg-surface-container-low border-b border-outline-variant fixed top-0 w-full z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="text-headline-md font-headline-md font-bold text-primary">
+                TechNexus
+            </div>
+<div class="flex items-center gap-stack-md">
+<span class="font-body-sm text-on-surface-variant hidden sm:inline">Already have an account?</span>
+<a class="text-primary font-button-text text-button-text hover:underline transition-all" href="#">Sign In</a>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center pt-16 px-4 md:px-0">
+<!-- Auth Layout Container -->
+<div class="grid lg:grid-cols-2 w-full max-w-[1200px] h-full lg:min-h-[800px] rounded-xl overflow-hidden border border-outline-variant shadow-2xl my-stack-lg">
+<!-- Left Side: Visual/Branding -->
+<div class="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden bg-surface-container-lowest">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent"></div>
+<div class="w-full h-full" data-alt="A cinematic, high-contrast photograph of a sleek, futuristic server room bathed in deep indigo and violet ambient lighting. The atmosphere is professional and technologically advanced, with glowing blue fiber optic lines trailing along the floor. The image uses a cool-toned palette of slates, deep blacks, and vibrant neon indigo highlights, reflecting a premium corporate tech aesthetic. The lighting is low-key with sharp geometric reflections." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC5D5o8nyCjnKR1K0pjx1GL_cQGtF_6aLxtpdZvsU6DZCnlnHvcdOwtv0w03kjzz3iNC4mnZliFVyussuLURHwymr4FAg__ogZ0AAsnZLSosxTJGTsMR6OdKOM8v_DQ5ESahQ140bZu6k3n7yfao6GugEgL3KWLwARiubAb4eLnoD5VPIYX7Tvv-XBb4P3K1zOr0BH7oi1_RzUlvUvA5WwGNy7YVGFIJalLxQ8YafAxiT7b-1jXawhzmQ')"></div>
+</div>
+<div class="relative z-10">
+<div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1 rounded-full mb-6">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span class="font-label-mono text-label-mono text-primary uppercase">Trusted by 50k+ Engineers</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface leading-tight">
+                        Build the future <br/> of technology.
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-6 max-w-md">
+                        Join the global hub for elite hackathons, technical challenges, and collaborative engineering excellence.
+                    </p>
+</div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex -space-x-3 overflow-hidden">
+<img class="inline-block h-10 w-10 rounded-full ring-2 ring-surface-container-lowest" data-alt="Close up portrait of a professional female software engineer with a confident smile, warm studio lighting, 8k resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZTGwl7CrH58sGvnhsxOsiQJdypS82LVAleIaxTIHqjMp9_k-Xg9FPDMZTooRZKlsJujcXgOnh5IxyNdaOEnDofQRoaKBeXiUaynZfXA4--QmtVVYUh5-utIwIDXB7iTG57kqwB_bssEjQ8-m4a7_1ualmvGG3NYT124FWYeGqmc2bfSlXM_NyWwRFBA-YT8Ot_iL5yeuXReCIu5Cn4pRO5Ykp_i2KK8ZAPQNFsPZP1mbwgjOv7QoU0A"/>
+<img class="inline-block h-10 w-10 rounded-full ring-2 ring-surface-container-lowest" data-alt="Portrait of a young male developer in a modern tech office setting, soft natural lighting, professional headshot style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwYSLD3GRG0W8u4ajgtj0mw8pMEcJjBDB1TpQfm9Qad6AiaYXqNrWaxvfhIhbwXUxnK1hvnaqSCvgLjB2Vl_GTNbdHUmkBYfKSU02IDAE0dmwGWu8cGJqxRs2J2HGkp6lAqrid8L8oGI5fEtngQRYUdsWRNDXUha78A-ftQL09NhJZ2pJvJWOlqahPQCrkfmzBOZfZaYXcDT6E4pIrA85rAhv3vGEQxJDJreVG6mwYa-4AR4LcIXEBvA"/>
+<img class="inline-block h-10 w-10 rounded-full ring-2 ring-surface-container-lowest" data-alt="Professional headshot of a diverse woman working in technology, minimalist background, crisp lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ2KHlTKg20byLGgCzGavyN2dWvWKum4GdF63oVwHm56V7iIyXUFVcj2aQsFv6WXR-Iv9jkFOODXLkShyyjg7pkHRl2YSpm6dUJ6-k5-GAW9TvfiGjgGvDUsswpUv_Y5fMzjn8gcnsFSQrAI-xmOB6tCjrF4ZvCDaCv7YeYbTSQtG9Wrvaekt3R0v2SgVJd0-mYbF3b0G2s40VPLmuZdKSZ0LDmBehRLeNkWWDCnLNf2eYlzQjM9EoDw"/>
+</div>
+<p class="font-label-mono text-label-mono text-on-secondary-fixed">
+                        Member since 2024
+                    </p>
+</div>
+</div>
+<!-- Right Side: Form Content -->
+<div class="bg-surface-container flex flex-col justify-center p-8 md:p-16 lg:p-20">
+<div class="max-w-md w-full mx-auto">
+<header class="mb-10 text-center lg:text-left">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Create an account</h2>
+<p class="text-on-surface-variant font-body-md">Enter your details to get started with TechNexus.</p>
+</header>
+<form class="space-y-6" id="signup-form">
+<!-- Full Name -->
+<div class="space-y-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase" for="fullname">Full Name</label>
+<div class="group relative input-glow rounded-lg transition-all duration-200">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary">person</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-12 pr-4 text-on-surface focus:outline-none focus:border-primary transition-colors" id="fullname" name="fullname" placeholder="John Doe" required="" type="text"/>
+</div>
+</div>
+<!-- Email -->
+<div class="space-y-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase" for="email">Email Address</label>
+<div class="group relative input-glow rounded-lg transition-all duration-200">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary">mail</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-12 pr-4 text-on-surface focus:outline-none focus:border-primary transition-colors" id="email" name="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Cluster -->
+<div class="grid md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase" for="password">Password</label>
+<div class="group relative input-glow rounded-lg transition-all duration-200">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary">lock</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-12 pr-4 text-on-surface focus:outline-none focus:border-primary transition-colors" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase" for="confirm_password">Confirm</label>
+<div class="group relative input-glow rounded-lg transition-all duration-200">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary">shield_lock</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-3 pl-12 pr-4 text-on-surface focus:outline-none focus:border-primary transition-colors" id="confirm_password" name="confirm_password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+</div>
+<!-- Terms -->
+<div class="flex items-start gap-3">
+<div class="flex items-center h-5">
+<input class="w-4 h-4 rounded border-outline-variant bg-surface-container-lowest text-primary focus:ring-primary focus:ring-offset-surface-container" id="terms" required="" type="checkbox"/>
+</div>
+<label class="text-body-sm font-body-sm text-on-surface-variant" for="terms">
+                                I agree to the <a class="text-primary hover:underline" href="#">Terms of Service</a> and <a class="text-primary hover:underline" href="#">Privacy Policy</a>.
+                            </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary-container text-on-primary-container font-button-text text-button-text py-4 rounded-lg hover:bg-primary transition-all active:scale-[0.98] duration-150 flex items-center justify-center gap-2" type="submit">
+<span>Create Account</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<!-- Social Auth Separator -->
+<div class="relative flex py-2 items-center">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink mx-4 font-label-mono text-[11px] text-outline uppercase tracking-widest">Or continue with</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Social Grid -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-surface-container-lowest border border-outline-variant hover:bg-surface-variant transition-colors text-on-surface font-button-text text-sm" type="button">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWo5zPfgRx6zwZE6jU4FT7b1hbJamPGct90CK09M6BphiX2CZwdOi213Q67PuNQ39fW16Mz6OXu9NnyueIvxrRXwurFhHQu8kcOh2VpxSMriTmex7R__YjNOw0ZGo0IrmJ3CerLX1jpz8CJSd4s6Zb2iENDMx4ce6j9paMp02I0bOxxtIqd8x2fcI3PvkzNgwQ1-ihaFB9rrmG__jMJajHT5htyxvoe5tlCQLtI-GzWzU3_Ij3j2viHw"/>
+<span>Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-surface-container-lowest border border-outline-variant hover:bg-surface-variant transition-colors text-on-surface font-button-text text-sm" type="button">
+<img alt="GitHub" class="w-5 h-5 dark:invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS1YU9waxS_xtW1N5iF0wl4IMteAxfrM2Bnq8K70vxh4It6ktUu5vEne9l7yuyeS0283l4KTZVUikjD7U3ouFShcEjMwhglV8367jntR6i4ctbn8rXntO9fyWGKYB1q6Hn8D2GjnAdX5_gJZZXTWDW_b73AuqR3ScJ2AU3Sl0na1EvIntPPPlB7oRfUhYOc9cmRjp_IVS7vfd8X3MPGmifLP5-QCTelNyoJuHOfXqf5atWSFJWteA6Tw"/>
+<span>GitHub</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Suppressed Layout) -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant w-full py-8 mt-auto">
+<div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                © 2024 TechNexus Hackathon Platform. All rights reserved.
+            </p>
+<div class="flex gap-stack-lg">
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors" href="#">Docs</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for the form
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalHtml = btn.innerHTML;
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> <span>Creating...</span>';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> <span>Welcome!</span>';
+                btn.classList.replace('bg-primary-container', 'bg-tertiary-container');
+                btn.classList.replace('text-on-primary-container', 'text-on-tertiary-container');
+            }, 1500);
+        });
+
+        // Floating label interaction simulation or field validation visual feedback
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('ring-2', 'ring-primary/20');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('ring-2', 'ring-primary/20');
+            });
+        });
+    </script>
+</body></html>

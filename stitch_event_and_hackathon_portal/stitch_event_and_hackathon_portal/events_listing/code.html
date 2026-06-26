@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Events | TechNexus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for a tech-forward look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1326;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #464554;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#c0c1ff",
+                        "inverse-surface": "#dae2fd",
+                        "tertiary-container": "#00885d",
+                        "tertiary": "#4edea3",
+                        "primary-container": "#8083ff",
+                        "on-primary-fixed": "#07006c",
+                        "surface-container": "#171f33",
+                        "surface-tint": "#c0c1ff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "background": "#0b1326",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-low": "#131b2e",
+                        "surface-bright": "#31394d",
+                        "outline-variant": "#464554",
+                        "surface-container-high": "#222a3d",
+                        "inverse-on-surface": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#2d3449",
+                        "surface-dim": "#0b1326",
+                        "on-secondary-container": "#e6ecff",
+                        "on-secondary-fixed": "#001a42",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-secondary": "#002e6a",
+                        "outline": "#908fa0",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary": "#003824",
+                        "error": "#ffb4ab",
+                        "on-surface": "#dae2fd",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-error": "#690005",
+                        "on-primary-container": "#0d0096",
+                        "on-surface-variant": "#c7c4d7",
+                        "error-container": "#93000a",
+                        "on-background": "#dae2fd",
+                        "surface-variant": "#2d3449",
+                        "surface": "#0b1326",
+                        "primary": "#c0c1ff",
+                        "inverse-primary": "#494bd6",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-tertiary-container": "#000703",
+                        "primary-fixed": "#e1e0ff",
+                        "secondary-container": "#0566d9",
+                        "secondary": "#adc6ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary": "#1000a9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px",
+                        "stack-md": "16px",
+                        "base-unit": "4px",
+                        "container-max": "1280px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "button-text": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "button-text": ["15px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md flex flex-col">
+<!-- TopNavBar (Public) -->
+<header class="bg-surface-container-low dark:bg-surface-container-low border-b border-outline-variant dark:border-outline-variant docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-8">
+<a class="text-headline-md font-headline-md font-bold text-primary dark:text-primary" href="#">TechNexus</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary dark:text-primary font-bold border-b-2 border-primary pb-1 transition-colors" href="#">Events</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Hackathons</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center relative">
+<input class="bg-surface-container-high border-none rounded-full px-4 py-1.5 text-body-sm w-64 focus:ring-2 focus:ring-primary-container text-on-surface" placeholder="Search events..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 text-on-surface-variant text-sm">search</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant font-medium hover:text-primary transition-colors text-button-text">Sign In</button>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-button-text transition-transform active:scale-95 duration-150">Sign Up</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative py-16 overflow-hidden">
+
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop">
+<h1 class="font-headline-xl text-headline-xl mb-4">Discover the Next <span class="text-primary">Big Event</span></h1>
+<p class="text-body-lg text-on-surface-variant max-w-2xl">Browse technical hackathons, coordination workshops, and industry conferences curated for high-performance teams.</p>
+</div>
+</section>
+<!-- Search & Filter Bar -->
+<section class="bg-surface-container sticky top-16 z-40 border-b border-outline-variant shadow-sm">
+<div class="max-w-container-max mx-auto px-margin-desktop py-stack-md flex flex-col md:flex-row md:items-center justify-between gap-gutter">
+<!-- Mobile Search (Hidden on md) -->
+<div class="md:hidden w-full relative">
+<input class="w-full bg-surface-container-high border-outline-variant border rounded-xl px-4 py-3 text-body-md focus:ring-2 focus:ring-primary text-on-surface" placeholder="Search events..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex items-center gap-4 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+<button class="bg-primary text-on-primary px-5 py-2 rounded-full font-button-text whitespace-nowrap">All Events</button>
+<button class="bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-5 py-2 rounded-full font-button-text whitespace-nowrap transition-colors">Hackathons</button>
+<button class="bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-5 py-2 rounded-full font-button-text whitespace-nowrap transition-colors">Workshops</button>
+<button class="bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-5 py-2 rounded-full font-button-text whitespace-nowrap transition-colors">Webinars</button>
+<button class="bg-surface-container-highest text-on-surface-variant hover:text-on-surface px-5 py-2 rounded-full font-button-text whitespace-nowrap transition-colors">Networking</button>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="hidden md:flex items-center border border-outline-variant rounded-xl px-3 py-2 gap-2 text-on-surface-variant bg-surface-container-low">
+<span class="material-symbols-outlined text-md">calendar_month</span>
+<select class="bg-transparent border-none p-0 text-label-mono focus:ring-0 cursor-pointer">
+<option>This Month</option>
+<option>Next Month</option>
+<option>Custom Range</option>
+</select>
+</div>
+<button class="flex items-center gap-2 border border-outline-variant rounded-xl px-4 py-2 hover:bg-surface-container-high transition-colors text-on-surface">
+<span class="material-symbols-outlined text-md">tune</span>
+<span class="font-button-text">Filters</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Events Grid -->
+<section class="max-w-container-max mx-auto px-margin-desktop py-stack-lg">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="group bg-surface-container border border-outline-variant rounded-xl overflow-hidden hover:border-primary transition-all duration-300 flex flex-col">
+<div class="h-48 relative overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A cinematic, high-contrast photograph of a technical hackathon workspace at night. Dim blue and indigo ambient lighting illuminates rows of sleek, modern workstations with multiple monitors. Glowing green neon accents highlight the futuristic, tech-forward architectural lines of the coworking space. The mood is focused and energetic, capturing a professional engineering environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSXO3BCW2rcrbYntraRpuhTY6LOeVImKeKnlqtwWBfdhaPpUmyrg43ym_SexucbaGr--arc7KmL8Eo-K4906nHm0MyGu4mNBnh5FIEdG88oTye57a4VmZkG_iPaDOSyiZFTleSQo9FpjFI6QuGcMTkdx-QU9rPEwNaezHe5LdpBSMSaiEf6rE4GbzQeo1vRbVNuQ6sEa3puN1xDbFUxunhIzl9B7UId2Hti8bfSeR8H7JdFQ-JMnrWlw')"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-background/80 backdrop-blur-md text-primary font-label-mono text-xs px-3 py-1 rounded-full border border-primary/20 uppercase tracking-widest">Hackathon</span>
+</div>
+</div>
+<div class="p-stack-lg flex-grow flex flex-col">
+<div class="flex items-center gap-2 text-primary font-label-mono text-label-mono mb-2 uppercase">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Ends in 2d 14h</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 group-hover:text-primary transition-colors">Nexus Code Challenge 2024</h3>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined text-md">calendar_today</span>
+<span>Oct 24 - 26, 2024</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined text-md">location_on</span>
+<span>Virtual / Global</span>
+</div>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young professional female software engineer with glasses, looking focused and confident, high-key studio lighting, modern tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcPaBQslOMxBZRbRlSSWoWoJ-tF5ewqwnAWM6Sw_v1OPRpxFPQyOyC1zAMFgcott5qcVg_fX-otKSbsojcVdgfm3kbHJrlcH4TGSY3KekT8ywqj2ckDN4DzzGzcP2uO9nQyyQZhbUwbcmyE_NZMcSFPDZ-6DIr2x9UNL9J5Tjj3DFUI7C8zdBJuTCdYk37OqRPggJkPZT5surVufjM-pyXRwMjzWg24efU7VA4St_Fgr_YcVf0_mZC4Q"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a diverse male developer in a black hoodie, urban tech setting, moody dramatic lighting with indigo highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXYVP0pV7xwIwrERkSbYycftdQRI7ih8jvKsl1K0PvGAnqyoxvgWGhaUQo2kwQiDTcUy-X5T9ufhSkP-4MXyz6CvXy4pFawc7aRbAMWGiGpiNxwCR20N_UqmkyEl7e4SjmCuJi-2mGs4NX08LM_ZPz4ED7larfEGtAITr6-WBQvt7tUVXAXd5da5Rv9ny2-28HdkDYfyoCe5LS-l70NTPw1Qgf1geBar6cWVcI8OllUmZVhFs3jZrxVw"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface-variant bg-surface-container-highest">
+                                    +124
+                                </div>
+</div>
+<button class="bg-secondary-container hover:bg-primary-container text-on-secondary-container hover:text-on-primary-container px-6 py-2 rounded-lg font-button-text transition-colors">View</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-container border border-outline-variant rounded-xl overflow-hidden hover:border-primary transition-all duration-300 flex flex-col">
+<div class="h-48 relative overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A professional conference stage design with large high-resolution LED screens displaying abstract geometric data visualizations in shades of indigo and teal. Minimalist podium on a dark polished floor. The lighting is sophisticated, using soft top-down spots to create a high-end corporate tech event atmosphere. The mood is prestigious and intellectually stimulating." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDaP-a8KyjTSYcYeetaLy8FgsD9Xt6Hrj0J0WWvUeWtFb0KM0hR_OqWXDLQO4JgJt8pb0NtO_2uOypf4PdnVmGKi8Ce8U4N_DtIdEmOGjsp9cOsUPNkeugNsJ0D1hyy8SD5cH_ab8guZRK506_1a621ZxBl1KQ7Ha8G_3CsbcvPpLk-kreVyfCprI4FA5HHnvwwyXcm09ldKJ27DdNs5e8g8WImL758E0lN0K7NhKS_AjXoof5loaZPnA')"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-background/80 backdrop-blur-md text-tertiary font-label-mono text-xs px-3 py-1 rounded-full border border-tertiary/20 uppercase tracking-widest">Webinar</span>
+</div>
+</div>
+<div class="p-stack-lg flex-grow flex flex-col">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-mono text-label-mono mb-2 uppercase">
+<span class="material-symbols-outlined text-sm">event_available</span>
+<span>Registration Open</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 group-hover:text-primary transition-colors">Next-Gen Architecture Summit</h3>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined text-md">calendar_today</span>
+<span>Nov 02, 2024</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined text-md">location_on</span>
+<span>San Francisco, CA</span>
+</div>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="h-2 w-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="text-label-mono text-xs text-on-surface-variant">Live Streaming</span>
+</div>
+<button class="bg-secondary-container hover:bg-primary-container text-on-secondary-container hover:text-on-primary-container px-6 py-2 rounded-lg font-button-text transition-colors">View</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-container border border-outline-variant rounded-xl overflow-hidden hover:border-primary transition-all duration-300 flex flex-col">
+<div class="h-48 relative overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A close-up shot of a modern tactile control panel and mechanical keyboard with subtle RGB backlighting in deep violets and cool blues. The aesthetic is extremely clean and organized, focusing on high-quality materials and technical precision. Soft bokeh in the background reveals a collaborative workspace. The lighting is low-key and professional, emphasizing the tools of a technical master." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZaS46pNwX6wUPUlRH2Kc3miFMJDBQ-Bl-S9nPOmef-fCKLnKpUtPE8fQlDkKctG6kd4HBByE7AC6X-B1URWrjFGDjTTyHvQB4VaKGdsoo7Y2megVlDDjtPF0uLcZzodC6yW8Dsm4JATzmFV8Ldec7ByWM4q3zVBVJ7G4lWXABdbM7-YmbuUzW7K9rcER1mXu0fKztbryv7qkJURwknS7a5KnMfH05Kyr7j2EY79QcFYBj-91_e8K8IQ')"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-background/80 backdrop-blur-md text-primary font-label-mono text-xs px-3 py-1 rounded-full border border-primary/20 uppercase tracking-widest">Workshop</span>
+</div>
+</div>
+<div class="p-stack-lg flex-grow flex flex-col">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-mono text-label-mono mb-2 uppercase">
+<span class="material-symbols-outlined text-sm">lock_clock</span>
+<span>Limited Seats</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 group-hover:text-primary transition-colors">Advanced Rust for Systems</h3>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined text-md">calendar_today</span>
+<span>Dec 15, 2024</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined text-md">location_on</span>
+<span>Berlin, DE</span>
+</div>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<div class="text-label-mono text-xs text-on-surface-variant">8/20 Participants</div>
+<button class="bg-secondary-container hover:bg-primary-container text-on-secondary-container hover:text-on-primary-container px-6 py-2 rounded-lg font-button-text transition-colors">View</button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-surface-container border border-outline-variant rounded-xl overflow-hidden hover:border-primary transition-all duration-300 flex flex-col">
+<div class="h-48 relative overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="Abstract digital visualization of global connectivity networks using thin luminous lines and nodes over a deep slate background. The aesthetic is clean, minimal, and highly technical. Color palette consists of cool blues, indigo, and subtle emerald highlights. Soft depth of field effects create a professional corporate atmosphere suitable for a networking event header." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOQ-oghYY2Dnz7UQH4M-Oj20gLET3OW_aVixodY9pOZVwp7Jt0YkO6Jk8xG6d5O3r3Rg7kjr1BdyRR_IvWd1XtDLIbSQ2bfjW3UjockKiQefOUbk94KnGRXZvfXyOC7H-JSPi09Csq9nWmz4Px4BhplwEoBlNlmv4e7eEiq8OQcvGdIYoiNlP7fUgFWLVSs3qgbKylk_PWhO4AtekvKRcmQR1BVs_QcbpXmeLm2KAWRfvjfIx3NQDDJw')"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-background/80 backdrop-blur-md text-primary font-label-mono text-xs px-3 py-1 rounded-full border border-primary/20 uppercase tracking-widest">Networking</span>
+</div>
+</div>
+<div class="p-stack-lg flex-grow flex flex-col">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-mono text-label-mono mb-2 uppercase">
+<span class="material-symbols-outlined text-sm">groups</span>
+<span>Community Event</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 group-hover:text-primary transition-colors">CTO Roundtable: Future Tech</h3>
+<div class="space-y-2 mb-6">
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined text-md">calendar_today</span>
+<span>Jan 12, 2025</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined text-md">location_on</span>
+<span>London, UK</span>
+</div>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<div class="text-label-mono text-xs text-on-surface-variant">Invites Only</div>
+<button class="bg-secondary-container hover:bg-primary-container text-on-secondary-container hover:text-on-primary-container px-6 py-2 rounded-lg font-button-text transition-colors">View</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Load More -->
+<div class="mt-stack-lg flex flex-col items-center gap-stack-md">
+<button class="flex items-center gap-2 border border-outline-variant px-8 py-3 rounded-full hover:bg-surface-container-high transition-all text-on-surface group">
+<span class="font-button-text">Load More Events</span>
+<span class="material-symbols-outlined group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+<p class="text-label-mono text-xs text-outline">Showing 4 of 24 events</p>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="bg-surface-container-high border-y border-outline-variant py-16 mt-stack-lg">
+<div class="max-w-container-max mx-auto px-margin-desktop text-center">
+<h2 class="font-headline-lg text-headline-lg mb-4">Never miss an opportunity</h2>
+<p class="text-on-surface-variant mb-8 max-w-xl mx-auto">Get early access to registrations and exclusive community updates delivered straight to your inbox.</p>
+<form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault();">
+<input class="flex-grow bg-background border-outline-variant rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary outline-none" placeholder="Enter your work email" type="email"/>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-xl font-button-text transition-all active:scale-95">Subscribe</button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant dark:border-outline-variant w-full">
+<div class="w-full py-stack-lg px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="font-headline-md text-headline-md text-primary dark:text-primary mb-4 block">TechNexus</span>
+<p class="text-body-sm text-on-surface-variant max-w-xs">Connecting the world's most talented engineers through curated high-stakes technical events.</p>
+</div>
+<div>
+<h4 class="text-secondary font-label-mono text-label-mono mb-4 uppercase tracking-widest">Platform</h4>
+<ul class="space-y-2">
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="#">Events</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="#">Hackathons</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="#">Leaderboards</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="#">Sponsors</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-secondary font-label-mono text-label-mono mb-4 uppercase tracking-widest">Company</h4>
+<ul class="space-y-2">
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="#">About Us</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="#">Contact</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="#">Privacy Policy</a></li>
+<li><a class="text-body-sm text-on-surface-variant hover:text-primary underline" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-secondary font-label-mono text-label-mono mb-4 uppercase tracking-widest">Connect</h4>
+<div class="flex gap-4 mb-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+</div>
+<p class="text-body-sm text-on-surface-variant">© 2024 TechNexus Hackathon Platform. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions and effects
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.97)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = '';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+
+        // Filter button active state toggle simulation
+        const filterButtons = document.querySelectorAll('.overflow-x-auto button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
+                });
+                btn.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+                btn.classList.add('bg-primary', 'text-on-primary');
+            });
+        });
+    </script>
+</body></html>

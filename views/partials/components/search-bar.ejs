@@ -1,0 +1,300 @@
+<%
+// Search Bar Component
+// Usage: <%- include('partials/components/search-bar', { placeholder: 'Search events...', filters: true }) %>
+// Parameters:
+// - placeholder: String (default: 'Search...')
+// - filters: Boolean (default: false)
+// - filterOptions: Array of filter options (optional)
+const placeholder = locals.placeholder || 'Search...';
+const showFilters = locals.filters || false;
+const filterOptions = locals.filterOptions || [
+  { name: 'date', label: 'Date', options: ['This Week', 'This Month', 'This Year'] },
+  { name: 'location', label: 'Location', options: ['Online', 'In-Person', 'Hybrid'] },
+  { name: 'category', label: 'Category', options: ['Tech', 'Design', 'Business', 'All'] }
+];
+%>
+
+<!-- Search Bar Container -->
+<div class="card p-4">
+  <div class="flex flex-col gap-4 md:flex-row md:items-center">
+    <!-- Search Input -->
+    <div class="relative flex-1">
+      <i data-feather="search" class="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-secondary-400"></i>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="<%= placeholder %>"
+        class="input-field pl-10"
+        autocomplete="off"
+      >
+      <button
+        id="clear-search"
+        class="absolute right-3 top-1/2 hidden -translate-y-1/2 rounded-lg p-1 text-secondary-400 hover:text-secondary-600 hover:bg-secondary-100 dark:hover:bg-secondary-800"
+      >
+        <i data-feather="x" class="h-4 w-4"></i>
+      </button>
+    </div>
+
+    <!-- Filter Toggle Button -->
+    <% if (showFilters) { %>
+      <button
+        id="filter-toggle"
+        class="btn-secondary flex items-center gap-2"
+      >
+        <i data-feather="filter" class="h-4 w-4"></i>
+        <span>Filters</span>
+        <span id="active-filters-count" class="badge badge-primary hidden">0</span>
+      </button>
+    <% } %>
+
+    <!-- Search Button -->
+    <button id="search-button" class="btn-primary">
+      <i data-feather="search" class="h-4 w-4 mr-2"></i>
+      Search
+    </button>
+  </div>
+
+  <!-- Filters Panel -->
+  <% if (showFilters) { %>
+    <div id="filters-panel" class="hidden mt-4 space-y-4 border-t border-secondary-200 pt-4 dark:border-secondary-800">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <% filterOptions.forEach((filter, filterIndex) => { %>
+          <div>
+            <label class="mb-2 block text-sm font-medium text-secondary-900 dark:text-white">
+              <%= filter.label %>
+            </label>
+            <select
+              id="filter-<%= filter.name %>"
+              class="input-field"
+              data-filter="<%= filter.name %>"
+            >
+              <option value="">All <%= filter.label %>s</option>
+              <% filter.options.forEach((option, optionIndex) => { %>
+                <option value="<%= option.toLowerCase().replace(/\s+/g, '-') %>">
+                  <%= option %>
+                </option>
+              <% }) %>
+            </select>
+          </div>
+        <% }) %>
+      </div>
+
+      <!-- Date Range Picker -->
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div>
+          <label class="mb-2 block text-sm font-medium text-secondary-900 dark:text-white">
+            From Date
+          </label>
+          <input
+            type="date"
+            id="filter-date-from"
+            class="input-field"
+          >
+        </div>
+        <div>
+          <label class="mb-2 block text-sm font-medium text-secondary-900 dark:text-white">
+            To Date
+          </label>
+          <input
+            type="date"
+            id="filter-date-to"
+            class="input-field"
+          >
+        </div>
+      </div>
+
+      <!-- Filter Actions -->
+      <div class="flex items-center justify-between">
+        <button
+          id="clear-filters"
+          class="btn-ghost text-sm"
+        >
+          <i data-feather="x" class="h-4 w-4 mr-2"></i>
+          Clear All Filters
+        </button>
+        <button
+          id="apply-filters"
+          class="btn-primary"
+        >
+          Apply Filters
+        </button>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<!-- Active Filters Display -->
+<div id="active-filters" class="mt-4 flex flex-wrap gap-2 hidden">
+  <!-- Active filter tags will be dynamically inserted here -->
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const clearSearchBtn = document.getElementById('clear-search');
+    const searchButton = document.getElementById('search-button');
+    const filterToggle = document.getElementById('filter-toggle');
+    const filtersPanel = document.getElementById('filters-panel');
+    const activeFiltersCount = document.getElementById('active-filters-count');
+    const activeFiltersDisplay = document.getElementById('active-filters');
+    const clearFiltersBtn = document.getElementById('clear-filters');
+    const applyFiltersBtn = document.getElementById('apply-filters');
+
+    let searchTimeout;
+    const activeFilters = new Set();
+
+    // Show/hide clear search button
+    searchInput.addEventListener('input', function() {
+      clearSearchBtn.classList.toggle('hidden', this.value.length === 0);
+
+      // Debounced search
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        performSearch();
+      }, 300);
+    });
+
+    // Clear search
+    clearSearchBtn.addEventListener('click', function() {
+      searchInput.value = '';
+      clearSearchBtn.classList.add('hidden');
+      performSearch();
+    });
+
+    // Search button click
+    searchButton.addEventListener('click', performSearch);
+
+    // Toggle filters panel
+    if (filterToggle && filtersPanel) {
+      filterToggle.addEventListener('click', function() {
+        filtersPanel.classList.toggle('hidden');
+      });
+    }
+
+    // Filter change handlers
+    document.querySelectorAll('[data-filter]').forEach(filterSelect => {
+      filterSelect.addEventListener('change', function() {
+        updateActiveFiltersCount();
+      });
+    });
+
+    // Apply filters
+    if (applyFiltersBtn) {
+      applyFiltersBtn.addEventListener('click', function() {
+        performSearch();
+        if (filtersPanel) {
+          filtersPanel.classList.add('hidden');
+        }
+      });
+    }
+
+    // Clear all filters
+    if (clearFiltersBtn) {
+      clearFiltersBtn.addEventListener('click', function() {
+        document.querySelectorAll('[data-filter]').forEach(select => {
+          select.value = '';
+        });
+        document.getElementById('filter-date-from').value = '';
+        document.getElementById('filter-date-to').value = '';
+        updateActiveFiltersCount();
+        activeFiltersDisplay.classList.add('hidden');
+        activeFiltersDisplay.innerHTML = '';
+        performSearch();
+      });
+    }
+
+    function performSearch() {
+      const query = searchInput.value.trim();
+      const filters = {};
+
+      // Collect filter values
+      document.querySelectorAll('[data-filter]').forEach(select => {
+        if (select.value) {
+          filters[select.dataset.filter] = select.value;
+        }
+      });
+
+      // Collect date range
+      const dateFrom = document.getElementById('filter-date-from').value;
+      const dateTo = document.getElementById('filter-date-to').value;
+      if (dateFrom) filters.dateFrom = dateFrom;
+      if (dateTo) filters.dateTo = dateTo;
+
+      // Update active filters display
+      updateActiveFiltersDisplay(filters);
+
+      // Emit search event (can be caught by parent page)
+      window.dispatchEvent(new CustomEvent('search', {
+        detail: { query, filters }
+      }));
+    }
+
+    function updateActiveFiltersCount() {
+      let count = 0;
+      document.querySelectorAll('[data-filter]').forEach(select => {
+        if (select.value) count++;
+      });
+
+      const dateFrom = document.getElementById('filter-date-from').value;
+      const dateTo = document.getElementById('filter-date-to').value;
+      if (dateFrom || dateTo) count++;
+
+      if (activeFiltersCount) {
+        if (count > 0) {
+          activeFiltersCount.textContent = count;
+          activeFiltersCount.classList.remove('hidden');
+        } else {
+          activeFiltersCount.classList.add('hidden');
+        }
+      }
+    }
+
+    function updateActiveFiltersDisplay(filters) {
+      const filterLabels = {
+        date: 'Date',
+        location: 'Location',
+        category: 'Category',
+        dateFrom: 'From',
+        dateTo: 'To'
+      };
+
+      activeFiltersDisplay.innerHTML = '';
+
+      Object.keys(filters).forEach(key => {
+        const value = filters[key];
+        const tag = document.createElement('span');
+        tag.className = 'badge badge-primary flex items-center gap-1';
+        tag.innerHTML = `
+          ${filterLabels[key] || key}: ${value}
+          <button class="hover:text-white" onclick="removeFilter('${key}')">
+            <i data-feather="x" class="h-3 w-3"></i>
+          </button>
+        `;
+        activeFiltersDisplay.appendChild(tag);
+      });
+
+      if (Object.keys(filters).length > 0) {
+        activeFiltersDisplay.classList.remove('hidden');
+      } else {
+        activeFiltersDisplay.classList.add('hidden');
+      }
+
+      // Re-initialize feather icons for new elements
+      feather.replace();
+    }
+
+    // Make removeFilter available globally
+    window.removeFilter = function(filterKey) {
+      if (filterKey === 'dateFrom') {
+        document.getElementById('filter-date-from').value = '';
+      } else if (filterKey === 'dateTo') {
+        document.getElementById('filter-date-to').value = '';
+      } else {
+        const select = document.querySelector(`[data-filter="${filterKey}"]`);
+        if (select) select.value = '';
+      }
+      updateActiveFiltersCount();
+      performSearch();
+    };
+  });
+</script>

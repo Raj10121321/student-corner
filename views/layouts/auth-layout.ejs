@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student Corner - Your Gateway to Exciting Tech Events and Hackathons">
+  <title><%= title || 'Student Corner' %></title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/images/react.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <link href="/stylesheets/main.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <% if (typeof additionalStyles !== 'undefined') { %>
+    <% additionalStyles.forEach(style => { %>
+      <link href="<%= style %>" rel="stylesheet">
+    <% }) %>
+  <% } %>
+</head>
+<body class="min-h-screen hero-gradient bg-hero-pattern">
+  <div class="flex min-h-screen">
+    <!-- Left Side - Branding -->
+    <div class="hidden lg:flex lg:w-5/12 lg:flex-col lg:justify-center lg:px-12 lg:py-12 xl:w-4/12">
+      <div class="space-y-8">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-primary-500 shadow-glow">
+            <svg class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <span class="text-2xl font-bold text-gradient">Student Corner</span>
+        </div>
+
+        <!-- Value Proposition -->
+        <div class="space-y-4">
+          <h1 class="text-4xl font-bold tracking-tight text-secondary-900 dark:text-white">
+            <%= heading || 'Welcome Back' %>
+          </h1>
+          <p class="text-lg text-secondary-600 dark:text-secondary-400">
+            <%= subheading || 'Your gateway to exciting tech events, hackathons, and opportunities.' %>
+          </p>
+        </div>
+
+        <!-- Features -->
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+              <i data-feather="calendar" class="h-5 w-5"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-secondary-900 dark:text-white">Discover Events</h3>
+              <p class="text-sm text-secondary-600 dark:text-secondary-400">Find amazing hackathons and tech events near you</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+              <i data-feather="users" class="h-5 w-5"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-secondary-900 dark:text-white">Build Community</h3>
+              <p class="text-sm text-secondary-600 dark:text-secondary-400">Connect with like-minded developers and innovators</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+              <i data-feather="award" class="h-5 w-5"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-secondary-900 dark:text-white">Grow Skills</h3>
+              <p class="text-sm text-secondary-600 dark:text-secondary-400">Participate in challenges and level up your expertise</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Proof -->
+        <div class="rounded-xl border border-secondary-200 bg-white/50 p-6 backdrop-blur-sm dark:border-secondary-800 dark:bg-secondary-900/50">
+          <p class="text-sm font-medium text-secondary-900 dark:text-white">Join thousands of students</p>
+          <div class="mt-4 flex -space-x-2">
+            <img class="h-10 w-10 rounded-full border-2 border-white object-cover dark:border-secondary-900" src="/images/Profiles/user1.jpg" alt="User">
+            <img class="h-10 w-10 rounded-full border-2 border-white object-cover dark:border-secondary-900" src="/images/Profiles/user2.jpg" alt="User">
+            <img class="h-10 w-10 rounded-full border-2 border-white object-cover dark:border-secondary-900" src="/images/Profiles/user3.jpg" alt="User">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-primary-100 text-xs font-medium text-primary-700 dark:border-secondary-900 dark:bg-primary-900 dark:text-primary-300">
+              +5k
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side - Form -->
+    <div class="flex w-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8 lg:w-7/12 xl:w-8/12">
+      <div class="w-full max-w-md space-y-8">
+        <!-- Mobile Logo -->
+        <div class="lg:hidden flex items-center justify-center gap-3">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-primary-500 shadow-glow">
+            <svg class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <span class="text-2xl font-bold text-gradient">Student Corner</span>
+        </div>
+
+        <!-- Content -->
+        <%- content %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Feather Icons
+    feather.replace();
+  </script>
+
+  <% if (typeof additionalScripts !== 'undefined') { %>
+    <% additionalScripts.forEach(script => { %>
+      <script src="<%= script %>"></script>
+    <% }) %>
+  <% } %>
+
+  <% if (typeof pageScripts !== 'undefined') { %>
+    <% pageScripts.forEach(script => { %>
+      <%- script %>
+    <% }) %>
+  <% } %>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | TechNexus</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    body {
+      background-color: #0b1326;
+      color: #dae2fd;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid #334155;
+    }
+
+    .tonal-layer-1 {
+      background-color: #1E293B;
+      border: 1px solid #334155;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#c0c1ff",
+            "on-primary": "#1000a9",
+            "primary-container": "#8083ff",
+            "on-primary-container": "#0d0096",
+            "secondary": "#adc6ff",
+            "on-secondary": "#002e6a",
+            "tertiary": "#4edea3",
+            "on-tertiary": "#003824",
+            "background": "#0b1326",
+            "on-background": "#dae2fd",
+            "surface": "#0b1326",
+            "on-surface": "#dae2fd",
+            "surface-variant": "#2d3449",
+            "on-surface-variant": "#c7c4d7",
+            "outline": "#908fa0",
+            "outline-variant": "#464554",
+            "surface-container": "#171f33",
+            "surface-container-low": "#131b2e",
+            "surface-container-high": "#222a3d",
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "gutter": "24px",
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "stack-lg": "32px",
+            "margin-desktop": "48px",
+            "container-max": "1280px"
+          },
+          fontFamily: {
+            "body-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-mono": ["JetBrains Mono"],
+            "button-text": ["Inter"]
+          },
+          fontSize: {
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "button-text": ["15px", { "lineHeight": "16px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-background text-on-background min-h-screen flex">
+  <!-- Left Panel - Branding -->
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-tertiary/20 via-background to-primary/20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:32px_32px]"></div>
+    <div class="relative z-10 flex flex-col justify-center px-20">
+      <div class="mb-8">
+        <h1 class="font-headline-lg text-headline-lg text-tertiary mb-4">Join TechNexus</h1>
+        <p class="text-on-surface-variant text-lg max-w-md">Create your account and start participating in elite hackathons and technical events.</p>
+      </div>
+
+      <div class="space-y-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-tertiary">verified</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">Secure Account</h3>
+            <p class="text-on-surface-variant text-body-sm">Industry-standard security for your data and submissions</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary">speed</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">Quick Setup</h3>
+            <p class="text-on-surface-variant text-body-sm">Get started in under 2 minutes</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-secondary">workspace_premium</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">Premium Features</h3>
+            <p class="text-on-surface-variant text-body-sm">Access exclusive events and early registrations</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-20">
+      <p class="text-on-surface-variant/60 text-sm font-label-mono">© 2024 TechNexus Platform</p>
+    </div>
+  </div>
+
+  <!-- Right Panel - Registration Form -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+    <div class="w-full max-w-md">
+      <!-- Logo for mobile -->
+      <div class="lg:hidden mb-8 text-center">
+        <h1 class="font-headline-lg text-headline-lg text-tertiary">TechNexus</h1>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8">
+        <div class="mb-8">
+          <h2 class="font-headline-lg text-headline-lg mb-2">Create your account</h2>
+          <p class="text-on-surface-variant">Join the community of elite developers</p>
+        </div>
+
+        <form id="registrationForm" class="space-y-5">
+          <div>
+            <label for="name" class="block font-label-mono text-label-mono text-on-surface mb-2">
+              FULL NAME
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-on-surface-variant">
+                <span class="material-symbols-outlined text-lg">person</span>
+              </span>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                required
+                class="w-full bg-surface-dim border border-outline-variant rounded-lg pl-10 pr-4 py-3 text-body-md focus:ring-2 focus:ring-tertiary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50"
+                placeholder="Enter your full name"
+              >
+            </div>
+          </div>
+
+          <div>
+            <label for="email" class="block font-label-mono text-label-mono text-on-surface mb-2">
+              EMAIL ADDRESS
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-on-surface-variant">
+                <span class="material-symbols-outlined text-lg">email</span>
+              </span>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                class="w-full bg-surface-dim border border-outline-variant rounded-lg pl-10 pr-4 py-3 text-body-md focus:ring-2 focus:ring-tertiary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50"
+                placeholder="Enter your email"
+              >
+            </div>
+          </div>
+
+          <div>
+            <label for="phonenumber" class="block font-label-mono text-label-mono text-on-surface mb-2">
+              PHONE NUMBER
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-on-surface-variant">
+                <span class="material-symbols-outlined text-lg">phone</span>
+              </span>
+              <input
+                type="tel"
+                name="phonenumber"
+                id="phonenumber"
+                required
+                class="w-full bg-surface-dim border border-outline-variant rounded-lg pl-10 pr-4 py-3 text-body-md focus:ring-2 focus:ring-tertiary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50"
+                placeholder="Enter your phone number"
+              >
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="dob" class="block font-label-mono text-label-mono text-on-surface mb-2">
+                DATE OF BIRTH
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-on-surface-variant">
+                  <span class="material-symbols-outlined text-lg">cake</span>
+                </span>
+                <input
+                  type="date"
+                  name="dob"
+                  id="dob"
+                  required
+                  class="w-full bg-surface-dim border border-outline-variant rounded-lg pl-10 pr-4 py-3 text-body-md focus:ring-2 focus:ring-tertiary focus:border-transparent outline-none transition-all"
+                >
+              </div>
+            </div>
+
+            <div>
+              <label for="gender" class="block font-label-mono text-label-mono text-on-surface mb-2">
+                GENDER
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-on-surface-variant">
+                  <span class="material-symbols-outlined text-lg">wc</span>
+                </span>
+                <select
+                  name="gender"
+                  id="gender"
+                  required
+                  class="w-full bg-surface-dim border border-outline-variant rounded-lg pl-10 pr-4 py-3 text-body-md focus:ring-2 focus:ring-tertiary focus:border-transparent outline-none transition-all appearance-none"
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="password" class="block font-label-mono text-label-mono text-on-surface mb-2">
+              PASSWORD
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-on-surface-variant">
+                <span class="material-symbols-outlined text-lg">lock</span>
+              </span>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                required
+                class="w-full bg-surface-dim border border-outline-variant rounded-lg pl-10 pr-12 py-3 text-body-md focus:ring-2 focus:ring-tertiary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50"
+                placeholder="Create a strong password"
+              >
+              <button
+                type="button"
+                id="togglePassword"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-on-surface-variant hover:text-on-surface transition-colors"
+              >
+                <span class="material-symbols-outlined text-lg">visibility</span>
+              </button>
+            </div>
+            <p class="mt-2 text-xs text-on-surface-variant">Must be at least 8 characters with a mix of letters and numbers</p>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <input type="checkbox" id="terms" required class="mt-1 w-4 h-4 rounded border-outline-variant bg-surface-dim text-tertiary focus:ring-2 focus:ring-tertiary">
+            <label for="terms" class="text-body-sm text-on-surface-variant">
+              I agree to the <a href="#" class="text-tertiary hover:underline">Terms of Service</a> and <a href="#" class="text-tertiary hover:underline">Privacy Policy</a>
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-tertiary text-on-tertiary font-button-text text-button-text py-3 rounded-lg hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-2"
+          >
+            <span>Create Account</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-outline-variant text-center">
+          <p class="text-on-surface-variant text-body-sm">
+            Already have an account?
+            <a href="/signin" class="text-tertiary font-medium hover:underline ml-1">Sign in</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="mt-6 grid grid-cols-3 gap-4">
+        <div class="text-center">
+          <div class="w-12 h-12 mx-auto rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+            <span class="material-symbols-outlined text-primary">code</span>
+          </div>
+          <p class="text-xs text-on-surface-variant">500+ Hackathons</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 mx-auto rounded-lg bg-secondary/10 flex items-center justify-center mb-2">
+            <span class="material-symbols-outlined text-secondary">groups</span>
+          </div>
+          <p class="text-xs text-on-surface-variant">120k Developers</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 mx-auto rounded-lg bg-tertiary/10 flex items-center justify-center mb-2">
+            <span class="material-symbols-outlined text-tertiary">payments</span>
+          </div>
+          <p class="text-xs text-on-surface-variant">$4.2M Prizes</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle password visibility
+    document.getElementById('togglePassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('password');
+      const icon = this.querySelector('.material-symbols-outlined');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        passwordInput.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    });
+
+    // Form submission
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phonenumber: document.getElementById('phonenumber').value,
+        dob: document.getElementById('dob').value,
+        gender: document.getElementById('gender').value,
+        password: document.getElementById('password').value
+      };
+
+      fetch('/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          Swal.fire({
+            title: 'Account Created!',
+            text: 'You have successfully registered. Please sign in to continue.',
+            icon: 'success',
+            confirmButtonText: 'Continue to Sign In',
+            background: '#171f33',
+            color: '#dae2fd',
+            confirmButtonColor: '#4edea3'
+          }).then(() => {
+            window.location.href = "/signin";
+          });
+        } else {
+          Swal.fire({
+            title: 'Registration Failed',
+            text: typeof data === 'string' ? data : (data.message || 'Unable to create account. Please try again.'),
+            icon: 'error',
+            confirmButtonText: 'Try Again',
+            background: '#171f33',
+            color: '#dae2fd',
+            confirmButtonColor: '#4edea3'
+          });
+        }
+      })
+      .catch(error => {
+        Swal.fire({
+          title: 'Error',
+          text: 'An unexpected error occurred. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          background: '#171f33',
+          color: '#dae2fd',
+          confirmButtonColor: '#4edea3'
+        });
+      });
+    });
+
+    // Micro-interactions for buttons
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('mousedown', () => {
+        btn.style.transform = 'scale(0.97)';
+      });
+      btn.addEventListener('mouseup', () => {
+        btn.style.transform = '';
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  </script>
+</body>
+</html>

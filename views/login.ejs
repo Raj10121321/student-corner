@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | TechNexus</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    body {
+      background-color: #0b1326;
+      color: #dae2fd;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .tonal-layer-1 {
+      background-color: #1E293B;
+      border: 1px solid #334155;
+    }
+
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid #334155;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#c0c1ff",
+            "on-primary": "#1000a9",
+            "primary-container": "#8083ff",
+            "on-primary-container": "#0d0096",
+            "secondary": "#adc6ff",
+            "on-secondary": "#002e6a",
+            "secondary-container": "#0566d9",
+            "on-secondary-container": "#e6ecff",
+            "tertiary": "#4edea3",
+            "on-tertiary": "#003824",
+            "tertiary-container": "#00885d",
+            "on-tertiary-container": "#000703",
+            "error": "#ffb4ab",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "on-error-container": "#ffdad6",
+            "background": "#0b1326",
+            "on-background": "#dae2fd",
+            "surface": "#0b1326",
+            "on-surface": "#dae2fd",
+            "surface-variant": "#2d3449",
+            "on-surface-variant": "#c7c4d7",
+            "outline": "#908fa0",
+            "outline-variant": "#464554",
+            "surface-container": "#171f33",
+            "surface-container-low": "#131b2e",
+            "surface-container-high": "#222a3d",
+            "surface-container-highest": "#2d3449",
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "gutter": "24px",
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "stack-lg": "32px",
+            "margin-desktop": "48px",
+            "container-max": "1280px"
+          },
+          fontFamily: {
+            "body-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-mono": ["JetBrains Mono"],
+            "button-text": ["Inter"]
+          },
+          fontSize: {
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "label-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "button-text": ["15px", { "lineHeight": "16px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-background text-on-background min-h-screen flex">
+  <!-- Left Panel - Branding -->
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary/20 via-background to-secondary/20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:32px_32px]"></div>
+    <div class="relative z-10 flex flex-col justify-center px-20">
+      <div class="mb-8">
+        <h1 class="font-headline-lg text-headline-lg text-primary mb-4">TechNexus</h1>
+        <p class="text-on-surface-variant text-lg max-w-md">The premier platform for technical hackathons and developer events. Built for engineers, by engineers.</p>
+      </div>
+
+      <div class="space-y-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary">terminal</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">500+ Hackathons</h3>
+            <p class="text-on-surface-variant text-body-sm">Access exclusive technical challenges and competitions</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-secondary">groups</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">120k Developers</h3>
+            <p class="text-on-surface-variant text-body-sm">Join a global community of elite engineers</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-tertiary">emoji_events</span>
+          </div>
+          <div>
+            <h3 class="font-headline-md text-headline-md mb-1">$4.2M Prizes</h3>
+            <p class="text-on-surface-variant text-body-sm">Compete for substantial rewards and recognition</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-20">
+      <p class="text-on-surface-variant/60 text-sm font-label-mono">© 2024 TechNexus Platform</p>
+    </div>
+  </div>
+
+  <!-- Right Panel - Login Form -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+    <div class="w-full max-w-md">
+      <!-- Logo for mobile -->
+      <div class="lg:hidden mb-8 text-center">
+        <h1 class="font-headline-lg text-headline-lg text-primary">TechNexus</h1>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8">
+        <div class="mb-8">
+          <h2 class="font-headline-lg text-headline-lg mb-2">Welcome back</h2>
+          <p class="text-on-surface-variant">Sign in to your account to continue</p>
+        </div>
+
+        <form id="loginForm" class="space-y-6">
+          <div>
+            <label for="identifier" class="block font-label-mono text-label-mono text-on-surface mb-2 font-bold">
+              EMAIL OR PHONE
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
+                <span class="material-symbols-outlined text-lg">person</span>
+              </span>
+              <input
+                type="text"
+                name="identifier"
+                id="identifier"
+                required
+                class="w-full bg-surface-container-high border border-outline-variant rounded-lg pl-10 pr-4 py-3 text-on-surface focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50 text-base"
+                placeholder="Enter your email or phone"
+              >
+            </div>
+          </div>
+
+          <div>
+            <label for="password" class="block font-label-mono text-label-mono text-on-surface mb-2 font-bold">
+              PASSWORD
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
+                <span class="material-symbols-outlined text-lg">lock</span>
+              </span>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                required
+                class="w-full bg-surface-container-high border border-outline-variant rounded-lg pl-10 pr-12 py-3 text-on-surface focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-on-surface-variant/50 text-base"
+                placeholder="Enter your password"
+              >
+              <button
+                type="button"
+                id="togglePassword"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-primary hover:text-on-surface transition-colors cursor-pointer"
+              >
+                <span class="material-symbols-outlined text-lg">visibility</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" class="w-4 h-4 rounded border-outline-variant bg-surface-container-high text-primary focus:ring-2 focus:ring-primary accent-primary">
+              <span class="text-body-sm text-on-surface">Remember me</span>
+            </label>
+            <a href="/forgot-password" class="text-primary text-body-sm hover:underline">Forgot password?</a>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-primary text-on-primary font-button-text text-button-text py-3 rounded-lg hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-2"
+          >
+            <span>Sign In</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-outline-variant text-center">
+          <p class="text-on-surface-variant text-body-sm">
+            Don't have an account?
+            <a href="/signup" class="text-primary font-medium hover:underline ml-1">Sign up</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Social Login -->
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-outline-variant"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-4 bg-background text-on-surface-variant">Or continue with</span>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-2 gap-4">
+          <button class="flex items-center justify-center gap-2 px-4 py-3 border border-outline-variant rounded-lg hover:bg-surface-variant transition-colors">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            <span class="text-base font-medium text-on-surface">Google</span>
+          </button>
+          <button class="flex items-center justify-center gap-2 px-4 py-3 border border-outline-variant rounded-lg hover:bg-surface-variant transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <span class="text-base font-medium text-on-surface">GitHub</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle password visibility
+    document.getElementById('togglePassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('password');
+      const icon = this.querySelector('.material-symbols-outlined');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        passwordInput.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    });
+
+    // Form submission
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const identifier = document.querySelector('input[name="identifier"]').value;
+      const password = document.querySelector('input[name="password"]').value;
+
+      fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ identifier: identifier, password: password }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          Swal.fire({
+            title: 'Welcome back!',
+            text: 'You have successfully logged in.',
+            icon: 'success',
+            confirmButtonText: 'Continue',
+            background: '#171f33',
+            color: '#dae2fd',
+            confirmButtonColor: '#c0c1ff'
+          }).then(() => {
+            window.location.href = "/dashboard";
+          });
+        } else {
+          Swal.fire({
+            title: 'Authentication Failed',
+            text: data.message || 'Please check your credentials and try again.',
+            icon: 'error',
+            confirmButtonText: 'Try Again',
+            background: '#171f33',
+            color: '#dae2fd',
+            confirmButtonColor: '#c0c1ff'
+          });
+        }
+      })
+      .catch(error => {
+        Swal.fire({
+          title: 'Error',
+          text: 'An unexpected error occurred. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          background: '#171f33',
+          color: '#dae2fd',
+          confirmButtonColor: '#c0c1ff'
+        });
+      });
+    });
+
+    // Micro-interactions for buttons
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('mousedown', () => {
+        btn.style.transform = 'scale(0.97)';
+      });
+      btn.addEventListener('mouseup', () => {
+        btn.style.transform = '';
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  </script>
+</body>
+</html>

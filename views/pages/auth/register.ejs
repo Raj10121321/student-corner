@@ -1,0 +1,299 @@
+<%-
+layout('auth-layout', {
+  title: 'Sign Up - Student Corner',
+  heading: 'Create Account',
+  subheading: 'Join thousands of students discovering amazing tech events and hackathons.'
+})
+-%>
+
+<div class="animate-fade-in">
+  <!-- Form Header -->
+  <div class="mb-8 text-center">
+    <h2 class="text-2xl font-bold text-secondary-900 dark:text-white">Sign Up</h2>
+    <p class="mt-2 text-sm text-secondary-600 dark:text-secondary-400">
+      Create your account to get started with Student Corner
+    </p>
+  </div>
+
+  <!-- Registration Form -->
+  <form id="register-form" class="space-y-5">
+    <!-- Name Input -->
+    <div class="input-floating">
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder=" "
+        required
+        autocomplete="name"
+      >
+      <label for="name">Full Name</label>
+    </div>
+
+    <!-- Email Input -->
+    <div class="input-floating">
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder=" "
+        required
+        autocomplete="email"
+      >
+      <label for="email">Email Address</label>
+    </div>
+
+    <!-- Phone Input -->
+    <div class="input-floating">
+      <input
+        type="tel"
+        id="phonenumber"
+        name="phonenumber"
+        placeholder=" "
+        required
+        autocomplete="tel"
+        pattern="[0-9]{10}"
+        title="Please enter a valid 10-digit phone number"
+      >
+      <label for="phonenumber">Phone Number</label>
+    </div>
+
+    <!-- Date of Birth -->
+    <div class="input-floating">
+      <input
+        type="date"
+        id="dob"
+        name="dob"
+        placeholder=" "
+        required
+      >
+      <label for="dob">Date of Birth</label>
+    </div>
+
+    <!-- Gender Selection -->
+    <div>
+      <label class="mb-2 block text-sm font-medium text-secondary-700 dark:text-secondary-300">Gender</label>
+      <div class="grid grid-cols-3 gap-3">
+        <label class="relative flex cursor-pointer items-center justify-center rounded-lg border border-secondary-300 bg-white p-3 transition-all hover:border-primary-500 hover:bg-primary-50 dark:border-secondary-700 dark:bg-secondary-800 dark:hover:border-primary-500 dark:hover:bg-primary-900/20">
+          <input type="radio" name="gender" value="Male" required class="peer sr-only">
+          <span class="text-sm font-medium text-secondary-600 peer-checked:text-primary-600 dark:text-secondary-400 dark:peer-checked:text-primary-400">Male</span>
+          <div class="absolute inset-0 rounded-lg border-2 border-primary-500 opacity-0 peer-checked:opacity-100"></div>
+        </label>
+        <label class="relative flex cursor-pointer items-center justify-center rounded-lg border border-secondary-300 bg-white p-3 transition-all hover:border-primary-500 hover:bg-primary-50 dark:border-secondary-700 dark:bg-secondary-800 dark:hover:border-primary-500 dark:hover:bg-primary-900/20">
+          <input type="radio" name="gender" value="Female" required class="peer sr-only">
+          <span class="text-sm font-medium text-secondary-600 peer-checked:text-primary-600 dark:text-secondary-400 dark:peer-checked:text-primary-400">Female</span>
+          <div class="absolute inset-0 rounded-lg border-2 border-primary-500 opacity-0 peer-checked:opacity-100"></div>
+        </label>
+        <label class="relative flex cursor-pointer items-center justify-center rounded-lg border border-secondary-300 bg-white p-3 transition-all hover:border-primary-500 hover:bg-primary-50 dark:border-secondary-700 dark:bg-secondary-800 dark:hover:border-primary-500 dark:hover:bg-primary-900/20">
+          <input type="radio" name="gender" value="Other" required class="peer sr-only">
+          <span class="text-sm font-medium text-secondary-600 peer-checked:text-primary-600 dark:text-secondary-400 dark:peer-checked:text-primary-400">Other</span>
+          <div class="absolute inset-0 rounded-lg border-2 border-primary-500 opacity-0 peer-checked:opacity-100"></div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Password Input -->
+    <div class="input-floating">
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder=" "
+        required
+        autocomplete="new-password"
+        minlength="8"
+      >
+      <label for="password">Password</label>
+      <button
+        type="button"
+        id="toggle-password"
+        class="absolute right-4 top-4 text-secondary-400 hover:text-secondary-600 dark:hover:text-secondary-300"
+      >
+        <i data-feather="eye" class="h-5 w-5"></i>
+      </button>
+    </div>
+
+    <!-- Password Strength Indicator -->
+    <div class="space-y-2">
+      <div class="flex items-center gap-2">
+        <div id="strength-bar-1" class="h-1 flex-1 rounded-full bg-secondary-200 dark:bg-secondary-700"></div>
+        <div id="strength-bar-2" class="h-1 flex-1 rounded-full bg-secondary-200 dark:bg-secondary-700"></div>
+        <div id="strength-bar-3" class="h-1 flex-1 rounded-full bg-secondary-200 dark:bg-secondary-700"></div>
+        <div id="strength-bar-4" class="h-1 flex-1 rounded-full bg-secondary-200 dark:bg-secondary-700"></div>
+      </div>
+      <p id="strength-text" class="text-xs text-secondary-500 dark:text-secondary-400">
+        Use 8+ characters with a mix of letters, numbers & symbols
+      </p>
+    </div>
+
+    <!-- Terms Agreement -->
+    <div class="flex items-start gap-3">
+      <input
+        type="checkbox"
+        id="terms"
+        required
+        class="mt-1 rounded border-secondary-300 text-primary-600 focus:ring-primary-500 dark:border-secondary-600 dark:bg-secondary-800"
+      >
+      <label for="terms" class="text-sm text-secondary-600 dark:text-secondary-400">
+        I agree to the
+        <a href="/terms" class="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400">Terms of Service</a>
+        and
+        <a href="/privacy" class="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400">Privacy Policy</a>
+      </label>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="hidden alert alert-error">
+      <i data-feather="alert-circle" class="h-5 w-5"></i>
+      <span id="error-text"></span>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn-primary w-full" id="submit-btn">
+      <span class="btn-text">Create Account</span>
+      <span class="hidden">
+        <svg class="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Creating account...
+      </span>
+    </button>
+  </form>
+
+  <!-- Sign In Link -->
+  <p class="mt-8 text-center text-sm text-secondary-600 dark:text-secondary-400">
+    Already have an account?
+    <a href="/signin" class="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400">
+      Sign in instead
+    </a>
+  </p>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const registerForm = document.getElementById('register-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('span:last-child');
+    const errorMessage = document.getElementById('error-message');
+    const errorText = document.getElementById('error-text');
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+    const strengthBars = [
+      document.getElementById('strength-bar-1'),
+      document.getElementById('strength-bar-2'),
+      document.getElementById('strength-bar-3'),
+      document.getElementById('strength-bar-4')
+    ];
+    const strengthText = document.getElementById('strength-text');
+
+    // Toggle password visibility
+    togglePassword.addEventListener('click', function() {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+
+      const icon = togglePassword.querySelector('i');
+      icon.setAttribute('data-feather', type === 'password' ? 'eye' : 'eye-off');
+      feather.replace();
+    });
+
+    // Password strength checker
+    passwordInput.addEventListener('input', function() {
+      const password = this.value;
+      const strength = checkPasswordStrength(password);
+      updateStrengthIndicator(strength);
+    });
+
+    function checkPasswordStrength(password) {
+      let strength = 0;
+
+      if (password.length >= 8) strength++;
+      if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+      if (/[0-9]/.test(password)) strength++;
+      if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+      return strength;
+    }
+
+    function updateStrengthIndicator(strength) {
+      const colors = ['bg-accent-error', 'bg-accent-warning', 'bg-accent-warning', 'bg-accent-success'];
+      const texts = ['Weak', 'Fair', 'Good', 'Strong'];
+
+      strengthBars.forEach((bar, index) => {
+        bar.className = 'h-1 flex-1 rounded-full transition-all duration-300 ';
+        if (index < strength) {
+          bar.classList.add(colors[strength - 1]);
+        } else {
+          bar.classList.add('bg-secondary-200', 'dark:bg-secondary-700');
+        }
+      });
+
+      if (strength > 0) {
+        strengthText.textContent = `Password strength: ${texts[strength - 1]}`;
+        strengthText.className = `text-xs ${strength === 1 ? 'text-accent-error' : strength === 2 ? 'text-accent-warning' : 'text-accent-success'}`;
+      } else {
+        strengthText.textContent = 'Use 8+ characters with a mix of letters, numbers & symbols';
+        strengthText.className = 'text-xs text-secondary-500 dark:text-secondary-400';
+      }
+    }
+
+    // Form submission
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Show loading state
+      btnText.classList.add('hidden');
+      btnLoading.classList.remove('hidden');
+      submitBtn.disabled = true;
+      errorMessage.classList.add('hidden');
+
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phonenumber: document.getElementById('phonenumber').value,
+        dob: document.getElementById('dob').value,
+        gender: document.querySelector('input[name="gender"]:checked').value,
+        password: document.getElementById('password').value
+      };
+
+      fetch('/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success' || !data.error) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Account Created!',
+            text: 'Your account has been successfully created. You can now sign in.',
+            confirmButtonColor: '#4f46e5'
+          }).then(() => {
+            window.location.href = '/signin';
+          });
+        } else {
+          // Show error
+          errorText.textContent = data.error || data.message || 'Registration failed. Please try again.';
+          errorMessage.classList.remove('hidden');
+
+          // Reset button
+          btnText.classList.remove('hidden');
+          btnLoading.classList.add('hidden');
+          submitBtn.disabled = false;
+        }
+      })
+      .catch(error => {
+        errorText.textContent = 'An error occurred. Please try again.';
+        errorMessage.classList.remove('hidden');
+
+        btnText.classList.remove('hidden');
+        btnLoading.classList.add('hidden');
+        submitBtn.disabled = false;
+      });
+    });
+  });
+</script>

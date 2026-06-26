@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Past Hackathons | TechNexus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#c0c1ff",
+                        "inverse-surface": "#dae2fd",
+                        "tertiary-container": "#00885d",
+                        "tertiary": "#4edea3",
+                        "primary-container": "#8083ff",
+                        "on-primary-fixed": "#07006c",
+                        "surface-container": "#171f33",
+                        "surface-tint": "#c0c1ff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "background": "#0b1326",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-low": "#131b2e",
+                        "surface-bright": "#31394d",
+                        "outline-variant": "#464554",
+                        "surface-container-high": "#222a3d",
+                        "inverse-on-surface": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#2d3449",
+                        "surface-dim": "#0b1326",
+                        "on-secondary-container": "#e6ecff",
+                        "on-secondary-fixed": "#001a42",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-secondary": "#002e6a",
+                        "outline": "#908fa0",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary": "#003824",
+                        "error": "#ffb4ab",
+                        "on-surface": "#dae2fd",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-error": "#690005",
+                        "on-primary-container": "#0d0096",
+                        "on-surface-variant": "#c7c4d7",
+                        "error-container": "#93000a",
+                        "on-background": "#dae2fd",
+                        "surface-variant": "#2d3449",
+                        "surface": "#0b1326",
+                        "primary": "#c0c1ff",
+                        "inverse-primary": "#494bd6",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-tertiary-container": "#000703",
+                        "primary-fixed": "#e1e0ff",
+                        "secondary-container": "#0566d9",
+                        "secondary": "#adc6ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary": "#1000a9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "48px",
+                        "stack-md": "16px",
+                        "base-unit": "4px",
+                        "container-max": "1280px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "button-text": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "button-text": ["15px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background selection:bg-primary/30 min-h-screen flex flex-col">
+<!-- TopNavBar (User Context) -->
+<header class="bg-surface-container-low dark:bg-surface-container-low border-b border-outline-variant dark:border-outline-variant docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-8">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary">TechNexus</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">My Events</a>
+<a class="text-primary dark:text-primary font-bold border-b-2 border-primary pb-1" href="#">My Hackathons</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer in their late 20s, with a friendly expression. The lighting is cinematic with a focus on dark, moody blue tones and a subtle rim light that matches the dark tech-nexus UI aesthetic. High quality, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBksyxtaj0T1UEP1ficDwfcFuxNXhDECZNeCuil93od4gA8u_9PzFxI5i3BGW5-eg67oJ4QJott7BZ0R83l_jwjFeUpnQKdO7d_j3bgUtPwYbtmxpDM8GBI651AC6cIt1gXVaAh5q-vjcrcTv-JkH-iCWqTGcVV_iTezfAuaPPyKwbPAr0GObTFjxxHajl6LfRH7j8LM6lL2tz2kgRqljvSXcDjWom-Dfk-SFnRlxmTSD8Jp5Z8uNaoMA"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative py-20 px-margin-desktop max-w-container-max mx-auto overflow-hidden">
+<div class="absolute top-0 right-0 -z-10 opacity-20">
+
+</div>
+<div class="max-w-3xl">
+<span class="font-label-mono text-label-mono text-primary tracking-widest uppercase mb-4 block">Archive View</span>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-6">Legacy of Innovation</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    Explore the history of TechNexus hackathons. Revisit winning solutions, team achievements, and the technical milestones that defined our community's growth.
+                </p>
+</div>
+</section>
+<!-- Archive Filter Bar -->
+<section class="px-margin-desktop max-w-container-max mx-auto mb-12">
+<div class="flex flex-wrap items-center justify-between gap-6 border-b border-outline-variant pb-8">
+<div class="flex gap-4">
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-button-text text-button-text">All Years</button>
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-2 rounded-full font-button-text text-button-text hover:bg-surface-bright transition-colors">2023</button>
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-2 rounded-full font-button-text text-button-text hover:bg-surface-bright transition-colors">2022</button>
+</div>
+<div class="flex gap-3 items-center">
+<span class="font-label-mono text-label-mono text-on-surface-variant">SORT BY:</span>
+<select class="bg-surface-container-low border-outline-variant text-on-surface rounded-lg font-body-sm text-body-sm focus:ring-primary focus:border-primary">
+<option>Most Recent</option>
+<option>Largest Prize Pool</option>
+<option>Most Participants</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Bento Grid Layout for Hackathons -->
+<section class="px-margin-desktop max-w-container-max mx-auto pb-24">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Main Featured Past Event -->
+<div class="md:col-span-8 group cursor-pointer">
+<div class="relative h-full glass-card rounded-xl overflow-hidden p-8 flex flex-col justify-end min-h-[500px]">
+<div class="absolute inset-0 -z-10 group-hover:scale-105 transition-transform duration-700">
+<div class="w-full h-full bg-cover bg-center" data-alt="A dark, high-tech hackathon arena with rows of glowing workstations and large overhead screens displaying complex code and data visualizations. The environment is dimly lit with deep blue and indigo lighting, creating a futuristic, focused atmosphere consistent with a professional tech event." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvWXHxhwsv8IPVXCPwKfDU3Co5hB15VYZD4xdQNHlmHSN5LT3PBOgMBJ0PgZVr3vix2B6ofSrc7MnfWWFDxtJidyjaEL059SylwDizfDF0XfFcsRuDlBVgVEiPRrwRHRkmn5m_GlL3P4FK7xlAVtmuCTIIX-jQ6yd7obhDWTIueqg9lFbJfpGm23V0QrAX1qqaqN4E6OppkG2gcNs5Ie5uU-AqwtS4GBCcW4c9Pzt_laB-05DGX4MTrg')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+</div>
+<div class="flex gap-2 mb-4">
+<span class="font-label-mono text-label-mono bg-tertiary/10 text-tertiary px-3 py-1 rounded">COMPLETED</span>
+<span class="font-label-mono text-label-mono bg-primary/10 text-primary px-3 py-1 rounded">SUMMER 2023</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Neural Nexus: AI Frontiers</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 max-w-xl">The largest AI-focused hackathon in our history, featuring over 1,200 participants from 45 countries developing generative solutions for climate change.</p>
+<div class="flex items-center gap-12 border-t border-outline-variant pt-6">
+<div>
+<span class="font-label-mono text-label-mono text-on-surface-variant block uppercase">Prize Pool</span>
+<span class="font-headline-md text-headline-md text-primary">$150,000</span>
+</div>
+<div>
+<span class="font-label-mono text-label-mono text-on-surface-variant block uppercase">Participants</span>
+<span class="font-headline-md text-headline-md text-on-surface">1,248</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Archive Items -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Item 1 -->
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer">
+<div class="h-48 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close-up of a high-performance motherboard with glowing circuits and data streams rendered in a digital, abstract style. The colors are dominated by deep slate, indigo, and neon primary-fixed-dim accents, suggesting high-speed computation and infrastructure development." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEeXSf1uZ1T9DLSBKex95fqRWcFNisoJneWtZfuNvmmwoHUqp2BGUiCq55HtFyh756vNGvYlE2YUHKOBDFPAqMO8BL_R-0PccU1kACK8tKGjeEFxexjpms6gidUoHtf9RNBOQ1RT8yB3gELXYzFfta24TyVSAxoPIYFWSZZ3UGtkxrLSHZVsdF8zoM6dg8RWD7NLxWI5Ybe2hhm8AxzPRPcfdL9WVjxcqbFd10syrwGEUCPD-zf5cvug"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="p-6">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase mb-2 block">Nov 2023</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Infrastructure 2.0</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Building the next generation of decentralized serverless architecture.</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="glass-card rounded-xl overflow-hidden group cursor-pointer">
+<div class="h-48 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Abstract visualization of blockchain nodes connecting in a 3D space, represented by sharp geometric lines and glowing vertices. The lighting is low-key with high-contrast highlights in secondary colors, conveying a sense of security and complex interconnectivity for a tech-forward hackathon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-PQi8pOXZ-Nen9HIlGFLn0oxAIllRmrV0mTjBiDYqChke5SOgnJyvp1EaNfNAw7_1sjVrhW00uYqHDG_1TsaAlKbXoikhWzQb4oGHSTa5f0tKTTSr8mHrCTzpYfKg6DemkWhJF_ctuef6Php7JYDHGiKkRg4zdjYg50l0oh5SQsCd-1vIQ0t3kv8srA0hQG_63HAWK79_oTpc7SbvXIjOfRAg_0hBPbK-KnWPC4BHuVmKMw8ku6UwyA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<div class="p-6">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase mb-2 block">Sept 2023</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Decentralize Everything</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Exploring the limits of Web3 and secure distributed ledger systems.</p>
+</div>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="md:col-span-4">
+<div class="bg-surface-container rounded-xl p-8 h-full border border-outline-variant flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-6">workspace_premium</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">The Hall of Fame</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Meet the visionaries who built the top-rated projects across all 24 past hackathons. See how their prototypes evolved into successful startups.</p>
+</div>
+<button class="mt-8 flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all">
+                            View All Winners
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-8">
+<div class="glass-card rounded-xl p-8 h-full flex flex-col md:flex-row gap-8 items-center overflow-hidden relative">
+<div class="flex-1 z-10">
+<span class="font-label-mono text-label-mono text-tertiary mb-2 block">STATISTICS</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-6">4 Years of Growth</h3>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<span class="font-label-mono text-label-mono text-on-surface-variant block uppercase">Total Prize Money</span>
+<span class="text-headline-md font-bold text-on-surface">$2.4M</span>
+</div>
+<div>
+<span class="font-label-mono text-label-mono text-on-surface-variant block uppercase">Code Commits</span>
+<span class="text-headline-md font-bold text-on-surface">148K+</span>
+</div>
+<div>
+<span class="font-label-mono text-label-mono text-on-surface-variant block uppercase">Projects Shipped</span>
+<span class="text-headline-md font-bold text-on-surface">432</span>
+</div>
+<div>
+<span class="font-label-mono text-label-mono text-on-surface-variant block uppercase">Startups Launched</span>
+<span class="text-headline-md font-bold text-on-surface">18</span>
+</div>
+</div>
+</div>
+<div class="flex-1 w-full h-full min-h-[200px] relative rounded-lg overflow-hidden bg-surface-container-highest">
+<!-- Simulation of a growth chart using CSS -->
+<div class="absolute bottom-0 left-0 w-full h-full p-4 flex items-end justify-between">
+<div class="w-12 bg-primary/20 h-[20%] rounded-t-sm"></div>
+<div class="w-12 bg-primary/40 h-[45%] rounded-t-sm"></div>
+<div class="w-12 bg-primary/60 h-[70%] rounded-t-sm"></div>
+<div class="w-12 bg-primary h-[100%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Final Archive Grid -->
+<div class="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-gutter mt-8">
+<div class="glass-card rounded-xl p-6 hover:translate-y-[-4px] transition-transform">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-mono text-label-mono text-on-surface-variant">JULY 2022</span>
+<span class="material-symbols-outlined text-outline">history</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">FinTech Disrupt</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Secure payment protocols and banking for the unbanked.</p>
+<div class="flex items-center justify-between border-t border-outline-variant pt-4">
+<span class="font-label-mono text-label-mono text-primary">$40K Pool</span>
+<a class="text-button-text font-button-text text-on-surface hover:text-primary underline transition-colors" href="#">Case Study</a>
+</div>
+</div>
+<div class="glass-card rounded-xl p-6 hover:translate-y-[-4px] transition-transform">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-mono text-label-mono text-on-surface-variant">MAY 2022</span>
+<span class="material-symbols-outlined text-outline">history</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">BioHack Health</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Wearable tech integrations and personalized medicine platforms.</p>
+<div class="flex items-center justify-between border-t border-outline-variant pt-4">
+<span class="font-label-mono text-label-mono text-primary">$55K Pool</span>
+<a class="text-button-text font-button-text text-on-surface hover:text-primary underline transition-colors" href="#">Case Study</a>
+</div>
+</div>
+<div class="glass-card rounded-xl p-6 hover:translate-y-[-4px] transition-transform">
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-mono text-label-mono text-on-surface-variant">FEB 2022</span>
+<span class="material-symbols-outlined text-outline">history</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">GameShift 3D</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Pushing the boundaries of browser-based gaming engines.</p>
+<div class="flex items-center justify-between border-t border-outline-variant pt-4">
+<span class="font-label-mono text-label-mono text-primary">$30K Pool</span>
+<a class="text-button-text font-button-text text-on-surface hover:text-primary underline transition-colors" href="#">Case Study</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="bg-surface-container-high border-y border-outline-variant py-24 px-margin-desktop text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Inspired by our history?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">Join the next chapter of innovation. Our upcoming Spring 2024 hackathon is now accepting pre-registrations.</p>
+<div class="flex flex-col md:flex-row gap-4 justify-center">
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-button-text text-button-text hover:brightness-110 transition-all active:scale-95">Register for Upcoming</button>
+<button class="border border-primary text-primary px-8 py-3 rounded-lg font-button-text text-button-text hover:bg-primary/10 transition-all active:scale-95">Download Reports</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant dark:border-outline-variant">
+<div class="w-full py-stack-lg px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<span class="font-headline-md text-headline-md text-primary dark:text-primary block mb-4">TechNexus</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Empowering the world's brightest engineers through competitive innovation and community-driven development.</p>
+</div>
+<div>
+<h5 class="font-label-mono text-label-mono text-secondary mb-6 uppercase">Navigation</h5>
+<ul class="space-y-4">
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline transition-colors" href="#">About Us</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-mono text-label-mono text-secondary mb-6 uppercase">Legal</h5>
+<ul class="space-y-4">
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary underline transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-mono text-label-mono text-secondary mb-6 uppercase">Newsletter</h5>
+<div class="flex flex-col gap-3">
+<input class="bg-surface-container border border-outline-variant rounded p-2 text-body-sm" placeholder="Email address" type="email"/>
+<button class="bg-secondary-container text-on-secondary-container rounded p-2 font-button-text text-button-text hover:opacity-90">Subscribe</button>
+</div>
+</div>
+</div>
+<div class="w-full py-6 px-margin-desktop max-w-container-max mx-auto border-t border-outline-variant/30 flex justify-between items-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant opacity-70">© 2024 TechNexus Hackathon Platform. All rights reserved.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">public</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">terminal</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">hub</span>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Smooth hover elevation for glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = 'rgba(192, 193, 255, 0.4)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = 'rgba(51, 65, 85, 0.5)';
+            });
+        });
+
+        // Parallax effect for shader background
+        window.addEventListener('scroll', () => {
+            const shader = document.querySelector('webgl-shader');
+            if (shader) {
+                const scrolled = window.pageYOffset;
+                shader.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+    </script>
+</body></html>

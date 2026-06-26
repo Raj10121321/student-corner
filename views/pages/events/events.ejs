@@ -1,0 +1,338 @@
+<%-
+layout('main-layout', {
+  title: 'Events - Student Corner',
+  currentPath: '/events'
+})
+-%>
+
+<!-- Events Header -->
+<div class="hero-gradient border-b border-secondary-200 dark:border-secondary-800">
+  <div class="section py-12">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="text-4xl font-bold text-secondary-900 dark:text-white sm:text-5xl">
+        Discover Amazing
+        <span class="text-gradient">Events</span>
+      </h1>
+      <p class="mt-4 text-lg text-secondary-600 dark:text-secondary-400">
+        Explore tech events, hackathons, and workshops from around the world
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Events Content -->
+<div class="section py-8">
+  <!-- Search and Filters -->
+  <div class="mb-8">
+    <%- include('../partials/components/search-bar', {
+      placeholder: 'Search events by name, location, or category...',
+      filters: true
+    }) %>
+  </div>
+
+  <!-- Active Filters Display -->
+  <div id="active-filters-container" class="mb-6 hidden">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="text-sm text-secondary-600 dark:text-secondary-400">Active filters:</span>
+      <div id="active-filters-list" class="flex gap-2 flex-wrap"></div>
+      <button id="clear-all-filters" class="text-sm text-accent-error hover:underline">Clear all</button>
+    </div>
+  </div>
+
+  <!-- View Toggle and Sort -->
+  <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex items-center gap-4">
+      <p class="text-sm text-secondary-600 dark:text-secondary-400">
+        Showing <span class="font-semibold text-secondary-900 dark:text-white" id="events-count">
+          <%= typeof upcomingEvents !== 'undefined' ? upcomingEvents.length : 0 %>
+        </span>
+        events
+      </p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <!-- View Toggle -->
+      <div class="flex rounded-lg border border-secondary-300 dark:border-secondary-700">
+        <button id="grid-view" class="flex items-center gap-2 rounded-l-lg border-r border-secondary-300 px-3 py-2 text-sm font-medium text-primary-600 bg-primary-50 dark:border-secondary-700 dark:bg-primary-900/20">
+          <i data-feather="grid" class="h-4 w-4"></i>
+          Grid
+        </button>
+        <button id="list-view" class="flex items-center gap-2 rounded-r-lg px-3 py-2 text-sm font-medium text-secondary-600 hover:bg-secondary-50 dark:text-secondary-400 dark:hover:bg-secondary-800">
+          <i data-feather="list" class="h-4 w-4"></i>
+          List
+        </button>
+      </div>
+
+      <!-- Sort -->
+      <select id="sort-select" class="input-field w-40">
+        <option value="deadline">Sort by Deadline</option>
+        <option value="date">Sort by Date</option>
+        <option value="name">Sort by Name</option>
+        <option value="location">Sort by Location</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Events Grid -->
+  <div id="events-container" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <% if (typeof upcomingEvents !== 'undefined' && upcomingEvents.length > 0) { %>
+      <% upcomingEvents.forEach((event, index) => { %>
+        <%- include('../partials/components/event-card', {
+          event: event,
+          type: 'event',
+          isEnrolled: event.isEnrolled || false,
+          showEnrollButton: true
+        }) %>
+      <% }) %>
+    <% } else { %>
+      <!-- Empty State -->
+      <div class="col-span-full py-16 text-center">
+        <div class="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-secondary-100 dark:bg-secondary-800">
+          <i data-feather="calendar" class="h-12 w-12 text-secondary-400"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-secondary-900 dark:text-white">No events found</h3>
+        <p class="mt-2 text-secondary-600 dark:text-secondary-400">
+          Try adjusting your search or filters to find what you're looking for
+        </p>
+        <button id="reset-filters" class="btn-primary mt-6">
+          Reset Filters
+        </button>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- Load More Button -->
+  <% if (typeof upcomingEvents !== 'undefined' && upcomingEvents.length >= 12) { %>
+    <div class="mt-12 text-center">
+      <button id="load-more-btn" class="btn-secondary inline-flex items-center gap-2">
+        Load More Events
+        <i data-feather="chevron-down" class="h-4 w-4"></i>
+      </button>
+    </div>
+  <% } %>
+</div>
+
+<!-- Newsletter Section -->
+<section class="border-t border-secondary-200 bg-secondary-50 py-12 dark:border-secondary-800 dark:bg-secondary-900/50">
+  <div class="section">
+    <div class="mx-auto max-w-2xl text-center">
+      <h3 class="text-2xl font-bold text-secondary-900 dark:text-white">Stay Updated</h3>
+      <p class="mt-2 text-secondary-600 dark:text-secondary-400">
+        Subscribe to get notified about new events and opportunities
+      </p>
+      <form action="/subscribe" method="POST" class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          class="input-field flex-1"
+        >
+        <button type="submit" class="btn-primary whitespace-nowrap">
+          Subscribe
+          <i data-feather="send" class="ml-2 h-4 w-4"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    const eventsContainer = document.getElementById('events-container');
+    const eventsCount = document.getElementById('events-count');
+    let allEvents = [];
+
+    // Collect all event data
+    document.querySelectorAll('.card').forEach(card => {
+      const titleElement = card.querySelector('h3');
+      const locationElement = card.querySelector('.flex.items-center.gap-2.text-sm');
+      if (titleElement) {
+        allEvents.push({
+          element: card,
+          title: titleElement.textContent.toLowerCase(),
+          location: locationElement ? locationElement.textContent.toLowerCase() : ''
+        });
+      }
+    });
+
+    // Search event listener
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      const query = this.value.toLowerCase().trim();
+
+      searchTimeout = setTimeout(() => {
+        let visibleCount = 0;
+
+        allEvents.forEach(event => {
+          const matchesTitle = event.title.includes(query);
+          const matchesLocation = event.location.includes(query);
+          const matches = matchesTitle || matchesLocation;
+
+          if (matches) {
+            event.element.style.display = '';
+            visibleCount++;
+          } else {
+            event.element.style.display = 'none';
+          }
+        });
+
+        eventsCount.textContent = visibleCount;
+
+        // Show empty state if no results
+        const emptyState = document.querySelector('.col-span-full.py-16');
+        if (visibleCount === 0 && !emptyState) {
+          showEmptyState();
+        } else if (visibleCount > 0 && emptyState) {
+          emptyState.remove();
+        }
+      }, 300);
+    });
+
+    function showEmptyState() {
+      const emptyHTML = `
+        <div class="col-span-full py-16 text-center">
+          <div class="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-secondary-100 dark:bg-secondary-800">
+            <i data-feather="calendar" class="h-12 w-12 text-secondary-400"></i>
+          </div>
+          <h3 class="text-xl font-semibold text-secondary-900 dark:text-white">No events found</h3>
+          <p class="mt-2 text-secondary-600 dark:text-secondary-400">
+            Try adjusting your search or filters to find what you're looking for
+          </p>
+          <button onclick="resetSearch()" class="btn-primary mt-6">
+            Reset Search
+          </button>
+        </div>
+      `;
+      eventsContainer.insertAdjacentHTML('beforeend', emptyHTML);
+      feather.replace();
+    }
+
+    window.resetSearch = function() {
+      searchInput.value = '';
+      searchInput.dispatchEvent(new Event('input'));
+    };
+
+    // View toggle
+    const gridViewBtn = document.getElementById('grid-view');
+    const listViewBtn = document.getElementById('list-view');
+
+    gridViewBtn.addEventListener('click', function() {
+      eventsContainer.className = 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3';
+
+      // Update button styles
+      gridViewBtn.classList.add('text-primary-600', 'bg-primary-50');
+      gridViewBtn.classList.remove('text-secondary-600', 'hover:bg-secondary-50');
+      listViewBtn.classList.remove('text-primary-600', 'bg-primary-50');
+      listViewBtn.classList.add('text-secondary-600', 'hover:bg-secondary-50');
+    });
+
+    listViewBtn.addEventListener('click', function() {
+      eventsContainer.className = 'grid gap-4';
+
+      // Update button styles
+      listViewBtn.classList.add('text-primary-600', 'bg-primary-50');
+      listViewBtn.classList.remove('text-secondary-600', 'hover:bg-secondary-50');
+      gridViewBtn.classList.remove('text-primary-600', 'bg-primary-50');
+      gridViewBtn.classList.add('text-secondary-600', 'hover:bg-secondary-50');
+    });
+
+    // Sort functionality
+    const sortSelect = document.getElementById('sort-select');
+    sortSelect.addEventListener('change', function() {
+      const sortBy = this.value;
+      const eventCards = Array.from(eventsContainer.querySelectorAll('.card'));
+
+      eventCards.sort((a, b) => {
+        if (sortBy === 'name') {
+          const titleA = a.querySelector('h3')?.textContent || '';
+          const titleB = b.querySelector('h3')?.textContent || '';
+          return titleA.localeCompare(titleB);
+        } else if (sortBy === 'location') {
+          const locA = a.querySelector('.flex.items-center.gap-2.text-sm')?.textContent || '';
+          const locB = b.querySelector('.flex.items-center.gap-2.text-sm')?.textContent || '';
+          return locA.localeCompare(locB);
+        }
+        // Default: deadline (original order)
+        return 0;
+      });
+
+      // Re-append in sorted order
+      eventCards.forEach(card => eventsContainer.appendChild(card));
+    });
+
+    // Load more button (simulation)
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', function() {
+        this.innerHTML = '<svg class="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Loading...';
+
+        setTimeout(() => {
+          this.innerHTML = 'Load More Events <i data-feather="chevron-down" class="h-4 w-4"></i>';
+          feather.replace();
+          // In a real app, this would load more events from the server
+        }, 1500);
+      });
+    }
+
+    // Reset filters button
+    document.getElementById('reset-filters')?.addEventListener('click', function() {
+      resetSearch();
+      document.querySelectorAll('[data-filter]').forEach(select => select.value = '');
+      document.getElementById('active-filters-container')?.classList.add('hidden');
+    });
+
+    // Search event handling from search-bar component
+    window.addEventListener('search', function(e) {
+      const { query, filters } = e.detail;
+
+      // Update search input
+      if (searchInput && query) {
+        searchInput.value = query;
+        searchInput.dispatchEvent(new Event('input'));
+      }
+
+      // Apply filters (visual feedback only for now)
+      if (Object.keys(filters).length > 0) {
+        const activeFiltersContainer = document.getElementById('active-filters-container');
+        const activeFiltersList = document.getElementById('active-filters-list');
+
+        if (activeFiltersContainer && activeFiltersList) {
+          activeFiltersList.innerHTML = '';
+
+          Object.entries(filters).forEach(([key, value]) => {
+            if (value) {
+              const tag = document.createElement('span');
+              tag.className = 'badge badge-primary flex items-center gap-1';
+              tag.innerHTML = `${key}: ${value} <button class="hover:text-white ml-1" onclick="removeFilter('${key}')">×</button>`;
+              activeFiltersList.appendChild(tag);
+            }
+          });
+
+          activeFiltersContainer.classList.remove('hidden');
+        }
+      }
+    });
+
+    // Make removeFilter available globally
+    window.removeFilter = function(filterKey) {
+      const filterSelect = document.querySelector(`[data-filter="${filterKey}"]`);
+      if (filterSelect) {
+        filterSelect.value = '';
+        // Trigger search event with updated filters
+        window.dispatchEvent(new CustomEvent('search', {
+          detail: { query: searchInput.value, filters: {} }
+        }));
+      }
+    };
+
+    // Clear all filters
+    document.getElementById('clear-all-filters')?.addEventListener('click', function() {
+      document.getElementById('active-filters-container')?.classList.add('hidden');
+      document.querySelectorAll('[data-filter]').forEach(select => select.value = '');
+    });
+  });
+</script>
