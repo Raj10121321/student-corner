@@ -30,7 +30,7 @@ Follow these simple steps to set up Student Corner on your computer:
 
 1. Clone the project:
    
-   git clone https://github.com/Gurupatel007/student-corner.git
+   git clone https://github.com/RAJpatel007/student-corner.git
    
 
 2. Jump into the project folder:
@@ -126,9 +126,9 @@ Shared under the MIT License. Check out `LICENSE` for the legal stuff.
 
 ## Say Hi! 👋
 
-Guru Patel - [gurupatel279@gmail.com](mailto:gurupatel279@gmail.com) or [code.guru@outlook.in](mailto:code.guru@outlook.in)
+RAJ Patel - [RAJpatel279@gmail.com](mailto:RAJpatel279@gmail.com) or [code.RAJ@outlook.in](mailto:code.RAJ@outlook.in)
 
-Project Home: [https://github.com/Gurupatel007/student-corner](https://github.com/Gurupatel007/student-corner)
+Project Home: [https://github.com/RAJpatel007/student-corner](https://github.com/RAJpatel007/student-corner)
 
 ## High Fives 🙌
 
@@ -172,7 +172,7 @@ Follow these simple steps to set up Student Corner on your computer:
 1. Clone the project:
    
    ```bash
-   git clone https://github.com/Gurupatel007/student-corner.git
+   git clone https://github.com/RAJpatel007/student-corner.git
    ```
 
 2. Jump into the project folder:
@@ -278,9 +278,9 @@ Shared under the MIT License. Check out `LICENSE` for the legal stuff.
 
 ## Say Hi! 👋
 
-Guru Patel - [gurupatel279@gmail.com](mailto:gurupatel279@gmail.com) or [code.guru@outlook.in](mailto:code.guru@outlook.in)
+RAJ Patel - [RAJpatel279@gmail.com](mailto:RAJpatel279@gmail.com) or [code.RAJ@outlook.in](mailto:code.RAJ@outlook.in)
 
-Project Home: [https://github.com/Gurupatel007/student-corner](https://github.com/Gurupatel007/student-corner)
+Project Home: [https://github.com/RAJpatel007/student-corner](https://github.com/RAJpatel007/student-corner)
 
 ## High Fives 🙌
 

@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'Gmail', // e.g., 'Gmail', 'Outlook'
   auth: {
-    user: 'gurupatel21@gnu.ac.in',
+    user: 'RAJpatel21@gnu.ac.in',
     pass: 'Ethicalhacker*@007',
   },
   secure: true
@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 
 module.exports = (email, otp) => {
   const mailOptions = {
-    from: 'gurupatel21@gnu.ac.in',
+    from: 'RAJpatel21@gnu.ac.in',
     to: email,
     subject: 'Your OTP for Email Verification',
     text: `Your OTP is: ${otp}`,

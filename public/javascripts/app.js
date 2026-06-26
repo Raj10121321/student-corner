@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 
 // Endpoint to generate and send OTP
 // app.get('/send-otp', (req, res) => {
-//   const email = 'certifiedguru44@gmail.com'; // Replace with the recipient's email
+//   const email = 'certifiedRAJ44@gmail.com'; // Replace with the recipient's email
 //   const otp = generateOTP();
 //   sendEmail(email, otp);
 //   res.send('OTP sent to your email.');
@@ -22,7 +22,7 @@ const otpValidityDuration = 2 * 60 * 1000; // 5 minutes in milliseconds
 const otps = {};
 
 app.get('/send-otp', (req, res) => {
-  const email = 'certifiedguru44@gmail.com'; // Replace with the recipient's email
+  const email = 'certifiedRAJ44@gmail.com'; // Replace with the recipient's email
   const otp = generateOTP();
   otps[email] = {
     otp,
@@ -33,7 +33,7 @@ app.get('/send-otp', (req, res) => {
 });
 
 app.get('/verify-otp', (req, res) => {
-  const email = 'certifiedguru44@gmail.com'; // Replace with the recipient's email
+  const email = 'certifiedRAJ44@gmail.com'; // Replace with the recipient's email
   const userOTP = req.query.otp; // Get the OTP provided by the user
 
   if (otpIsValid(email, userOTP)) {
